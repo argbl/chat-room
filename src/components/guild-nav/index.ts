@@ -3,7 +3,7 @@ export default [
     name: 'Home',
     path: '/',
     type: 'link',
-    defaultColor: 'bg-neutral-600',
+    defaultColor: 'bg-zinc-700',
     activeColor: 'bg-blue-500',
     iconDefaultColor: '#eee',
     svgWidth: 28,
@@ -16,7 +16,7 @@ export default [
     handleEvent: () => {
       console.log('123')
     },
-    defaultColor: 'bg-neutral-600',
+    defaultColor: 'bg-zinc-700',
     activeColor: 'bg-green-500',
     svgWidth: 24,
     svgHeight: 24,
@@ -26,7 +26,7 @@ export default [
     name: 'Explore',
     path: '/explore',
     type: 'link',
-    defaultColor: 'bg-neutral-600',
+    defaultColor: 'bg-zinc-700',
     activeColor: 'bg-green-500',
     svgWidth: 24,
     svgHeight: 24,
@@ -38,7 +38,7 @@ export default [
     handleEvent: () => {
       console.log('456')
     },
-    defaultColor: 'bg-neutral-600',
+    defaultColor: 'bg-zinc-700',
     activeColor: 'bg-green-500',
     svgWidth: 24,
     svgHeight: 24,
