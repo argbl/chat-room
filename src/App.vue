@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import GuildNav from '@cp/guild-nav/guild-nav.vue'
-import SideBar from '@cp/side-bar/side-bar.ts'
-import MainView from './views/main-view.ts'
+import SideBar from '@cp/side-bar/side-bar'
+import MainView from './views/main-view'
 </script>
 
 <template>
@@ -16,4 +16,21 @@ import MainView from './views/main-view.ts'
   </div>
 </template>
 
-<style></style>
+<style>
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 4px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.1);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: black;
+}
+</style>

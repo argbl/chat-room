@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import exploreList from './explore-list.ts'
+import exploreList from './explore-list'
 </script>
 
 <style lang="postcss" scoped>
