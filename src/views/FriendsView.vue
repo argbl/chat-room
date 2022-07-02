@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full bg-zinc-700">
+  <div class="w-full h-screen overflow-hidden bg-zinc-700">
     <section class="h-12 border-b-2 border-zinc-900 px-2 flex items-center">
       <div class="flex h-[42px] items-center">
         <div class="w-6 h-6 mx-2 flex justify-center items-center">

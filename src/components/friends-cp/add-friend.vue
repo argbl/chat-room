@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1">
+  <div class="flex-1 overflow-hidden">
     <header class="border-b-[1px] px-[30px] py-5 border-zinc-600">
       <h2 class="text-white">添加好友</h2>
       <form action="">
