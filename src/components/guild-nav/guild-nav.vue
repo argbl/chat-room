@@ -1,5 +1,5 @@
 <template>
-  <nav class="h-screen bg-zinc-900 w-[72px]">
+  <nav class="h-screen overflow-scroll bg-zinc-900 w-[72px] min-w-[72px]">
     <ul class="flex flex-col justify-center items-center py-3">
       <nav-item
         v-for="nav in NavList"
@@ -29,4 +29,8 @@ import NavList from './index'
 const route = useRoute()
 </script>
 
-<style lang="postcss" scoped></style>
+<style lang="postcss" scoped>
+::-webkit-scrollbar {
+  width: 0px;
+}
+</style>
