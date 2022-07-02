@@ -14,7 +14,7 @@ export default [
     name: 'Add',
     type: 'button',
     handleEvent: () => {
-      console.log('123')
+      console.log('添加')
     },
     defaultColor: 'bg-zinc-700',
     activeColor: 'bg-green-500',
@@ -36,7 +36,7 @@ export default [
     name: 'Download',
     type: 'button',
     handleEvent: () => {
-      console.log('456')
+      console.log('下载')
     },
     defaultColor: 'bg-zinc-700',
     activeColor: 'bg-green-500',

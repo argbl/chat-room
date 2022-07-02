@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>channel</div>
 </template>
 
 <script setup lang="ts"></script>

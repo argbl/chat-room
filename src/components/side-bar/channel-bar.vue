@@ -1,27 +1,49 @@
 <template>
   <aside class="h-screen bg-zinc-800 w-60 flex flex-col justify-between">
     <nav class="flex flex-col" style="height: calc(100vh - 56px)">
+      <div class="px-4 py-3 relative text-white">
+        <header class="relative z-10">
+          <div>
+            <h1 class="text-sm font-semibold">Genshin Impact Official</h1>
+          </div>
+        </header>
+        <div class="absolute left-0 top-0 overflow-hidden">
+          <img
+            class="object-cover"
+            :style="{
+              opacity: (100 - scrollTop) / 100,
+              transform: `translateY(${-scrollTop}px) scale(${
+                1 + scrollTop * 0.005
+              })`,
+            }"
+            width="240"
+            src="https://cdn.discordapp.com/banners/522681957373575168/80b2051c037e22dbaefd15bbf528fde5.webp?size=240"
+          />
+        </div>
+      </div>
+
       <div
+        ref="userListRef"
         class="relative pr-2 flex-1 flex flex-col overflow-x-hidden overflow-y-scroll text-white"
       >
-        <h2 class="m-4 mr-0 font-bold text-2xl leading-[30px]">发现</h2>
-        <div v-for="item in exploreList" :key="item.name" class="ml-2 py-[1px]">
-          <div
-            class="rouned py-[5px] px-2 hover:bg-blue-600 rounded flex items-center"
-          >
-            <div class="mr-3 w-8 h-8 flex justify-center items-center">
-              <svg
-                aria-hidden="false"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path fill="currentColor" :d="item.d"></path>
-              </svg>
+        <ul>
+          <div class="h-[84px]"></div>
+          <h2 class="pt-4 px-4 mb-2 font-semibold">用户列表</h2>
+          <div v-for="index in 25" :key="index" class="ml-2">
+            <div class="flex items-center rounded px-2 py-2 h-[42px]">
+              <div class="mr-2">
+                <img
+                  class="rounded-full"
+                  src="https://cdn.discordapp.com/avatars/102991676301144064/a_b068de1d964f6c329d30449f33870353.webp?size=32"
+                />
+              </div>
+              <div class="flex-1 flex flex-col">
+                <div class="text-yellow-500">可莉</div>
+                <div class="text-xs text-gray-400">正在炸鱼</div>
+              </div>
             </div>
-            <div class="flex-1 leading-5">{{ item.name }}</div>
           </div>
-        </div>
+        </ul>
       </div>
     </nav>
     <slot></slot>
@@ -29,7 +51,15 @@
 </template>
 
 <script setup lang="ts">
-import exploreList from './explore-list'
+import { ref } from 'vue'
+const userListRef = ref<HTMLElement | null>(null)
+const scrollTop = ref(0)
+setTimeout(() => {
+  userListRef.value?.addEventListener('scroll', () => {
+    scrollTop.value = userListRef.value?.scrollTop || 0
+    console.log(((100 - scrollTop.value) / 100) * 145)
+  })
+})
 </script>
 
 <style lang="postcss" scoped>
