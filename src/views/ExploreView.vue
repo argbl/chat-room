@@ -31,8 +31,48 @@
       </div>
       <div>
         <section class="mb-8 min-w-[580px]">
-          <h3>特色社区</h3>
-          <div class="grid gap-4 mt-4"></div>
+          <h3 class="text-white text-xl">特色社区</h3>
+          <div class="grid grid-cols-5 gap-4 mt-4">
+            <div class="flex flex-col bg-zinc-800 rounded-lg cursor-pointer">
+              <div class="relative mb-8 h-[143px]">
+                <div class="w-full h-full">
+                  <img
+                    class="rounded-t-lg object-cover w-full h-full"
+                    src="https://cdn.discordapp.com/discovery-splashes/522681957373575168/f9c7d500f8d7002ca4220f09548852a0.jpg?size=300"
+                  />
+                </div>
+                <div
+                  class="absolute left-3 -bottom-5 w-12 h-12 rounded-lg bg-black flex justify-center items-center"
+                >
+                  <img
+                    src="https://cdn.discordapp.com/icons/522681957373575168/b735610da8c0d49a1cc2a14c5146801b.webp?size=40"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="flex flex-col pt-0 p-4 text-gray-400">
+                <div>
+                  <h4 class="text-ellipsis font-semibold text-white">
+                    Genshin Impact Official
+                  </h4>
+                </div>
+                <div class="flex-1 mt-1 mb-4 line-clamp-4 text-sm">
+                  Welcome to Teyvat, Traveler! This is the place to discuss with
+                  others about your favorite game: Genshin Impact!
+                </div>
+                <div class="flex text-xs">
+                  <div class="mr-4 flex items-center">
+                    <div class="w-2 h-2 rounded-full bg-green-500 mr-1"></div>
+                    <div>275,455 人在线</div>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-2 h-2 rounded-full bg-gray-500 mr-1"></div>
+                    <div>994,236 位成员</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
       <div class="mb-8 flex flex-col justify-center items-center">
