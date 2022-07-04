@@ -16,13 +16,20 @@
     </section>
     <div class="flex flex-col">
       <div class="flex-1">
-        <div>123</div>
+        <div class="text-gray-300" v-for="item in chatList" :key="item">
+          {{ item }}
+        </div>
       </div>
-      <form class="px-4" action="">
+      <form class="px-4" @submit.prevent>
         <div
           class="rounded-lg bg-zinc-600 flex h-11 items-center text-gray-400 px-4"
         >
-          <input class="bg-transparent outline-none flex-1" type="text" />
+          <input
+            v-model="chatMessage"
+            class="bg-transparent outline-none flex-1"
+            type="text"
+            @keyup.enter="publishMessage"
+          />
           <div>
             <div>
               <svg
@@ -46,6 +53,61 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+import axios from 'axios'
+import io from 'socket.io-client'
+const chatMessage = ref('')
+const chatList = ref<string[]>([])
+function publishMessage() {
+  chatList.value = [...chatList.value, chatMessage.value]
+  console.log(chatList)
+}
+
+const getToekn = () => {
+  axios
+    .post('http://127.0.0.1:7001/login')
+    .then(({ data }) => {
+      window.sessionStorage.setItem('token', `Bearer ${data.data}`)
+    })
+    .then(() => {
+      initSocket()
+    })
+}
+getToekn()
+
+const initSocket = () => {
+  const socket = io('http://127.0.0.1:7001/', {
+    transports: ['websocket'],
+    reconnection: true, // 是否重连
+    reconnectionAttempts: 30, // 重新连接的次数
+    reconnectionDelay: 1000, // 每过多长时间重连一次
+    timeout: 5000, // 超时时间
+    autoConnect: false,
+    query: {
+      token: window.sessionStorage.getItem('token'),
+    },
+  })
+  socket.on('connect', () => {
+    console.log('连接成功') // x8WIv7-mJelg7on_ALbx
+  })
+  socket.on('disconnect', (res: any) => {
+    console.log('连接关闭') // undefined
+  })
+  socket.on('client_success', (res: any) => {
+    console.log(`连接成功${res.message}`) // x8WIv7-mJelg7on_ALbx
+  })
+  socket.on('connect_error', (e: any) => {
+    console.log('connect_error', e)
+  })
+
+  socket.connect()
+
+  socket.emit('chat', '123')
+  socket.on('res', (res: any) => {
+    console.log(res)
+  })
+}
+</script>
 
 <style scoped></style>
