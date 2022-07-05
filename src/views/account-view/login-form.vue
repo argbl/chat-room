@@ -1,7 +1,7 @@
 <template>
   <form action="/" class="bg-zinc-800 w-[450px] p-8 flex flex-col items-center">
     <div class="flex flex-col items-center">
-      <h3 class="font-semibold text-2xl text-white">欢迎回来</h3>
+      <h3 class="font-semibold text-2xl text-white">欢迎回来!</h3>
       <div class="text-gray-400">很高兴再次见到您！</div>
     </div>
     <div class="mt-5 w-full">
