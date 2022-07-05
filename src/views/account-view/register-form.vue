@@ -1,5 +1,5 @@
 <template>
-  <form action="/" class="bg-zinc-800 w-[450px] p-8 flex flex-col text-white">
+  <div class="bg-zinc-800 w-[450px] p-8 flex flex-col text-white">
     <button class="mb-4 py-[2px] flex items-center">
       <svg
         class="caret-1Uw6Xp"
@@ -56,6 +56,8 @@
         </div>
       </div>
       <button
+        v-loading:[loadingStyle]="loading"
+        @click="handleRegister"
         class="block w-full mt-8 mb-2 px-4 py-[2px] bg-violet-500 h-[40px] rounded hover:bg-violet-600"
       >
         <div class="mx-auto text-white">继续</div>
@@ -73,16 +75,24 @@
         <span class="text-blue-500">隐私权政策</span>
       </span>
     </div>
-  </form>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { ref, reactive } from 'vue'
 const account = reactive({
   uemail: '',
   uname: '',
   upass: '',
 })
+const loading = ref(false)
+const handleRegister = () => {
+  loading.value = !loading.value
+}
+const loadingStyle = {
+  size: 20,
+  color: 'red',
+}
 </script>
 
 <style scoped></style>

@@ -1,5 +1,5 @@
 <template>
-  <form action="/" class="bg-zinc-800 w-[450px] p-8 flex flex-col items-center">
+  <div class="bg-zinc-800 w-[450px] p-8 flex flex-col items-center">
     <div class="flex flex-col items-center">
       <h3 class="font-semibold text-2xl text-white">欢迎回来!</h3>
       <div class="text-gray-400">很高兴再次见到您！</div>
@@ -31,6 +31,8 @@
         <div>忘记密码?</div>
       </button>
       <button
+        @click.stop="handleLogin"
+        v-loading:[loadingStyle]="loading"
         class="block w-full mb-2 px-4 py-[2px] bg-violet-500 h-[40px] rounded hover:bg-violet-600"
       >
         <div class="mx-auto text-white">登录</div>
@@ -47,9 +49,19 @@
         >
       </div>
     </div>
-  </form>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+const loading = ref(false)
+const handleLogin = () => {
+  loading.value = !loading.value
+}
+const loadingStyle = {
+  size: 20,
+  color: 'red',
+}
+</script>
 
 <style scoped></style>
