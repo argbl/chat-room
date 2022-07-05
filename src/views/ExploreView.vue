@@ -5,7 +5,7 @@
     >
       <div class="w-full relative">
         <div class="mb-8 min-h-[200px]">
-          <img src="/src/assets/explore.svg" class="w-full" />
+          <img src="@img/bg-explore.svg" class="w-full" />
         </div>
         <div
           class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center"

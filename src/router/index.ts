@@ -1,9 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
 const routes = [
   {
     path: '/',
     component: () => import('../views/HomeView.vue'),
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/account-view/AccountView.vue'),
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/account-view/AccountView.vue'),
   },
   {
     path: '/explore',
@@ -15,13 +24,23 @@ const routes = [
   },
 ]
 
-// 3. 创建路由实例并传递 `routes` 配置
-// 你可以在这里输入更多的配置，但我们在这里
-// 暂时保持简单
 const router = createRouter({
-  // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
   history: createWebHistory(),
-  routes, // `routes: routes` 的缩写
+  routes,
+})
+
+function isAuthenticated() {
+  return !!localStorage.getItem('token')
+}
+
+router.beforeEach(async (to, from) => {
+  console.log(['/login', '/register'].includes(to.path))
+
+  if (!isAuthenticated() && !['/login', '/register'].includes(to.path)) {
+    console.log('执行')
+    // 将用户重定向到登录页面
+    return { name: 'Login' }
+  }
 })
 
 export default router
