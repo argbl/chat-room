@@ -10,7 +10,7 @@ export default defineConfig({
       '@cp': '/src/components/',
       '@icon': '/src/assets/icon/',
       '@img': '/src/assets/images',
-      '@type': 'src/type',
+      '@model': 'src/model',
     },
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
   },

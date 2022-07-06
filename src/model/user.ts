@@ -5,6 +5,11 @@ interface UserProps {
   uemail: string
 }
 
-type RegisterProps = Omit<UserProps, 'uphone'>
+interface RegisterProps {
+  uname: string
+  upass?: string
+  uemail: string
+  ucrypto?: string
+}
 
 export type { UserProps, RegisterProps }

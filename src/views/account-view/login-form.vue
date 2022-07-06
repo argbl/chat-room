@@ -5,28 +5,21 @@
       <div class="text-gray-400">很高兴再次见到您！</div>
     </div>
     <div class="mt-5 w-full">
-      <div class="w-full mb-5">
-        <div class="w-full mb-2">
-          <h5 class="text-xs text-gray-400">电子邮箱地址或电话号码</h5>
-        </div>
-        <div class="w-full">
-          <input
-            class="w-full p-[10px] h-[40px] rounded outline-none"
-            type="text"
-          />
-        </div>
-      </div>
-      <div class="w-full">
-        <div class="w-full mb-2">
-          <h5 class="text-xs text-gray-400">密码</h5>
-        </div>
-        <div class="w-full">
-          <input
-            class="w-full p-[10px] h-[40px] rounded outline-none"
-            type="password"
-          />
-        </div>
-      </div>
+      <base-input
+        v-model="loginForm.uemail"
+        label="电子邮箱"
+        check="email"
+        inputType="email"
+        bgColor="#fff"
+      ></base-input>
+      <base-input
+        class="mt-5"
+        v-model="loginForm.upass"
+        label="密码"
+        check="password"
+        inputType="password"
+        bgColor="#fff"
+      ></base-input>
       <button class="mt-1 mb-5 py-[2px] text-sm text-blue-500">
         <div>忘记密码?</div>
       </button>
@@ -53,10 +46,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+import BaseInput from '@/components/base-input/base-input.vue'
+import useValidate from '@/hooks/useValidate'
 const loading = ref(false)
+const loginForm = reactive({
+  uemail: '',
+  upass: '',
+})
+const rules = {
+  uemail: 'email',
+  upass: 'password',
+}
 const handleLogin = () => {
-  loading.value = !loading.value
+  loading.value = true
+  const valid = useValidate(loginForm, rules)
+  if (!valid) {
+    loading.value = false
+    return
+  }
+  loading.value = false
 }
 </script>
 

@@ -21,42 +21,29 @@
     </button>
     <h3 class="text-white font-semibold text-2xl text-center">创建一个帐号</h3>
     <div class="mt-5 w-full">
-      <div class="w-full mb-5">
-        <div class="w-full mb-2">
-          <h5 class="text-xs text-gray-400">电子邮箱</h5>
-        </div>
-        <div class="w-full">
-          <input
-            v-model="account.uemail"
-            class="w-full p-[10px] h-[40px] rounded outline-none bg-black"
-            type="text"
-          />
-        </div>
-      </div>
-      <div class="w-full mb-5">
-        <div class="w-full mb-2">
-          <h5 class="text-xs text-gray-400">用户名</h5>
-        </div>
-        <div class="w-full">
-          <input
-            v-model="account.uname"
-            class="w-full p-[10px] h-[40px] rounded outline-none bg-black"
-            type="text"
-          />
-        </div>
-      </div>
-      <div class="w-full">
-        <div class="w-full mb-2">
-          <h5 class="text-xs text-gray-400">密码</h5>
-        </div>
-        <div class="w-full">
-          <input
-            v-model="account.upass"
-            class="w-full p-[10px] h-[40px] rounded outline-none bg-black"
-            type="password"
-          />
-        </div>
-      </div>
+      <base-input
+        v-model="registerForm.uemail"
+        label="电子邮箱"
+        check="email"
+        inputType="email"
+        bgColor="#000"
+        class="mb-5"
+      ></base-input>
+      <base-input
+        v-model="registerForm.uname"
+        label="用户名"
+        check="username"
+        inputType="text"
+        bgColor="#000"
+        class="mb-5"
+      ></base-input>
+      <base-input
+        v-model="registerForm.upass"
+        label="密码"
+        check="password"
+        inputType="password"
+        bgColor="#000"
+      ></base-input>
       <button
         v-loading:20="loading"
         @click="handleRegister"
@@ -82,20 +69,42 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { register } from '@/api/user'
-import { RegisterProps } from '@/type/user'
-const account: RegisterProps = reactive({
+import { register, getPublicKey } from '@/api/user'
+import { RegisterProps } from '@/model/user'
+import useValidate from '@/hooks/useValidate'
+import BaseInput from '@/components/base-input/base-input.vue'
+import { encrypt } from '@/helper/crypto'
+const registerForm: RegisterProps = reactive({
   uemail: '',
   uname: '',
   upass: '',
 })
+
+const rules = {
+  uemail: 'email',
+  uname: 'username',
+  upass: 'password',
+}
+
 const loading = ref(false)
 const handleRegister = async () => {
-  loading.value = !loading.value
-  const result = await register(account)
-  console.log(result)
+  loading.value = true
+  const valid = useValidate(registerForm, rules)
+  if (!valid) {
+    loading.value = false
+    return
+  }
 
-  loading.value = !loading.value
+  const {
+    data: { data: public_key },
+  } = await getPublicKey()
+  registerForm.ucrypto = encrypt(registerForm.upass!, public_key)
+  const result = await register({
+    ucrypto: registerForm.ucrypto,
+    uname: registerForm.uname,
+    uemail: registerForm.uemail,
+  })
+  loading.value = false
 }
 </script>
 
