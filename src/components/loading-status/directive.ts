@@ -8,11 +8,8 @@ interface loadingElement extends HTMLElement {
 
 export default {
   mounted(el: loadingElement, binding: any) {
-    console.log(binding.arg.size)
-
     const app = createApp(LoadingStatus, {
-      size: Number(binding.arg.size),
-      color: binding.arg.color,
+      size: Number(binding.arg),
     }) // 根据模板创建app
 
     // 将app挂载在div上

@@ -1,11 +1,7 @@
 <template>
   <div :class="`relative h-[${size}px] w-[${size}px]`">
-    <div
-      :class="`absolute w-[10px] h-[10px] bg-${color}-500 animation-rotate`"
-    ></div>
-    <div
-      :class="`absolute w-[10px] h-[10px] bg-${color}-500 animation-rotate2`"
-    ></div>
+    <div :class="`absolute w-[10px] h-[10px] animation-rotate`"></div>
+    <div :class="`absolute w-[10px] h-[10px] animation-rotate2`"></div>
   </div>
 </template>
 
@@ -15,10 +11,6 @@ const props = defineProps({
   size: {
     type: Number,
     default: 32,
-  },
-  color: {
-    type: String,
-    default: 'blue',
   },
 })
 const positiveSizePx = computed(() => {
@@ -42,26 +34,31 @@ const negativeSizePx = computed(() => {
     transform: rotate(0) scale(1);
     left: v-bind('negativeSizePx');
     top: v-bind('negativeSizePx');
+    background-color: #029ed7;
   }
   25% {
     transform: rotate(90deg) scale(0.5);
     left: v-bind('positiveSizePx');
     top: v-bind('negativeSizePx');
+    background-color: #003f75;
   }
   50% {
     transform: rotate(180deg) scale(1);
     left: v-bind('positiveSizePx');
     top: v-bind('positiveSizePx');
+    background-color: #029ed7;
   }
   75% {
     transform: rotate(270deg) scale(0.5);
     left: v-bind('negativeSizePx');
     top: v-bind('positiveSizePx');
+    background-color: #003f75;
   }
   100% {
     transform: rotate(360deg) scale(1) translate(0, 0);
     left: v-bind('negativeSizePx');
     top: v-bind('negativeSizePx');
+    background-color: #029ed7;
   }
 }
 
@@ -70,26 +67,31 @@ const negativeSizePx = computed(() => {
     transform: rotate(0) scale(1);
     left: v-bind('positiveSizePx');
     top: v-bind('positiveSizePx');
+    background-color: #003f75;
   }
   25% {
     transform: rotate(90deg) scale(0.5);
     left: v-bind('negativeSizePx');
     top: v-bind('positiveSizePx');
+    background-color: #029ed7;
   }
   50% {
     transform: rotate(180deg) scale(1);
     left: v-bind('negativeSizePx');
     top: v-bind('negativeSizePx');
+    background-color: #003f75;
   }
   75% {
     transform: rotate(270deg) scale(0.5);
     left: v-bind('positiveSizePx');
     top: v-bind('negativeSizePx');
+    background-color: #029ed7;
   }
   100% {
     transform: rotate(360deg) scale(1) translate(0, 0);
     left: v-bind('positiveSizePx');
     top: v-bind('positiveSizePx');
+    background-color: #003f75;
   }
 }
 </style>

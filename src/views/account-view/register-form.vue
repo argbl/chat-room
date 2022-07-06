@@ -39,6 +39,7 @@
         </div>
         <div class="w-full">
           <input
+            v-model="account.uname"
             class="w-full p-[10px] h-[40px] rounded outline-none bg-black"
             type="text"
           />
@@ -50,13 +51,14 @@
         </div>
         <div class="w-full">
           <input
+            v-model="account.upass"
             class="w-full p-[10px] h-[40px] rounded outline-none bg-black"
             type="password"
           />
         </div>
       </div>
       <button
-        v-loading:[loadingStyle]="loading"
+        v-loading:20="loading"
         @click="handleRegister"
         class="block w-full mt-8 mb-2 px-4 py-[2px] bg-violet-500 h-[40px] rounded hover:bg-violet-600"
       >
@@ -80,18 +82,20 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-const account = reactive({
+import { register } from '@/api/user'
+import { RegisterProps } from '@/type/user'
+const account: RegisterProps = reactive({
   uemail: '',
   uname: '',
   upass: '',
 })
 const loading = ref(false)
-const handleRegister = () => {
+const handleRegister = async () => {
   loading.value = !loading.value
-}
-const loadingStyle = {
-  size: 20,
-  color: 'red',
+  const result = await register(account)
+  console.log(result)
+
+  loading.value = !loading.value
 }
 </script>
 

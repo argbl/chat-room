@@ -32,7 +32,7 @@
       </button>
       <button
         @click.stop="handleLogin"
-        v-loading:[loadingStyle]="loading"
+        v-loading:20="loading"
         class="block w-full mb-2 px-4 py-[2px] bg-violet-500 h-[40px] rounded hover:bg-violet-600"
       >
         <div class="mx-auto text-white">登录</div>
@@ -57,10 +57,6 @@ import { ref } from 'vue'
 const loading = ref(false)
 const handleLogin = () => {
   loading.value = !loading.value
-}
-const loadingStyle = {
-  size: 20,
-  color: 'red',
 }
 </script>
 
