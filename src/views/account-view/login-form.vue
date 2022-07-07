@@ -30,7 +30,7 @@
       >
         <div class="mx-auto text-white">登录</div>
       </button>
-      <div class="text-sm">
+      <div class="text-sm flex justify-between">
         <span class="text-gray-400"
           >需要新的帐号？<button>
             <router-link to="/register"
@@ -40,30 +40,40 @@
             >
           </button></span
         >
+        <span class="text-gray-400"
+          >最近登录?<button>
+            <div
+              @click="setIsLoginForm(false)"
+              class="text-blue-500 hover:underline"
+            >
+              选择
+            </div>
+          </button></span
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, inject } from 'vue'
 import BaseInput from '@/components/base-input/base-input.vue'
-import useValidate from '@/hooks/useValidate'
+import { UserProps } from '@/model/user'
+import useLogin from '@/hooks/useLogin'
 const loading = ref(false)
-const loginForm = reactive({
+const loginForm: UserProps = reactive({
   uemail: '',
   upass: '',
 })
-const rules = {
-  uemail: 'email',
-  upass: 'password',
-}
-const handleLogin = () => {
+const setIsLoginForm: (value: boolean) => void = inject('setIsLoginForm')!
+
+const { doValid, doEncrypt, doLogin } = useLogin()
+const handleLogin = async () => {
   loading.value = true
-  const valid = useValidate(loginForm, rules)
-  if (!valid) {
-    loading.value = false
-    return
+  const valid = doValid(loginForm)
+  if (valid) {
+    loginForm.ucrypto = doEncrypt(loginForm.upass!)
+    await doLogin(loginForm)
   }
   loading.value = false
 }

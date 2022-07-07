@@ -10,19 +10,21 @@
       </div>
       <div class="w-full">
         <div
+          v-for="item in loginHistory"
+          :key="item.uemail"
           class="w-full flex items-center bg-zinc-800 px-4 py-3 justify-between rounded"
         >
           <div class="flex-1 flex items-center">
             <img class="h-10 w-10 rounded-full" src="@icon/play.png" alt="" />
             <div class="flex-1 ml-2">
-              <span class="text-white font-semibold">霒蚀</span>
-              <span class="text-gray-400 text-sm">#2376</span>
+              <span class="text-white font-semibold">{{ item.uname }}</span>
+              <!-- <span class="text-gray-400 text-sm">#2376</span> -->
             </div>
           </div>
           <div class="flex items-center">
             <button
               class="bg-zinc-500 h-[34px] px-4 py-[2px] rounded"
-              @click="handleLogin"
+              @click="handleLogin(item)"
             >
               <div class="text-sm text-white mx-4">登录</div>
             </button>
@@ -49,6 +51,7 @@
                 class="absolute w-40 left-6 top-2 bg-black text-red-500 rounded p-2 text-left"
               >
                 <div
+                  @click="delHistory(item)"
                   class="p-1 text-sm rounded hover:text-white hover:bg-red-500"
                 >
                   删除记录
@@ -59,9 +62,12 @@
         </div>
       </div>
       <div class="mt-5">
-        <router-link to="/register">
-          <div class="text-gray-300 text-sm hover:underline">添加一个账户</div>
-        </router-link>
+        <div
+          @click="handleLogin()"
+          class="text-gray-300 text-sm hover:underline"
+        >
+          添加一个账户
+        </div>
       </div>
     </div>
     <div class="mt-5 w-full"></div>
@@ -69,7 +75,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onUnmounted } from 'vue'
+import useLogin from '@/hooks/useLogin'
+import useLoginHistory from '@/hooks/useLoginHistory'
+import { UserProps } from '@/model/user'
+import { ref, onUnmounted, inject } from 'vue'
 const optMore = ref(false)
 
 const cancleOptMore = () => {
@@ -78,16 +87,20 @@ const cancleOptMore = () => {
 
 window.document.addEventListener('click', cancleOptMore)
 
+const { loginHistory, getHistory, delHistory } = useLoginHistory()
+const { doValid, doLogin } = useLogin()
+const setIsLoginForm: (value: boolean) => void = inject('setIsLoginForm')!
+const handleLogin = async (loginForm?: UserProps) => {
+  if (loginForm) {
+    const user = getHistory(loginForm)
+    doValid(user!) && (await doLogin(user!))
+  } else {
+    setIsLoginForm(true)
+  }
+}
 onUnmounted(() => {
   window.document.removeEventListener('click', cancleOptMore)
 })
-
-const emit = defineEmits(['selectAccount'])
-const handleLogin = () => {
-  emit('selectAccount', {
-    uname: '123',
-  })
-}
 </script>
 
 <style scoped></style>

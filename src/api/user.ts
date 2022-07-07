@@ -1,10 +1,10 @@
 import axios from './axios'
-import { RegisterProps } from '@type/user'
+import { RegisterProps, LoginProps } from '@/model/user'
 
-export async function getPublicKey() {
-  return await axios.get('/user/public_key')
+export async function register(registerForm: RegisterProps) {
+  return await axios.post('/user/register', registerForm)
 }
 
-export async function register(registerInfo: RegisterProps) {
-  return await axios.post('/user/register', registerInfo)
+export async function login(loginForm: LoginProps) {
+  return await axios.post('/user/login', loginForm)
 }

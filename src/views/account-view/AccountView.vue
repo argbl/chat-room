@@ -9,10 +9,9 @@
       </transition>
 
       <transition name="bounce">
-        <account-list
-          @selectAccount="selectAccount"
+        <login-history
           v-show="route.name === 'Login' && !isLoginForm"
-        ></account-list>
+        ></login-history>
       </transition>
 
       <transition name="bounce">
@@ -23,17 +22,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { provide, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import LoginForm from './login-form.vue'
-import AccountList from './account-list.vue'
+import LoginHistory from './login-history.vue'
 import RegisterForm from './register-form.vue'
 const route = useRoute()
 const isLoginForm = ref(false)
 
-const selectAccount = (u: any) => {
-  isLoginForm.value = true
+const setIsLoginForm = (value: boolean) => {
+  isLoginForm.value = value
 }
+
+provide('setIsLoginForm', setIsLoginForm)
 </script>
 
 <style scoped>

@@ -6,7 +6,6 @@ import MainView from './views/main-view'
 import AccountView from './views/account-view/AccountView.vue'
 
 const route = useRoute()
-console.log(route)
 </script>
 
 <template>

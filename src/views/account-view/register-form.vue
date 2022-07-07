@@ -69,12 +69,13 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { register, getPublicKey } from '@/api/user'
-import { RegisterProps } from '@/model/user'
+import { register } from '@/api/user'
+import { UserProps } from '@/model/user'
 import useValidate from '@/hooks/useValidate'
 import BaseInput from '@/components/base-input/base-input.vue'
 import { encrypt } from '@/helper/crypto'
-const registerForm: RegisterProps = reactive({
+import secretKey from '@/config/secret-key'
+const registerForm: UserProps = reactive({
   uemail: '',
   uname: '',
   upass: '',
@@ -95,15 +96,19 @@ const handleRegister = async () => {
     return
   }
 
-  const {
-    data: { data: public_key },
-  } = await getPublicKey()
-  registerForm.ucrypto = encrypt(registerForm.upass!, public_key)
-  const result = await register({
+  registerForm.ucrypto = encrypt(registerForm.upass!, secretKey)
+  const { data: result } = await register({
     ucrypto: registerForm.ucrypto,
     uname: registerForm.uname,
     uemail: registerForm.uemail,
   })
+  if (result.code === 200) {
+    alert(result.message)
+  } else if (result.code === 400) {
+    alert(result.message)
+  }
+  console.log(result)
+
   loading.value = false
 }
 </script>

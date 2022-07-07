@@ -5,7 +5,7 @@ interface RulesProps {
 export default function (form: any, rules: RulesProps) {
   for (const key in rules) {
     const k = rules[key]
-    if (!validators[k].reg.test(form[key])) {
+    if (form[key] && !validators[k].reg.test(form[key])) {
       alert('无法提交')
       return false
     }

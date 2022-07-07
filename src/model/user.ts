@@ -1,15 +1,9 @@
 interface UserProps {
-  uname: string
-  upass: string
-  uphone: string
-  uemail: string
-}
-
-interface RegisterProps {
-  uname: string
+  uname?: string
   upass?: string
-  uemail: string
+  uphone?: string
+  uemail?: string
   ucrypto?: string
 }
 
-export type { UserProps, RegisterProps }
+export type { UserProps }
