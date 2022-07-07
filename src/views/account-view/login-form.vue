@@ -41,7 +41,7 @@
           </button></span
         >
         <span class="text-gray-400"
-          >最近登录?<button>
+          >最近登录？<button>
             <div
               @click="setIsLoginForm(false)"
               class="text-blue-500 hover:underline"

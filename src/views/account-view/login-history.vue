@@ -8,11 +8,11 @@
       <div class="text-gray-400 mt-2 mb-6">
         选择一个要登录的帐号，或者添加一个新账号
       </div>
-      <div class="w-full">
+      <div class="w-full bg-zinc-800 rounded">
         <div
-          v-for="item in loginHistory"
+          v-for="(item, index) in loginHistory"
           :key="item.uemail"
-          class="w-full flex items-center bg-zinc-800 px-4 py-3 justify-between rounded"
+          class="w-full flex items-center px-4 py-3 justify-between"
         >
           <div class="flex-1 flex items-center">
             <img class="h-10 w-10 rounded-full" src="@icon/play.png" alt="" />
@@ -29,7 +29,7 @@
               <div class="text-sm text-white mx-4">登录</div>
             </button>
             <button
-              @click.stop="optMore = !optMore"
+              @click.stop="selectOptItem(index)"
               class="flex relative ml-4 justify-center items-center text-zinc-200"
             >
               <svg
@@ -47,11 +47,11 @@
                 ></path>
               </svg>
               <div
-                v-show="optMore"
+                v-show="optMore[index]"
                 class="absolute w-40 left-6 top-2 bg-black text-red-500 rounded p-2 text-left"
               >
                 <div
-                  @click="delHistory(item)"
+                  @click="handleDel(item)"
                   class="p-1 text-sm rounded hover:text-white hover:bg-red-500"
                 >
                   删除记录
@@ -78,16 +78,39 @@
 import useLogin from '@/hooks/useLogin'
 import useLoginHistory from '@/hooks/useLoginHistory'
 import { UserProps } from '@/model/user'
-import { ref, onUnmounted, inject } from 'vue'
-const optMore = ref(false)
+import { reactive, onUnmounted, inject } from 'vue'
+const { loginHistory, getHistory, delHistory } = useLoginHistory()
 
-const cancleOptMore = () => {
-  optMore.value = false
+const useOptMore = () => {
+  const optMore = reactive(new Array(loginHistory.value.length).fill(false))
+
+  const selectOptItem = (index: number) => {
+    cancleOptMore()
+    optMore[index] = !optMore[index]
+  }
+
+  const handleDel = (user: UserProps) => {
+    delHistory(user)
+  }
+
+  const cancleOptMore = () => {
+    for (let i = 0; i < optMore.length; i++) {
+      optMore[i] = false
+    }
+  }
+
+  return {
+    optMore,
+    selectOptItem,
+    handleDel,
+    cancleOptMore,
+  }
 }
+
+const { optMore, selectOptItem, handleDel, cancleOptMore } = useOptMore()
 
 window.document.addEventListener('click', cancleOptMore)
 
-const { loginHistory, getHistory, delHistory } = useLoginHistory()
 const { doValid, doLogin } = useLogin()
 const setIsLoginForm: (value: boolean) => void = inject('setIsLoginForm')!
 const handleLogin = async (loginForm?: UserProps) => {
