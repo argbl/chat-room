@@ -4,7 +4,6 @@ import GuildNav from '@cp/guild-nav/guild-nav.vue'
 import SideBar from '@cp/side-bar/side-bar'
 import MainView from './views/main-view'
 import AccountView from './views/account-view/AccountView.vue'
-
 const route = useRoute()
 </script>
 
