@@ -7,7 +7,7 @@
         v-for="(item, index) in settingItems"
         :key="item.label"
         @click="handleSetting(item, index)"
-        class="w-full leading-5 px-[10px] py-[6px] rounded mb-1 hover:bg-zinc-500"
+        class="w-full leading-5 px-[10px] py-[6px] rounded mb-1 cursor-pointer hover:bg-zinc-500"
         :class="settingStore.settingActiveIndex === index ? 'activeItem' : ''"
       >
         {{ item.label }}

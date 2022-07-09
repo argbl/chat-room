@@ -1,0 +1,102 @@
+<template>
+  <div>
+    <div class="text-lg mb-5">用户个人资料</div>
+    <div class="h-[1px] my-6 bg-gray-500"></div>
+    <div class="flex">
+      <div class="flex-1">
+        <div>
+          <h5 class="mb-2 text-xs">头像</h5>
+          <button class="bg-blue-500 text-sm rounded py-[2px] px-4 h-8 mr-4">
+            <div>更改头像</div>
+          </button>
+        </div>
+        <div class="h-[1px] my-6 bg-gray-500"></div>
+        <div>
+          <h5 class="mb-2 text-xs">个人资料颜色</h5>
+          <div class="mt-4 flex text-xs">
+            <div class="flex flex-col items-center mr-4">
+              <div class="w-[70px] h-[50px] bg-green-500 rounded"></div>
+              <span class="mt-1">默认</span>
+            </div>
+            <div class="flex flex-col items-center mr-4">
+              <input
+                v-model="pickColor"
+                type="color"
+                class="w-[70px] h-[50px] rounded"
+                :style="{
+                  backgroundColor: pickColor,
+                }"
+              />
+
+              <span class="mt-1">自定义</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 ml-5">
+        <h5 class="mb-2 text-xs">预览</h5>
+        <div class="bg-zinc-800 shadow rounded">
+          <div
+            class="h-[60px] rounded-t-md w-full"
+            :style="{
+              backgroundColor: pickColor,
+            }"
+          ></div>
+          <div class="flex -mt-10 justify-between items-center">
+            <div class="p-2 bg-zinc-800 w-24 h-24 rounded-full ml-4">
+              <img src="@icon/play.png" class="rounded-full" />
+            </div>
+          </div>
+          <div class="text-xl flex ml-4 font-semibold">
+            <div>{{ userStore.user.uname }}</div>
+            <span>#{{ userStore.user.uid }}</span>
+          </div>
+          <p class="p-4 text-xs">自定义我的个人资料</p>
+        </div>
+      </div>
+    </div>
+    <transition name="slide-fade">
+      <div
+        v-show="showSave"
+        class="w-[700px] flex items-center justify-between px-4 py-[10px] bg-zinc-800 rounded fixed bottom-5"
+      >
+        <div>注意！您尚未保存更改！</div>
+        <div class="flex items-center">
+          <div class="mr-4">重置</div>
+          <button class="bg-blue-500 text-sm rounded py-[2px] px-4 h-8">
+            <div>更改更改</div>
+          </button>
+        </div>
+      </div>
+    </transition>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useUserStore } from '@/store/user'
+
+const userStore = useUserStore()
+const showSave = ref(false)
+const pickColor = ref('')
+watch(pickColor, (newColor) => {
+  if (newColor) {
+    showSave.value = true
+  }
+})
+</script>
+<style scoped>
+.slide-fade-enter-active {
+  transition: all 0.2s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.2s ease-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+</style>

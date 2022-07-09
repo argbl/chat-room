@@ -18,7 +18,7 @@
             stroke-linecap="round"
             stroke-linejoin="round"
             d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
+          ></path>
         </svg>
       </button>
     </div>
@@ -44,7 +44,7 @@ const layoutStore = useSettingStore()
 
 .scale-fade-enter-from,
 .scale-fade-leave-to {
-  transform: scaleX(0.75);
+  transform: scale(0.75);
   opacity: 0;
 }
 </style>
