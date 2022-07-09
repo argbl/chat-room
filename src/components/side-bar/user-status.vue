@@ -15,7 +15,7 @@
     </div>
     <div class="flex flex-col flex-1">
       <div class="text-sm text-white font-semibold">
-        {{ userStore.user.uname }}
+        {{ username }}
       </div>
       <div class="text-xs text-zinc-400">#{{ userStore.user.uid }}</div>
     </div>
@@ -42,10 +42,15 @@
 <script setup lang="ts">
 import { useSettingStore } from '@/store/setting'
 import { useUserStore } from '@/store/user'
+import { computed } from 'vue'
 
 const userStore = useUserStore()
 
 const settingStore = useSettingStore()
+
+const username = computed(() => {
+  return userStore.user.uname
+})
 </script>
 
 <style scoped></style>

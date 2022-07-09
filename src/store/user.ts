@@ -1,5 +1,5 @@
 // stores/counter.js
-import { me } from '@/api/user'
+import { logout, me } from '@/api/user'
 import { UserProps } from '@/model/user'
 import { defineStore } from 'pinia'
 
@@ -15,6 +15,13 @@ export const useUserStore = defineStore('user', {
       if (result.code === 200) {
         this.user = result.data.user
         console.log(this.user)
+      }
+    },
+    async logout() {
+      const { data: result } = await logout()
+      if (result.code === 200) {
+        this.user = {}
+        window.localStorage.removeItem('token')
       }
     },
   },

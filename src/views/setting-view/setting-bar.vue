@@ -18,9 +18,13 @@
 
 <script setup lang="ts">
 import { useSettingStore } from '@/store/setting'
+import { useUserStore } from '@/store/user'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const settingStore = useSettingStore()
+const userStore = useUserStore()
+const router = useRouter()
 interface SettingProps {
   name: string
   label: string
@@ -44,7 +48,11 @@ const settingItems: SettingProps[] = [
     name: 'Logout',
     label: '登出',
     event: () => {
-      console.log('登出')
+      userStore.logout()
+      settingStore.handleSettingView()
+      router.push({
+        name: 'Login',
+      })
     },
   },
 ]

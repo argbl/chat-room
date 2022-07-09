@@ -12,3 +12,7 @@ export async function login(loginForm: UserProps) {
 export async function me() {
   return await axios.get('/user/@me')
 }
+
+export async function logout() {
+  return await axios.post('/user/logout')
+}

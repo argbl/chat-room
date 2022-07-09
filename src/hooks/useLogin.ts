@@ -34,11 +34,13 @@ export default function () {
     if (result.code === 200) {
       Message.success(result.message)
       window.localStorage.setItem('token', result.data.token)
+      console.log(result.data.token)
+
+      await store.me()
       addHistory({ ...result.data.user, ucrypto: loginForm.ucrypto })
-      store.me()
-      // router.push({
-      //   path: '/',
-      // })
+      router.push({
+        path: '/',
+      })
     } else if (result.code === 400) {
       Message.error(result.message)
     }

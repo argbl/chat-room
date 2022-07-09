@@ -1,11 +1,11 @@
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:7001/api'
-const token = localStorage.getItem('token')
-token && (axios.defaults.headers.common['Authorization'] = 'Bearer ' + token)
+
 // 添加请求拦截器
 axios.interceptors.request.use(
-  function (config) {
-    // 在发送请求之前做些什么
+  function (config: any) {
+    const token = window.localStorage.getItem('token')
+    token && (config.headers['Authorization'] = 'Bearer ' + token)
     return config
   },
   function (error) {
