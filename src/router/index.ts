@@ -35,7 +35,6 @@ function isAuthenticated() {
 
 router.beforeEach(async (to, from) => {
   if (!isAuthenticated() && !['/login', '/register'].includes(to.path)) {
-    console.log('执行')
     // 将用户重定向到登录页面
     return { name: 'Login' }
   }

@@ -39,7 +39,7 @@
               />
             </svg>
             <svg
-              v-if="config.type === 'fail'"
+              v-if="config.type === 'error'"
               xmlns="http://www.w3.org/2000/svg"
               class="h-4 w-4"
               viewBox="0 0 20 20"
@@ -101,7 +101,7 @@ const visible = ref(false)
 const messageStyle = computed(() => {
   if (props.config.type === 'success') {
     return 'bg-green-100 text-green-500'
-  } else if (props.config.type === 'fail') {
+  } else if (props.config.type === 'error') {
     return 'bg-red-100 text-red-500'
   }
   return 'bg-gray-100 text-gray-500'

@@ -75,6 +75,7 @@ import useValidate from '@/hooks/useValidate'
 import BaseInput from '@/components/base-input/base-input.vue'
 import { encrypt } from '@/helper/crypto'
 import secretKey from '@/config/secret-key'
+import Message from '@/components/base-message'
 const registerForm: UserProps = reactive({
   uemail: '',
   uname: '',
@@ -103,11 +104,10 @@ const handleRegister = async () => {
     uemail: registerForm.uemail,
   })
   if (result.code === 200) {
-    alert(result.message)
+    Message.success(result.message)
   } else if (result.code === 400) {
-    alert(result.message)
+    Message.error(result.message)
   }
-  console.log(result)
 
   loading.value = false
 }

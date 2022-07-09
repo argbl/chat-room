@@ -6,9 +6,11 @@ import useLoginHistory from './useLoginHistory'
 import useValidate from './useValidate'
 import { useRouter } from 'vue-router'
 import Message from '@/components/base-message'
+import { useUserStore } from '@/store/user'
 export default function () {
   const { addHistory } = useLoginHistory()
   const router = useRouter()
+  const store = useUserStore()
 
   const doValid = (loginForm: UserProps) => {
     const rules = {
@@ -33,11 +35,12 @@ export default function () {
       Message.success(result.message)
       window.localStorage.setItem('token', result.data.token)
       addHistory({ ...result.data.user, ucrypto: loginForm.ucrypto })
-      router.push({
-        path: '/',
-      })
+      store.me()
+      // router.push({
+      //   path: '/',
+      // })
     } else if (result.code === 400) {
-      alert(result.message)
+      Message.error(result.message)
     }
   }
 

@@ -4,7 +4,13 @@ import GuildNav from '@cp/guild-nav/guild-nav.vue'
 import SideBar from '@cp/side-bar/side-bar'
 import MainView from './views/main-view'
 import AccountView from './views/account-view/AccountView.vue'
+import { useUserStore } from './store/user'
+import SettingView from './views/setting-view/SettingView.vue'
+import { useSettingStore } from './store/setting'
 const route = useRoute()
+const userStore = useUserStore()
+userStore.me()
+const settingStore = useSettingStore()
 </script>
 
 <template>
@@ -19,6 +25,7 @@ const route = useRoute()
       </main>
     </div>
   </div>
+  <SettingView v-show="settingStore.isSettingView"></SettingView>
 </template>
 
 <style></style>

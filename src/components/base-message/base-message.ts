@@ -36,9 +36,9 @@ export default {
     return renderMessage(message, config)
   },
 
-  fail(message = '', config = {}) {
+  error(message = '', config = {}) {
     Object.assign(config, {
-      type: 'fail',
+      type: 'error',
     })
     return renderMessage(message, config)
   },

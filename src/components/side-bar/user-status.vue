@@ -1,5 +1,5 @@
 <template>
-  <section class="h-[52px] px-2 pb-[1px] bg-zinc-900 flex items-center">
+  <section class="h-[52px] px-2 pb-[1px] bg-zinc-900 flex items-center z-50">
     <div class="relative flex items-center mr-2">
       <img src="@icon/play.png" class="rounded-full w-8 h-8 object-cover" />
       <svg
@@ -14,11 +14,14 @@
       </svg>
     </div>
     <div class="flex flex-col flex-1">
-      <div class="text-sm text-white font-semibold">霒蚀</div>
-      <div class="text-xs text-zinc-400">#2827</div>
+      <div class="text-sm text-white font-semibold">
+        {{ userStore.user.uname }}
+      </div>
+      <div class="text-xs text-zinc-400">#{{ userStore.user.uid }}</div>
     </div>
     <div class="flex-initial">
       <button
+        @click="settingStore.handleSettingView()"
         class="w-8 h-8 rounded hover:bg-zinc-700 flex justify-center items-center"
       >
         <div class="w-5 h-5">
@@ -36,6 +39,13 @@
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useSettingStore } from '@/store/setting'
+import { useUserStore } from '@/store/user'
+
+const userStore = useUserStore()
+
+const settingStore = useSettingStore()
+</script>
 
 <style scoped></style>

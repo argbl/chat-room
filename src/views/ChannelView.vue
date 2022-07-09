@@ -55,7 +55,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import axios from 'axios'
 import io from 'socket.io-client'
 const chatMessage = ref('')
 const chatList = ref<string[]>([])
@@ -63,18 +62,6 @@ function publishMessage() {
   chatList.value = [...chatList.value, chatMessage.value]
   console.log(chatList)
 }
-
-const getToekn = () => {
-  axios
-    .post('http://127.0.0.1:7001/login')
-    .then(({ data }) => {
-      window.sessionStorage.setItem('token', `Bearer ${data.data}`)
-    })
-    .then(() => {
-      initSocket()
-    })
-}
-getToekn()
 
 const initSocket = () => {
   const socket = io('http://127.0.0.1:7001/', {
@@ -108,6 +95,8 @@ const initSocket = () => {
     console.log(res)
   })
 }
+
+initSocket()
 </script>
 
 <style scoped></style>
