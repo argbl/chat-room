@@ -11,13 +11,13 @@
       <div class="w-full bg-zinc-800 rounded">
         <div
           v-for="(item, index) in loginHistory"
-          :key="item.uemail"
+          :key="item.email"
           class="w-full flex items-center px-4 py-3 justify-between"
         >
           <div class="flex-1 flex items-center">
             <img class="h-10 w-10 rounded-full" src="@icon/play.png" alt="" />
             <div class="flex-1 ml-2">
-              <span class="text-white font-semibold">{{ item.uname }}</span>
+              <span class="text-white font-semibold">{{ item.nickname }}</span>
               <!-- <span class="text-gray-400 text-sm">#2376</span> -->
             </div>
           </div>

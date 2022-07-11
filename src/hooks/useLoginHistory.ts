@@ -1,4 +1,4 @@
-import { UserProps } from '@/model/user'
+import { UserProps } from '@/models/user'
 import { useStorage } from '@vueuse/core'
 import { Ref, watch } from 'vue'
 
@@ -9,7 +9,7 @@ export default function () {
 
   const addHistory = (loginForm: UserProps) => {
     for (let i = 0; i < loginHistory.value.length; i++) {
-      if (loginHistory.value[i].uemail === loginForm.uemail) {
+      if (loginHistory.value[i].email === loginForm.email) {
         loginHistory.value[i] = loginForm
         return
       }
@@ -22,7 +22,7 @@ export default function () {
 
   const delHistory = (loginForm: UserProps) => {
     for (let i = 0; i < loginHistory.value.length; i++) {
-      if (loginHistory.value[i].uemail === loginForm.uemail) {
+      if (loginHistory.value[i].email === loginForm.email) {
         loginHistory.value.splice(i, 1)
       }
     }
@@ -30,7 +30,7 @@ export default function () {
 
   const getHistory = (loginForm: UserProps) => {
     for (let i = 0; i < loginHistory.value.length; i++) {
-      if (loginHistory.value[i].uemail === loginForm.uemail) {
+      if (loginHistory.value[i].email === loginForm.email) {
         return loginHistory.value[i]
       }
     }

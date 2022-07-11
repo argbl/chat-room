@@ -22,7 +22,7 @@
     <h3 class="text-white font-semibold text-2xl text-center">创建一个帐号</h3>
     <div class="mt-5 w-full">
       <base-input
-        v-model="registerForm.uemail"
+        v-model="registerForm.email"
         label="电子邮箱"
         check="email"
         inputType="email"
@@ -30,7 +30,7 @@
         class="mb-5"
       ></base-input>
       <base-input
-        v-model="registerForm.uname"
+        v-model="registerForm.nickname"
         label="用户名"
         check="username"
         inputType="text"
@@ -38,7 +38,7 @@
         class="mb-5"
       ></base-input>
       <base-input
-        v-model="registerForm.upass"
+        v-model="registerForm.password"
         label="密码"
         check="password"
         inputType="password"
@@ -77,15 +77,15 @@ import { encrypt } from '@/helper/crypto'
 import secretKey from '@/config/secret-key'
 import Message from '@/components/base-message'
 const registerForm: UserProps = reactive({
-  uemail: '',
-  uname: '',
-  upass: '',
+  email: '',
+  nickname: '',
+  password: '',
 })
 
 const rules = {
-  uemail: 'email',
-  uname: 'username',
-  upass: 'password',
+  email: 'email',
+  nickname: 'username',
+  password: 'password',
 }
 
 const loading = ref(false)
@@ -97,11 +97,11 @@ const handleRegister = async () => {
     return
   }
 
-  registerForm.ucrypto = encrypt(registerForm.upass!, secretKey)
+  registerForm.ucrypto = encrypt(registerForm.password!, secretKey)
   const { data: result } = await register({
     ucrypto: registerForm.ucrypto,
-    uname: registerForm.uname,
-    uemail: registerForm.uemail,
+    nickname: registerForm.nickname,
+    email: registerForm.email,
   })
   if (result.code === 200) {
     Message.success(result.message)

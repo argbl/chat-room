@@ -14,7 +14,10 @@
         <div>
           <h5 class="mb-2 text-xs">个人资料颜色</h5>
           <div class="mt-4 flex text-xs">
-            <div class="flex flex-col items-center mr-4">
+            <div
+              @click="pickColor = defaultColor"
+              class="flex flex-col items-center mr-4"
+            >
               <div class="w-[70px] h-[50px] bg-green-500 rounded"></div>
               <span class="mt-1">默认</span>
             </div>
@@ -48,8 +51,8 @@
             </div>
           </div>
           <div class="text-xl flex ml-4 font-semibold">
-            <div>{{ userStore.user.uname }}</div>
-            <span>#{{ userStore.user.uid }}</span>
+            <div>{{ userStore.user.nickname }}</div>
+            <span>#{{ userStore.user.id }}</span>
           </div>
           <p class="p-4 text-xs">自定义我的个人资料</p>
         </div>
@@ -62,9 +65,12 @@
       >
         <div>注意！您尚未保存更改！</div>
         <div class="flex items-center">
-          <div class="mr-4">重置</div>
-          <button class="bg-blue-500 text-sm rounded py-[2px] px-4 h-8">
-            <div>更改更改</div>
+          <div class="mr-4 cursor-pointer" @click="handleReset">重置</div>
+          <button
+            @click="handleUpdate"
+            class="bg-blue-500 text-sm rounded py-[2px] px-4 h-8"
+          >
+            <div>保存更改</div>
           </button>
         </div>
       </div>
@@ -75,15 +81,39 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useUserStore } from '@/store/user'
+import { update } from '@/api/user'
+import Message from '@/components/base-message'
 
+const defaultColor = '#22c55e'
 const userStore = useUserStore()
 const showSave = ref(false)
-const pickColor = ref('')
+const pickColor = ref(userStore.user?.banner_color || defaultColor)
 watch(pickColor, (newColor) => {
-  if (newColor) {
+  console.log(newColor)
+  if (newColor && newColor !== userStore.user.banner_color) {
     showSave.value = true
+  } else if (newColor === defaultColor) {
+    showSave.value = false
   }
 })
+
+const handleReset = () => {
+  pickColor.value = defaultColor
+}
+
+const handleUpdate = async () => {
+  const { data: result } = await update({
+    ...userStore.user,
+    banner_color: pickColor.value,
+  })
+  if (result.code === 200) {
+    Message.success(result.message)
+    await userStore.me()
+    showSave.value = false
+  } else {
+    Message.error(result.message)
+  }
+}
 </script>
 <style scoped>
 .slide-fade-enter-active {

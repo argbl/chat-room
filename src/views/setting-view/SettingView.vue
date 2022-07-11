@@ -1,7 +1,7 @@
 <template>
   <transition name="scale-fade">
     <div
-      class="fixed z-50 top-0 left-0 w-full h-full bg-zinc-700 text-white flex items-start justify-center"
+      class="fixed z-40 top-0 left-0 w-full h-full bg-zinc-700 text-white flex items-start justify-center"
     >
       <setting-bar></setting-bar>
       <setting-content></setting-content>

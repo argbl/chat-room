@@ -1,5 +1,5 @@
 <template>
-  <section class="h-[52px] px-2 pb-[1px] bg-zinc-900 flex items-center z-50">
+  <section class="h-[52px] px-2 pb-[1px] bg-zinc-900 flex items-center z-30">
     <div class="relative flex items-center mr-2">
       <img src="@icon/play.png" class="rounded-full w-8 h-8 object-cover" />
       <svg
@@ -17,7 +17,7 @@
       <div class="text-sm text-white font-semibold">
         {{ username }}
       </div>
-      <div class="text-xs text-zinc-400">#{{ userStore.user.uid }}</div>
+      <div class="text-xs text-zinc-400">#{{ userStore.user.id }}</div>
     </div>
     <div class="flex-initial">
       <button
@@ -49,7 +49,7 @@ const userStore = useUserStore()
 const settingStore = useSettingStore()
 
 const username = computed(() => {
-  return userStore.user.uname
+  return userStore.user.nickname
 })
 </script>
 

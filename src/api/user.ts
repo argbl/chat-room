@@ -1,5 +1,5 @@
 import axios from './axios'
-import { UserProps } from '@/model/user'
+import { UserProps } from '@/models/user'
 
 export async function register(registerForm: UserProps) {
   return await axios.post('/user/register', registerForm)
@@ -15,4 +15,8 @@ export async function me() {
 
 export async function logout() {
   return await axios.post('/user/logout')
+}
+
+export async function update(UserForm: UserProps) {
+  return await axios.post('/user/update', UserForm)
 }

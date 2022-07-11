@@ -18,7 +18,7 @@
       "@cp/*": ["./src/components/*"],
       "@icon/*": ["./src/assets/icon/*"],
       "@img/*": ["./src/assets/images/*"],
-      "@model/*":["src/model/*"]
+      "@model/*":["src/models/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],

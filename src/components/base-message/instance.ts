@@ -7,6 +7,7 @@ const createInstance = (message: string, config: MessageConfig) => {
     'fixed',
     'message',
     'left-1/2',
+    'z-50',
     '-translate-x-[200px]'
   )
 

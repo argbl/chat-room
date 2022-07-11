@@ -6,7 +6,7 @@
     </div>
     <div class="mt-5 w-full">
       <base-input
-        v-model="loginForm.uemail"
+        v-model="loginForm.email"
         label="电子邮箱"
         check="email"
         inputType="email"
@@ -14,7 +14,7 @@
       ></base-input>
       <base-input
         class="mt-5"
-        v-model="loginForm.upass"
+        v-model="loginForm.password"
         label="密码"
         check="password"
         inputType="password"
@@ -62,8 +62,8 @@ import { UserProps } from '@/model/user'
 import useLogin from '@/hooks/useLogin'
 const loading = ref(false)
 const loginForm: UserProps = reactive({
-  uemail: '',
-  upass: '',
+  email: '',
+  password: '',
 })
 const setIsLoginForm: (value: boolean) => void = inject('setIsLoginForm')!
 
@@ -72,7 +72,7 @@ const handleLogin = async () => {
   loading.value = true
   const valid = doValid(loginForm)
   if (valid) {
-    loginForm.ucrypto = doEncrypt(loginForm.upass!)
+    loginForm.ucrypto = doEncrypt(loginForm.password!)
     await doLogin(loginForm)
   }
   loading.value = false

@@ -3,7 +3,7 @@
   <transition name="slide-fade">
     <div
       v-show="visible"
-      class="fixed w-[400px] text-center z-50 pl-5 p-4 rounded"
+      class="fixed w-[400px] text-center pl-5 p-4 rounded"
       :class="messageStyle"
     >
       <div
