@@ -2,12 +2,12 @@
   <aside
     class="h-screen relative flex flex-col flex-shrink-0 overflow-y-scroll theme-third"
   >
-    <nav class="w-[216px] flex-1 pl-5 pr-4 py-16">
+    <nav class="w-[216px] flex-1 pl-5 pr-4 py-16 setting-item">
       <div
         v-for="(item, index) in settingItems"
         :key="item.label"
         @click="handleSetting(item, index)"
-        class="w-full leading-5 px-[10px] py-[6px] rounded mb-1 cursor-pointer hover:bg-zinc-100"
+        class="w-full leading-5 px-[10px] py-[6px] rounded mb-1 cursor-pointer"
         :class="settingStore.settingActiveIndex === index ? 'activeItem' : ''"
       >
         {{ item.label }}
@@ -17,6 +17,7 @@
 </template>
 
 <script setup lang="ts">
+import useTheme from '@/hooks/useTheme'
 import { useSettingStore } from '@/store/setting'
 import { useUserStore } from '@/store/user'
 import { ref } from 'vue'
@@ -61,11 +62,16 @@ const handleSetting = (item: SettingProps, index: number) => {
   item.event && item.event()
   settingStore.setSettingActiveIndex(index)
 }
+
+const { bgColorSecond } = useTheme()
 </script>
 
 <style scoped>
 .activeItem {
-  @apply bg-zinc-100;
+  background-color: v-bind(bgColorSecond);
+}
+.setting-item :hover {
+  background-color: v-bind(bgColorSecond);
 }
 
 /* 设置滚动条的样式 */

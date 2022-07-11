@@ -55,15 +55,15 @@
       </button>
       <div class="text-sm">
         <router-link to="/login"
-          ><div class="text-blue-500 hover:underline">
+          ><div class="text-blue-600 hover:underline">
             已经有帐号？
           </div></router-link
         >
       </div>
       <span class="text-second text-xs"
         >进行注册即表示您同意 Record 的
-        <span class="text-blue-500">服务条款</span>和
-        <span class="text-blue-500">隐私权政策</span>
+        <span class="text-blue-600">服务条款</span>和
+        <span class="text-blue-600">隐私权政策</span>
       </span>
     </div>
   </div>

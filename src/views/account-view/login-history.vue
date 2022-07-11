@@ -25,7 +25,7 @@
           </div>
           <div class="flex items-center">
             <button
-              class="bg-zinc-500 h-[34px] px-4 py-[2px] rounded"
+              class="bg-primary h-[34px] px-4 py-[2px] rounded"
               @click="handleLogin(item)"
             >
               <div class="text-sm text-primary mx-4">登录</div>

@@ -1,14 +1,14 @@
 <template>
   <transition name="scale-fade">
     <div
-      class="fixed z-40 top-0 left-0 w-full h-full flex items-start justify-center theme-primary"
+      class="fixed z-40 top-0 left-0 w-full h-full flex items-start justify-center theme-primary transition-all"
     >
       <setting-bar></setting-bar>
       <setting-content></setting-content>
       <button class="pt-[60px]" @click="settingStore.handleSettingView()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-8 w-8"
+          class="h-8 w-8 text-third"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

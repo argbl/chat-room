@@ -20,7 +20,7 @@
         inputType="password"
         bgColor="#fff"
       ></base-input>
-      <button class="mt-1 mb-5 py-[2px] text-sm text-blue-500">
+      <button class="mt-1 mb-5 py-[2px] text-sm text-blue-600">
         <div>忘记密码?</div>
       </button>
       <button
@@ -34,7 +34,7 @@
         <span class="text-second"
           >需要新的帐号？<button>
             <router-link to="/register"
-              ><div class="text-blue-500 hover:underline">
+              ><div class="text-blue-600 hover:underline">
                 注册
               </div></router-link
             >
@@ -44,7 +44,7 @@
           >最近登录？<button>
             <div
               @click="setIsLoginForm(false)"
-              class="text-blue-500 hover:underline"
+              class="text-blue-600 hover:underline"
             >
               选择
             </div>

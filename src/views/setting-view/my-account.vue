@@ -16,41 +16,49 @@
           <div class="ml-2">{{ userStore.user.nickname }}</div>
           <span>#{{ userStore.user.id }}</span>
         </div>
-        <button class="bg-blue-500 text-sm rounded py-[2px] px-4 h-8 mr-4">
+        <button
+          class="bg-blue-600 button text-sm rounded py-[2px] px-4 h-8 mr-4"
+        >
           <div>编辑个人信息</div>
         </button>
       </div>
-      <div class="theme-second rounded-b-md p-4 text-gray-200">
-        <div class="theme-primary p-4 rounded">
-          <div class="flex items-center">
-            <div class="flex-1 flex flex-col">
-              <h5 class="mb-1 text-xs">用户名</h5>
-              <div class="flex">
-                <div class="text-primary">{{ userStore.user.nickname }}</div>
-                <span>#{{ userStore.user.id }}</span>
+      <div class="rounded">
+        <div class="theme-second p-4 text-gray-200">
+          <div class="theme-primary p-4 rounded">
+            <div class="flex items-center">
+              <div class="flex-1 flex flex-col">
+                <h5 class="mb-1 text-xs">用户名</h5>
+                <div class="flex">
+                  <div class="text-primary">{{ userStore.user.nickname }}</div>
+                  <span>#{{ userStore.user.id }}</span>
+                </div>
               </div>
+              <button
+                class="h-8 py-[2px] px-4 my-1 bg-third button text-sm rounded"
+              >
+                <div>编辑</div>
+              </button>
             </div>
-            <button class="h-8 py-[2px] px-4 my-1 bg-zinc-600 text-sm rounded">
-              <div>编辑</div>
-            </button>
-          </div>
-          <div class="flex items-center mt-6">
-            <div class="flex-1 flex flex-col">
-              <h5 class="mb-1 text-xs">邮箱</h5>
-              <div class="flex">
-                <div class="text-primary">{{ userStore.user.email }}</div>
+            <div class="flex items-center mt-6">
+              <div class="flex-1 flex flex-col">
+                <h5 class="mb-1 text-xs">邮箱</h5>
+                <div class="flex">
+                  <div class="text-primary">{{ userStore.user.email }}</div>
+                </div>
               </div>
+              <button
+                class="h-8 py-[2px] px-4 my-1 bg-third button text-sm rounded"
+              >
+                <div>编辑</div>
+              </button>
             </div>
-            <button class="h-8 py-[2px] px-4 my-1 bg-zinc-600 text-sm rounded">
-              <div>编辑</div>
-            </button>
           </div>
         </div>
       </div>
     </div>
     <div class="h-[1px] my-10 bg-gray-500"></div>
     <div class="text-lg mb-5">密码和验证</div>
-    <button class="bg-blue-500 text-sm rounded py-[2px] px-4 h-8 mr-4">
+    <button class="bg-blue-600 button text-sm rounded py-[2px] px-4 h-8 mr-4">
       <div>更改密码</div>
     </button>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="text-lg mb-5">外观</div>
-    <div class="h-[1px] my-6 bg-gray-500"></div>
+    <div class="h-[1px] my-6 bg-theme-primary"></div>
     <div>
       <h5 class="mb-2 text-xs">主题</h5>
       <div

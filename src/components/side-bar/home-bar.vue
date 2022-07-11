@@ -3,7 +3,7 @@
     <nav class="flex flex-col" style="height: calc(100vh - 56px)">
       <div class="h-12 border-b border-theme px-3">
         <button
-          class="my-[10px] w-full h-7 px-[6px] theme-third rounded text-seond text-sm text-left"
+          class="my-[10px] w-full h-7 px-[6px] theme-third rounded text-sm text-left"
         >
           搜索
         </button>
@@ -35,7 +35,7 @@
                   </g>
                 </svg>
               </div>
-              <div class="text-primary">好友</div>
+              <div class="text-second">好友</div>
             </div>
           </li>
           <h2

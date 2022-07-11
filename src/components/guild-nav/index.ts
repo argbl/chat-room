@@ -4,7 +4,7 @@ export default [
     path: '/',
     type: 'link',
     defaultColor: 'theme-primary',
-    activeColor: 'bg-blue-500',
+    activeColor: 'bg-blue-600',
     iconDefaultColor: '#eee',
     svgWidth: 28,
     svgHeight: 24,

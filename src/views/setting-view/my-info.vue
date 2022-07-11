@@ -6,11 +6,13 @@
       <div class="flex-1">
         <div>
           <h5 class="mb-2 text-xs">头像</h5>
-          <button class="bg-blue-500 text-sm rounded py-[2px] px-4 h-8 mr-4">
+          <button
+            class="bg-blue-600 button text-sm rounded py-[2px] px-4 h-8 mr-4"
+          >
             <div>更改头像</div>
           </button>
         </div>
-        <div class="h-[1px] my-6 bg-gray-500"></div>
+        <div class="h-[1px] my-6 bg-theme-primary"></div>
         <div>
           <h5 class="mb-2 text-xs">个人资料颜色</h5>
           <div class="mt-4 flex text-xs">
@@ -68,7 +70,7 @@
           <div class="mr-4 cursor-pointer" @click="handleReset">重置</div>
           <button
             @click="handleUpdate"
-            class="bg-blue-500 text-sm rounded py-[2px] px-4 h-8"
+            class="bg-blue-600 button text-sm rounded py-[2px] px-4 h-8"
           >
             <div>保存更改</div>
           </button>

@@ -12,7 +12,7 @@
             />
           </div>
           <button
-            class="h-8 min-h-8 min-w-[60px] opacity-50 text-primary bg-blue-700 rounded text-sm px-4 py-[2px]"
+            class="h-8 min-h-8 min-w-[60px] opacity-50 bg-blue-700 button rounded text-sm px-4 py-[2px]"
           >
             <div class="mx-auto">发送好友请求</div>
           </button>

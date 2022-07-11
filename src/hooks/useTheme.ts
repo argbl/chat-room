@@ -13,7 +13,7 @@ export default function () {
     return theme.value === 'dark' ? '#202225' : '#e3e5e8'
   })
   const textColorPrimary = computed(() => {
-    return theme.value === 'dark' ? '#b9bbbe' : '#000000'
+    return theme.value === 'dark' ? '#ffffff' : '#000000'
   })
   const textColorSecond = computed(() => {
     return theme.value === 'dark' ? '#b9bbbe' : '#4f5660'
