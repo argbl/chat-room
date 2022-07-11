@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-zinc-800 w-[450px] p-8 flex flex-col text-white">
+  <div class="theme-second w-[450px] p-8 flex flex-col text-primary">
     <button class="mb-4 py-[2px] flex items-center">
       <svg
         class="caret-1Uw6Xp"
@@ -19,7 +19,9 @@
       </svg>
       <router-link to="/login"> 返回 </router-link>
     </button>
-    <h3 class="text-white font-semibold text-2xl text-center">创建一个帐号</h3>
+    <h3 class="text-primary font-semibold text-2xl text-center">
+      创建一个帐号
+    </h3>
     <div class="mt-5 w-full">
       <base-input
         v-model="registerForm.email"
@@ -49,7 +51,7 @@
         @click="handleRegister"
         class="block w-full mt-8 mb-2 px-4 py-[2px] bg-violet-500 h-[40px] rounded hover:bg-violet-600"
       >
-        <div class="mx-auto text-white">继续</div>
+        <div class="mx-auto text-primary">继续</div>
       </button>
       <div class="text-sm">
         <router-link to="/login"
@@ -58,7 +60,7 @@
           </div></router-link
         >
       </div>
-      <span class="text-gray-400 text-xs"
+      <span class="text-second text-xs"
         >进行注册即表示您同意 Record 的
         <span class="text-blue-500">服务条款</span>和
         <span class="text-blue-500">隐私权政策</span>

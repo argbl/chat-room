@@ -38,7 +38,7 @@
       </div>
       <div class="flex-1 ml-5">
         <h5 class="mb-2 text-xs">预览</h5>
-        <div class="bg-zinc-800 shadow rounded">
+        <div class="theme-second shadow rounded">
           <div
             class="h-[60px] rounded-t-md w-full"
             :style="{
@@ -46,7 +46,7 @@
             }"
           ></div>
           <div class="flex -mt-10 justify-between items-center">
-            <div class="p-2 bg-zinc-800 w-24 h-24 rounded-full ml-4">
+            <div class="p-2 theme-second w-24 h-24 rounded-full ml-4">
               <img src="@icon/play.png" class="rounded-full" />
             </div>
           </div>
@@ -61,7 +61,7 @@
     <transition name="slide-fade">
       <div
         v-show="showSave"
-        class="w-[700px] flex items-center justify-between px-4 py-[10px] bg-zinc-800 rounded fixed bottom-5"
+        class="w-[700px] flex items-center justify-between px-4 py-[10px] theme-second rounded fixed bottom-5"
       >
         <div>注意！您尚未保存更改！</div>
         <div class="flex items-center">

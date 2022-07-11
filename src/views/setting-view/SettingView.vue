@@ -1,11 +1,11 @@
 <template>
   <transition name="scale-fade">
     <div
-      class="fixed z-40 top-0 left-0 w-full h-full bg-zinc-700 text-white flex items-start justify-center"
+      class="fixed z-40 top-0 left-0 w-full h-full flex items-start justify-center theme-primary"
     >
       <setting-bar></setting-bar>
       <setting-content></setting-content>
-      <button class="pt-[60px]" @click="layoutStore.handleSettingView()">
+      <button class="pt-[60px]" @click="settingStore.handleSettingView()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-8 w-8"
@@ -26,11 +26,13 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import settingBar from './setting-bar.vue'
 import SettingContent from './setting-content.vue'
 import { useSettingStore } from '@/store/setting'
 
-const layoutStore = useSettingStore()
+const settingStore = useSettingStore()
+const theme = computed(() => settingStore.theme)
 </script>
 
 <style scoped>

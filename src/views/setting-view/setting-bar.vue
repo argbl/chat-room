@@ -1,13 +1,13 @@
 <template>
   <aside
-    class="h-screen relative flex flex-col flex-shrink-0 overflow-y-scroll bg-zinc-800"
+    class="h-screen relative flex flex-col flex-shrink-0 overflow-y-scroll theme-third"
   >
     <nav class="w-[216px] flex-1 pl-5 pr-4 py-16">
       <div
         v-for="(item, index) in settingItems"
         :key="item.label"
         @click="handleSetting(item, index)"
-        class="w-full leading-5 px-[10px] py-[6px] rounded mb-1 cursor-pointer hover:bg-zinc-500"
+        class="w-full leading-5 px-[10px] py-[6px] rounded mb-1 cursor-pointer hover:bg-zinc-100"
         :class="settingStore.settingActiveIndex === index ? 'activeItem' : ''"
       >
         {{ item.label }}
@@ -65,7 +65,7 @@ const handleSetting = (item: SettingProps, index: number) => {
 
 <style scoped>
 .activeItem {
-  @apply bg-zinc-500;
+  @apply bg-zinc-100;
 }
 
 /* 设置滚动条的样式 */

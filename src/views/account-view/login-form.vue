@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-zinc-800 w-[450px] p-8 flex flex-col items-center">
+  <div class="theme-second w-[450px] p-8 flex flex-col items-center">
     <div class="flex flex-col items-center">
-      <h3 class="font-semibold text-2xl text-white">欢迎回来!</h3>
-      <div class="text-gray-400">很高兴再次见到您！</div>
+      <h3 class="font-semibold text-2xl text-primary">欢迎回来!</h3>
+      <div class="text-second">很高兴再次见到您！</div>
     </div>
     <div class="mt-5 w-full">
       <base-input
@@ -28,10 +28,10 @@
         v-loading:20="loading"
         class="block w-full mb-2 px-4 py-[2px] bg-violet-500 h-[40px] rounded hover:bg-violet-600"
       >
-        <div class="mx-auto text-white">登录</div>
+        <div class="mx-auto text-primary">登录</div>
       </button>
       <div class="text-sm flex justify-between">
-        <span class="text-gray-400"
+        <span class="text-second"
           >需要新的帐号？<button>
             <router-link to="/register"
               ><div class="text-blue-500 hover:underline">
@@ -40,7 +40,7 @@
             >
           </button></span
         >
-        <span class="text-gray-400"
+        <span class="text-second"
           >最近登录？<button>
             <div
               @click="setIsLoginForm(false)"

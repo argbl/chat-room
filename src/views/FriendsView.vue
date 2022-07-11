@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full h-screen overflow-hidden bg-zinc-700">
-    <section class="h-12 border-b-2 border-zinc-900 px-2 flex items-center">
+  <div class="w-full h-screen overflow-hidden theme-primary">
+    <section class="h-12 border-b border-theme px-2 flex items-center">
       <div class="flex h-[42px] items-center">
         <div class="w-6 h-6 mx-2 flex justify-center items-center">
           <svg aria-hidden="false" width="24" height="24" viewBox="0 0 24 24">
@@ -17,10 +17,10 @@
             </g>
           </svg>
         </div>
-        <h3 class="text-white mr-2">好友</h3>
+        <h3 class="text-second mr-2">好友</h3>
       </div>
-      <div class="w-[1px] h-6 mx-2 bg-zinc-600"></div>
-      <div class="flex text-zinc-300">
+      <div class="w-[1px] h-6 mx-2 theme-second"></div>
+      <div class="flex text-third">
         <div class="tab-item">在线</div>
         <div class="tab-item">全部</div>
         <div class="tab-item">待定</div>

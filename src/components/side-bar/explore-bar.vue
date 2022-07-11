@@ -1,13 +1,15 @@
 <template>
-  <aside class="h-screen bg-zinc-800 w-60 flex flex-col justify-between">
+  <aside class="h-screen theme-second w-60 flex flex-col justify-between">
     <nav class="flex flex-col" style="height: calc(100vh - 56px)">
       <div
-        class="relative pr-2 flex-1 flex flex-col overflow-x-hidden overflow-y-scroll text-white"
+        class="relative pr-2 flex-1 flex flex-col overflow-x-hidden overflow-y-scroll text-primary"
       >
-        <h2 class="m-4 mr-0 font-bold text-2xl leading-[30px]">发现</h2>
+        <h2 class="m-4 mr-0 font-bold text-2xl leading-[30px] text-primary">
+          发现
+        </h2>
         <div v-for="item in exploreList" :key="item.name" class="ml-2 py-[1px]">
           <div
-            class="rouned py-[5px] px-2 hover:bg-blue-600 rounded flex items-center"
+            class="rouned py-[5px] px-2 hover:bg-blue-600 rounded flex items-center text-second"
           >
             <div class="mr-3 w-8 h-8 flex justify-center items-center">
               <svg

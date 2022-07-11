@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-screen overflow-hidden pr-2 bg-zinc-700">
+  <div class="w-full h-screen overflow-hidden pr-2 theme-primary">
     <div
       class="w-full h-full py-8 pl-8 pr-4 overflow-x-hidden overflow-y-scroll"
     >
@@ -31,10 +31,12 @@
       </div>
       <div>
         <section class="mb-8 min-w-[580px]">
-          <h3 class="text-white text-xl">特色社区</h3>
+          <h3 class="text-primary text-xl">特色社区</h3>
           <div class="grid grid-cols-5 gap-4 mt-4">
             <router-link to="/channel">
-              <div class="flex flex-col bg-zinc-800 rounded-lg cursor-pointer">
+              <div
+                class="flex flex-col theme-second rounded-lg cursor-pointer"
+              >
                 <div class="relative mb-8 h-[143px]">
                   <div class="w-full h-full">
                     <img
@@ -51,17 +53,17 @@
                     />
                   </div>
                 </div>
-                <div class="flex flex-col pt-0 p-4 text-gray-400">
+                <div class="flex flex-col pt-0 p-4 text-second">
                   <div>
-                    <h4 class="text-ellipsis font-semibold text-white">
+                    <h4 class="text-ellipsis font-semibold text-primary">
                       Genshin Impact Official
                     </h4>
                   </div>
-                  <div class="flex-1 mt-1 mb-4 line-clamp-4 text-sm">
+                  <div class="flex-1 mt-1 mb-4 line-clamp-4 text-sm text-third">
                     Welcome to Teyvat, Traveler! This is the place to discuss
                     with others about your favorite game: Genshin Impact!
                   </div>
-                  <div class="flex text-xs">
+                  <div class="flex text-xs text-third">
                     <div class="mr-4 flex items-center">
                       <div class="w-2 h-2 rounded-full bg-green-500 mr-1"></div>
                       <div>275,455 人在线</div>
@@ -79,7 +81,7 @@
       </div>
       <div class="mb-8 flex flex-col justify-center items-center">
         <img src="@icon/explore.svg" class="mb-2" />
-        <h3 class="text-white">还有更多社区等你发现！</h3>
+        <h3 class="text-primary">还有更多社区等你发现！</h3>
         <button class="text-sm text-blue-500">试着进行搜索吧。</button>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <nav class="h-screen overflow-scroll bg-zinc-900 w-[72px] min-w-[72px]">
+  <nav class="h-screen overflow-scroll theme-third w-[72px] min-w-[72px]">
     <ul class="flex flex-col justify-center items-center py-3">
       <nav-item
         v-for="nav in NavList"

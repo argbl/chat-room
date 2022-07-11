@@ -1,14 +1,14 @@
 <template>
   <div
     action="/"
-    class="bg-zinc-700 w-[450px] p-4 pt-6 flex flex-col items-center"
+    class="theme-primary w-[450px] p-4 pt-6 flex flex-col items-center"
   >
     <div class="w-full flex flex-col items-center">
-      <h3 class="font-semibold text-2xl text-white">选择一个帐号</h3>
-      <div class="text-gray-400 mt-2 mb-6">
+      <h3 class="font-semibold text-2xl text-primary">选择一个帐号</h3>
+      <div class="text-second mt-2 mb-6">
         选择一个要登录的帐号，或者添加一个新账号
       </div>
-      <div class="w-full bg-zinc-800 rounded">
+      <div class="w-full theme-second rounded">
         <div
           v-for="(item, index) in loginHistory"
           :key="item.email"
@@ -17,8 +17,10 @@
           <div class="flex-1 flex items-center">
             <img class="h-10 w-10 rounded-full" src="@icon/play.png" alt="" />
             <div class="flex-1 ml-2">
-              <span class="text-white font-semibold">{{ item.nickname }}</span>
-              <!-- <span class="text-gray-400 text-sm">#2376</span> -->
+              <span class="text-primary font-semibold">{{
+                item.nickname
+              }}</span>
+              <!-- <span class="text-second text-sm">#2376</span> -->
             </div>
           </div>
           <div class="flex items-center">
@@ -26,11 +28,11 @@
               class="bg-zinc-500 h-[34px] px-4 py-[2px] rounded"
               @click="handleLogin(item)"
             >
-              <div class="text-sm text-white mx-4">登录</div>
+              <div class="text-sm text-primary mx-4">登录</div>
             </button>
             <button
               @click.stop="selectOptItem(index)"
-              class="flex relative ml-4 justify-center items-center text-zinc-200"
+              class="flex relative ml-4 justify-center items-center text-seond"
             >
               <svg
                 class="overflowMenuIcon-35A0oT"
@@ -52,7 +54,7 @@
               >
                 <div
                   @click="handleDel(item)"
-                  class="p-1 text-sm rounded hover:text-white hover:bg-red-500"
+                  class="p-1 text-sm rounded hover:text-primary hover:bg-red-500"
                 >
                   删除记录
                 </div>

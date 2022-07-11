@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <div class="w-full mb-2 text-xs text-gray-400">
+    <div class="w-full mb-2 text-xs text-second">
       <h5 class="inline">{{ label }}</h5>
       <span class="ml-2" v-show="showErrorMsg">{{ validator.errorMsg }}</span>
     </div>

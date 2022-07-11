@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full h-screen overflow-hidden bg-zinc-700">
-    <section class="h-12 border-b-2 border-zinc-900 px-2 flex items-center">
+  <div class="w-full h-screen overflow-hidden theme-primary">
+    <section class="h-12 border-b border-theme px-2 flex items-center">
       <div class="flex h-[42px] items-center">
         <div class="w-6 h-6 mx-2 flex justify-center items-center">
           <svg width="24" height="24" viewBox="0 0 40 40" fill="#fff">
@@ -11,7 +11,7 @@
             ></path>
           </svg>
         </div>
-        <h3 class="text-white font-semibold mr-2">Genshin Impact Official</h3>
+        <h3 class="text-primary font-semibold mr-2">Genshin Impact Official</h3>
       </div>
     </section>
     <div class="flex flex-col">
@@ -21,9 +21,7 @@
         </div>
       </div>
       <form class="px-4" @submit.prevent>
-        <div
-          class="rounded-lg bg-zinc-600 flex h-11 items-center text-gray-400 px-4"
-        >
+        <div class="rounded-lg flex h-11 items-center text-second px-4">
           <input
             v-model="chatMessage"
             class="bg-transparent outline-none flex-1"

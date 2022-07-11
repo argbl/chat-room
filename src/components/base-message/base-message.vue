@@ -57,7 +57,7 @@
         </div>
 
         <div
-          class="cursor-pointer text-gray-500"
+          class="cursor-pointer text-second"
           @click="onClose"
           v-if="config.close"
         >
@@ -104,7 +104,7 @@ const messageStyle = computed(() => {
   } else if (props.config.type === 'error') {
     return 'bg-red-100 text-red-500'
   }
-  return 'bg-gray-100 text-gray-500'
+  return 'bg-gray-100 text-second'
 })
 
 // 打开消息

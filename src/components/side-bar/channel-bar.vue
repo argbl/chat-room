@@ -1,10 +1,17 @@
 <template>
-  <aside class="h-screen bg-zinc-800 w-60 flex flex-col justify-between">
+  <aside class="h-screen theme-second w-60 flex flex-col justify-between">
     <nav class="flex flex-col" style="height: calc(100vh - 56px)">
-      <div class="px-4 py-3 relative text-white">
+      <div class="px-4 py-3 relative text-primary">
         <header class="relative z-10">
           <div>
-            <h1 class="text-sm font-semibold">Genshin Impact Official</h1>
+            <h1
+              class="text-sm font-semibold"
+              :style="{
+                color: titleColor,
+              }"
+            >
+              Genshin Impact Official
+            </h1>
           </div>
         </header>
         <div class="absolute left-0 top-0 overflow-hidden">
@@ -24,7 +31,7 @@
 
       <div
         ref="userListRef"
-        class="relative pr-2 flex-1 flex flex-col overflow-x-hidden overflow-y-scroll text-white"
+        class="relative pr-2 flex-1 flex flex-col overflow-x-hidden overflow-y-scroll text-primary"
       >
         <ul>
           <div class="h-[84px]"></div>
@@ -39,7 +46,7 @@
               </div>
               <div class="flex-1 flex flex-col">
                 <div class="text-yellow-500">可莉</div>
-                <div class="text-xs text-gray-400">正在炸鱼</div>
+                <div class="text-xs text-second">正在炸鱼</div>
               </div>
             </div>
           </div>
@@ -51,13 +58,21 @@
 </template>
 
 <script setup lang="ts">
+import { ThemeType } from '@/models/theme'
+import { useSettingStore } from '@/store/setting'
 import { ref } from 'vue'
 const userListRef = ref<HTMLElement | null>(null)
 const scrollTop = ref(0)
+const titleColor = ref('#ffffff')
+const settingStore = useSettingStore()
 setTimeout(() => {
   userListRef.value?.addEventListener('scroll', () => {
     scrollTop.value = userListRef.value?.scrollTop || 0
-    console.log(((100 - scrollTop.value) / 100) * 145)
+    if (scrollTop.value === 0) {
+      titleColor.value = '#ffffff'
+    } else if (scrollTop.value !== 0 && settingStore.theme !== ThemeType.Dark) {
+      titleColor.value = '#000000'
+    }
   })
 })
 </script>

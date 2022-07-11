@@ -1,9 +1,9 @@
 <template>
-  <aside class="h-screen bg-zinc-800 w-60 flex flex-col justify-between">
+  <aside class="h-screen theme-second w-60 flex flex-col justify-between">
     <nav class="flex flex-col" style="height: calc(100vh - 56px)">
-      <div class="h-12 border-b-2 border-zinc-900 px-3">
+      <div class="h-12 border-b border-theme px-3">
         <button
-          class="my-[10px] w-full h-7 px-[6px] bg-zinc-900 rounded text-zinc-400 text-sm text-left"
+          class="my-[10px] w-full h-7 px-[6px] theme-third rounded text-seond text-sm text-left"
         >
           搜索
         </button>
@@ -13,7 +13,7 @@
       >
         <ul class="">
           <li
-            class="mt-2 ml-2 max-w-[224px] p-[1px] rounded bg-zinc-700 cursor-pointer"
+            class="mt-2 ml-2 max-w-[224px] p-[1px] rounded theme-third cursor-pointer"
           >
             <div class="flex h-[42px] items-center px-2">
               <div class="w-8 h-8 mr-3 flex justify-center items-center">
@@ -25,7 +25,6 @@
                 >
                   <g fill="none" fill-rule="evenodd">
                     <path
-                      fill="#fff"
                       fill-rule="nonzero"
                       d="M0.5,0 L0.5,1.5 C0.5,5.65 2.71,9.28 6,11.3 L6,16 L21,16 L21,14 C21,11.34 15.67,10 13,10 C13,10 12.83,10 12.75,10 C8,10 4,6 4,1.5 L4,0 L0.5,0 Z M13,0 C10.790861,0 9,1.790861 9,4 C9,6.209139 10.790861,8 13,8 C15.209139,8 17,6.209139 17,4 C17,1.790861 15.209139,0 13,0 Z"
                       transform="translate(2 4)"
@@ -36,13 +35,13 @@
                   </g>
                 </svg>
               </div>
-              <div class="text-white">好友</div>
+              <div class="text-primary">好友</div>
             </div>
           </li>
           <h2
             class="pt-[18px] pl-[18px] pr-2 pb-1 flex justify-between items-center"
           >
-            <span class="text-zinc-400 text-xs">私信</span>
+            <span class="text-seond text-xs">私信</span>
             <svg
               x="0"
               y="0"
@@ -90,7 +89,11 @@
   </aside>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import useTheme from '@/hooks/useTheme'
+
+const { bgColorThird } = useTheme()
+</script>
 
 <style lang="postcss" scoped>
 /* 设置滚动条的样式 */
@@ -104,9 +107,9 @@
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: rgba(0, 0, 0, 0.1);
+  background: v-bind(bgColorThird);
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: black;
+  background: v-bind(bgColorThird);
 }
 </style>

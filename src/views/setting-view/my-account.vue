@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="text-lg mb-5">我的帐号</div>
-    <div class="bg-zinc-800">
+    <div class="theme-second">
       <div
         class="h-[100px] rounded-t-md w-full"
         :style="{
@@ -10,7 +10,7 @@
       ></div>
       <div class="flex -mt-5 justify-between items-center">
         <div class="flex items-center text-xl">
-          <div class="p-2 bg-zinc-800 w-24 h-24 rounded-full ml-4">
+          <div class="p-2 theme-second w-24 h-24 rounded-full ml-4">
             <img src="@icon/play.png" class="rounded-full" />
           </div>
           <div class="ml-2">{{ userStore.user.nickname }}</div>
@@ -20,13 +20,13 @@
           <div>编辑个人信息</div>
         </button>
       </div>
-      <div class="bg-zinc-800 rounded-b-md p-4 text-gray-200">
-        <div class="bg-zinc-700 p-4 rounded">
+      <div class="theme-second rounded-b-md p-4 text-gray-200">
+        <div class="theme-primary p-4 rounded">
           <div class="flex items-center">
             <div class="flex-1 flex flex-col">
               <h5 class="mb-1 text-xs">用户名</h5>
               <div class="flex">
-                <div class="text-white">{{ userStore.user.nickname }}</div>
+                <div class="text-primary">{{ userStore.user.nickname }}</div>
                 <span>#{{ userStore.user.id }}</span>
               </div>
             </div>
@@ -38,7 +38,7 @@
             <div class="flex-1 flex flex-col">
               <h5 class="mb-1 text-xs">邮箱</h5>
               <div class="flex">
-                <div class="text-white">{{ userStore.user.email }}</div>
+                <div class="text-primary">{{ userStore.user.email }}</div>
               </div>
             </div>
             <button class="h-8 py-[2px] px-4 my-1 bg-zinc-600 text-sm rounded">
