@@ -20,7 +20,7 @@
               <span class="text-primary font-semibold">{{
                 item.nickname
               }}</span>
-              <!-- <span class="text-second text-sm">#2376</span> -->
+              <span class="text-second ml-1 text-sm">#{{ item.id }}</span>
             </div>
           </div>
           <div class="flex items-center">
@@ -63,7 +63,7 @@
       <div class="mt-5">
         <div
           @click="handleLogin()"
-          class="text-gray-300 text-sm hover:underline"
+          class="text-gray-300 cursor-pointer text-sm hover:underline"
         >
           添加一个账户
         </div>
