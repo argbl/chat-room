@@ -3,7 +3,9 @@ import { logout, me } from '@/api/user'
 import Message from '@/components/base-message'
 import { UserProps } from '@/models/user'
 import { defineStore } from 'pinia'
+import useLoginHistory from '@/hooks/useLoginHistory'
 
+const { updateHistory } = useLoginHistory()
 export const useUserStore = defineStore('user', {
   state: () => ({
     user: JSON.parse(window.localStorage.getItem('user') || '{}') as UserProps,
@@ -14,8 +16,10 @@ export const useUserStore = defineStore('user', {
     async me() {
       const { data: result } = await me()
       if (result.code === 200) {
-        window.localStorage.setItem('user', JSON.stringify(result.data.user))
-        this.user = result.data.user
+        const user = result.data.user
+        window.localStorage.setItem('user', JSON.stringify(user))
+        updateHistory(user)
+        this.user = user
       } else if (result.code === 403) {
         Message.error(result.message)
       }

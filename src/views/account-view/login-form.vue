@@ -67,12 +67,11 @@ const loginForm: UserProps = reactive({
 })
 const setIsLoginForm: (value: boolean) => void = inject('setIsLoginForm')!
 
-const { doValid, doEncrypt, doLogin } = useLogin()
+const { doValid, doLogin } = useLogin()
 const handleLogin = async () => {
   loading.value = true
   const valid = doValid(loginForm)
   if (valid) {
-    loginForm.ucrypto = doEncrypt(loginForm.password!)
     await doLogin(loginForm)
   }
   loading.value = false

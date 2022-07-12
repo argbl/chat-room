@@ -6,7 +6,6 @@ interface UserProps {
   password?: string
   phone?: string
   email?: string
-  ucrypto?: string
 }
 
 interface PassProps {

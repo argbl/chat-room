@@ -50,12 +50,9 @@
               </svg>
               <div
                 v-show="optMore[index]"
-                class="absolute w-40 left-6 top-2 bg-black text-red-500 rounded p-2 text-left"
+                class="absolute w-40 left-6 top-2 theme-third rounded p-2 text-left del-item"
               >
-                <div
-                  @click="handleDel(item)"
-                  class="p-1 text-sm rounded hover:text-primary hover:bg-red-500"
-                >
+                <div @click="handleDel(item)" class="p-1 text-sm rounded">
                   删除记录
                 </div>
               </div>
@@ -79,10 +76,12 @@
 <script setup lang="ts">
 import useLogin from '@/hooks/useLogin'
 import useLoginHistory from '@/hooks/useLoginHistory'
+import useTheme from '@/hooks/useTheme'
 import { UserProps } from '@model/user'
 import { reactive, onUnmounted, inject } from 'vue'
 const { loginHistory, getHistory, delHistory } = useLoginHistory()
 
+const { bgColorPrimary } = useTheme()
 const useOptMore = () => {
   const optMore = reactive(new Array(loginHistory.value.length).fill(false))
 
@@ -128,4 +127,8 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.del-item :hover {
+  background-color: v-bind(bgColorPrimary);
+}
+</style>

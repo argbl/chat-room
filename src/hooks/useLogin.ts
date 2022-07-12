@@ -1,6 +1,4 @@
 import { UserProps } from '@/models/user'
-import { encrypt } from '@/helper/crypto'
-import secretKey from '@/config/secret-key'
 import { login } from '@/api/user'
 import useLoginHistory from './useLoginHistory'
 import useValidate from './useValidate'
@@ -21,21 +19,14 @@ export default function () {
     return useValidate(loginForm, rules)
   }
 
-  const doEncrypt = (password: string) => {
-    return encrypt(password, secretKey)
-  }
-
   const doLogin = async (loginForm: UserProps) => {
-    const { data: result } = await login({
-      ucrypto: loginForm.ucrypto,
-      email: loginForm.email,
-    })
+    const { data: result } = await login(loginForm)
 
     if (result.code === 200) {
       Message.success(result.message)
       window.localStorage.setItem('token', result.data.token)
       await store.me()
-      addHistory({ ...result.data.user, ucrypto: loginForm.ucrypto })
+      addHistory({ ...result.data.user, password: loginForm.password })
       router.push({
         path: '/',
       })
@@ -46,7 +37,6 @@ export default function () {
 
   return {
     doValid,
-    doEncrypt,
     doLogin,
   }
 }

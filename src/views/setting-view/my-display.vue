@@ -105,8 +105,6 @@ import { ThemeType } from '@/models/theme'
 const settingStore = useSettingStore()
 const theme = computed(() => settingStore.theme)
 const handleSetTheme = (theme: ThemeType) => {
-  console.log('点击', theme)
-
   settingStore.setTheme(theme)
 }
 </script>
