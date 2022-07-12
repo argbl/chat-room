@@ -34,7 +34,7 @@
       <base-input
         v-model="registerForm.nickname"
         label="用户名"
-        check="username"
+        check="nickname"
         inputType="text"
         bgColor="#000"
         class="mb-5"
@@ -72,7 +72,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { register } from '@/api/user'
-import { UserProps } from '@/model/user'
+import { UserProps } from '@model/user'
 import useValidate from '@/hooks/useValidate'
 import BaseInput from '@/components/base-input/base-input.vue'
 import { encrypt } from '@/helper/crypto'
@@ -86,7 +86,7 @@ const registerForm: UserProps = reactive({
 
 const rules = {
   email: 'email',
-  nickname: 'username',
+  nickname: 'nickname',
   password: 'password',
 }
 

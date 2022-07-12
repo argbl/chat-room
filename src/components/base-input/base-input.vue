@@ -10,9 +10,8 @@
         @input="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
         "
-        class="w-full p-[10px] rounded outline-none"
+        class="w-full p-[10px] rounded outline-none theme-third"
         :style="{
-          'background-color': bgColor,
           height: height,
         }"
         :type="inputType"
@@ -34,10 +33,6 @@ const props = defineProps({
   inputType: {
     type: String,
     default: 'text',
-  },
-  bgColor: {
-    type: String,
-    default: '#ffffff',
   },
   height: {
     type: String,

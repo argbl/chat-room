@@ -79,7 +79,7 @@
 <script setup lang="ts">
 import useLogin from '@/hooks/useLogin'
 import useLoginHistory from '@/hooks/useLoginHistory'
-import { UserProps } from '@/model/user'
+import { UserProps } from '@model/user'
 import { reactive, onUnmounted, inject } from 'vue'
 const { loginHistory, getHistory, delHistory } = useLoginHistory()
 

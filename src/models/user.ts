@@ -9,4 +9,10 @@ interface UserProps {
   ucrypto?: string
 }
 
-export type { UserProps }
+interface PassProps {
+  originalPassword: string
+  newPassword: string
+  checkPassword: string
+}
+
+export type { UserProps, PassProps }

@@ -11,7 +11,7 @@ export default {
     errorMsg: '密码长度为6-12位，至少包含数字跟字母，可以使用字符',
   },
 
-  username: {
+  nickname: {
     reg: /^.{4,20}$/,
     errorMsg: '用户名长度为4-20个字符',
   },

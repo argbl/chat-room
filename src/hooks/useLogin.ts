@@ -26,8 +26,6 @@ export default function () {
   }
 
   const doLogin = async (loginForm: UserProps) => {
-    console.log(loginForm)
-
     const { data: result } = await login({
       ucrypto: loginForm.ucrypto,
       email: loginForm.email,

@@ -81,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useUserStore } from '@/store/user'
 import { update } from '@/api/user'
 import Message from '@/components/base-message'
@@ -90,17 +90,20 @@ const defaultColor = '#22c55e'
 const userStore = useUserStore()
 const showSave = ref(false)
 const pickColor = ref(userStore.user?.banner_color || defaultColor)
+const defaultPickColor = computed(() => {
+  return userStore.user.banner_color
+})
 watch(pickColor, (newColor) => {
   console.log(newColor)
-  if (newColor && newColor !== userStore.user.banner_color) {
+  if (newColor && newColor !== defaultPickColor.value) {
     showSave.value = true
-  } else if (newColor === defaultColor) {
+  } else if (newColor === defaultPickColor.value) {
     showSave.value = false
   }
 })
 
 const handleReset = () => {
-  pickColor.value = defaultColor
+  pickColor.value = defaultPickColor.value || defaultColor
 }
 
 const handleUpdate = async () => {

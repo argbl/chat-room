@@ -7,7 +7,8 @@ export default function (form: any, rules: RulesProps) {
   for (const key in rules) {
     const k = rules[key]
     if (form[key] && !validators[k].reg.test(form[key])) {
-      Message.error('无法提交')
+      const tip = validators[k].errorMsg
+      Message.error(tip)
       return false
     }
   }

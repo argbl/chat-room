@@ -15,7 +15,7 @@
     </div>
     <div class="flex flex-col flex-1">
       <div class="text-sm text-primary font-semibold">
-        {{ username }}
+        {{ nickname }}
       </div>
       <div class="text-xs text-seond-400">#{{ userStore.user.id }}</div>
     </div>
@@ -48,7 +48,7 @@ const userStore = useUserStore()
 
 const settingStore = useSettingStore()
 
-const username = computed(() => {
+const nickname = computed(() => {
   return userStore.user.nickname
 })
 </script>
