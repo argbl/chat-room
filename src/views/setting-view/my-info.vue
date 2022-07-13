@@ -93,7 +93,7 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
 import { useUserStore } from '@/store/user'
-import { preUpload, update, uploadImage } from '@/api/user'
+import { avatar, update, uploadImage } from '@/api/user'
 import Message from '@/components/base-message'
 
 const defaultColor = '#22c55e'
@@ -136,7 +136,7 @@ const handleUpdate = async () => {
 
 const uploadRef = ref<{ files: Array<File> } | null>(null)
 const upload = async () => {
-  let { data: result } = await preUpload()
+  let { data: result } = await avatar()
   if (result.code === 200) {
     console.log(result)
 

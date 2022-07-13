@@ -28,7 +28,7 @@ export async function update(UserForm: UserProps) {
   return await axios.post('/user/update', UserForm)
 }
 
-export async function changePassword(passForm: PassProps) {
+export async function pass(passForm: PassProps) {
   const encryptPassForm: PassProps = {
     originalPassword: '',
     newPassword: '',
@@ -37,11 +37,11 @@ export async function changePassword(passForm: PassProps) {
   for (const key in passForm) {
     encryptPassForm[key] = encrypt(passForm[key], authkey)
   }
-  return await axios.post('/user/changePass', encryptPassForm)
+  return await axios.post('/user/pass', encryptPassForm)
 }
 
-export async function preUpload() {
-  return await axios.get('/user/preUpload')
+export async function avatar() {
+  return await axios.get('/user/avatar')
 }
 
 export async function uploadImage(form: FormData) {

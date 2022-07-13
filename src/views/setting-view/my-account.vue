@@ -135,7 +135,7 @@ import { ref, reactive, computed } from 'vue'
 import { useUserStore } from '@/store/user'
 import baseModal from '@/components/base-modal/base-modal.vue'
 import baseInput from '@/components/base-input/base-input.vue'
-import { update, changePassword } from '@/api/user'
+import { update, pass } from '@/api/user'
 import useValidate from '@/hooks/useValidate'
 import Message from '@/components/base-message'
 import { useSettingStore } from '@/store/setting'
@@ -177,7 +177,7 @@ const confirmUser = async () => {
 }
 
 const confirmPass = async () => {
-  const { data: result } = await changePassword(passForm)
+  const { data: result } = await pass(passForm)
   if (result.code === 200) {
     Message.success(result.message)
     await userStore.me()

@@ -19,7 +19,7 @@
       </div>
       <div class="text-xs text-seond-400">#{{ user.id }}</div>
     </div>
-    <div class="flex-initial">
+    <div class="flex-initial setting-button">
       <button
         @click="settingStore.handleSettingView()"
         class="w-8 h-8 rounded hover:theme-second flex justify-center items-center"
@@ -40,6 +40,7 @@
 </template>
 
 <script setup lang="ts">
+import useTheme from '@/hooks/useTheme'
 import { useSettingStore } from '@/store/setting'
 import { useUserStore } from '@/store/user'
 import { computed } from 'vue'
@@ -51,6 +52,12 @@ const settingStore = useSettingStore()
 const user = computed(() => {
   return userStore.user
 })
+
+const { bgColorPrimary } = useTheme()
 </script>
 
-<style scoped></style>
+<style scoped>
+.setting-button:hover {
+  background-color: v-bind(bgColorPrimary);
+}
+</style>
