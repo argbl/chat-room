@@ -15,7 +15,11 @@
           class="w-full flex items-center px-4 py-3 justify-between"
         >
           <div class="flex-1 flex items-center">
-            <img class="h-10 w-10 rounded-full" src="@icon/play.png" alt="" />
+            <img
+              class="h-10 w-10 rounded-full object-cover"
+              :src="item.avatar"
+              alt=""
+            />
             <div class="flex-1 ml-2">
               <span class="text-primary font-semibold">{{
                 item.nickname

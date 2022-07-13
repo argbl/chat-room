@@ -1,18 +1,18 @@
 import axios from './axios'
 import { PassProps, UserProps } from '@/models/user'
 import { encrypt } from '@/helper/crypto'
-import secretKey from '@/config/secret-key'
+import authkey from '@/config/auth-key'
 export async function register(registerForm: UserProps) {
   return await axios.post('/user/register', {
     ...registerForm,
-    password: encrypt(registerForm.password!, secretKey),
+    password: encrypt(registerForm.password!, authkey),
   })
 }
 
 export async function login(loginForm: UserProps) {
   return await axios.post('/user/login', {
     ...loginForm,
-    password: encrypt(loginForm.password!, secretKey),
+    password: encrypt(loginForm.password!, authkey),
   })
 }
 
@@ -35,7 +35,15 @@ export async function changePassword(passForm: PassProps) {
     checkPassword: '',
   }
   for (const key in passForm) {
-    encryptPassForm[key] = encrypt(passForm[key], secretKey)
+    encryptPassForm[key] = encrypt(passForm[key], authkey)
   }
   return await axios.post('/user/changePass', encryptPassForm)
+}
+
+export async function preUpload() {
+  return await axios.get('/user/preUpload')
+}
+
+export async function uploadImage(form: FormData) {
+  return await axios.post('http://upload-cn-east-2.qiniup.com', form)
 }

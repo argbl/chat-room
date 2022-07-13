@@ -5,16 +5,19 @@
       <div
         class="h-[100px] rounded-t-md w-full"
         :style="{
-          backgroundColor: userStore.user.banner_color || '#22c55e',
+          backgroundColor: user.banner_color || '#22c55e',
         }"
       ></div>
       <div class="flex -mt-5 justify-between items-center">
         <div class="flex items-center text-xl">
           <div class="p-2 theme-second w-24 h-24 rounded-full ml-4">
-            <img src="@icon/play.png" class="rounded-full" />
+            <img
+              :src="user.avatar"
+              class="w-full h-full rounded-full object-cover"
+            />
           </div>
-          <div class="ml-2">{{ userStore.user.nickname }}</div>
-          <span>#{{ userStore.user.id }}</span>
+          <div class="ml-2">{{ user.nickname }}</div>
+          <span>#{{ user.id }}</span>
         </div>
         <button
           @click="settingStore.setSettingActiveIndex(1)"
@@ -30,8 +33,8 @@
               <div class="flex-1 flex flex-col">
                 <h5 class="mb-1 text-xs">用户名</h5>
                 <div class="flex">
-                  <div class="text-primary">{{ userStore.user.nickname }}</div>
-                  <span>#{{ userStore.user.id }}</span>
+                  <div class="text-primary">{{ user.nickname }}</div>
+                  <span>#{{ user.id }}</span>
                 </div>
               </div>
               <button
@@ -45,7 +48,7 @@
               <div class="flex-1 flex flex-col">
                 <h5 class="mb-1 text-xs">邮箱</h5>
                 <div class="flex">
-                  <div class="text-primary">{{ userStore.user.email }}</div>
+                  <div class="text-primary">{{ user.email }}</div>
                 </div>
               </div>
               <button
@@ -128,7 +131,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useUserStore } from '@/store/user'
 import baseModal from '@/components/base-modal/base-modal.vue'
 import baseInput from '@/components/base-input/base-input.vue'
@@ -138,6 +141,10 @@ import Message from '@/components/base-message'
 import { useSettingStore } from '@/store/setting'
 import { PassProps } from '@model/user'
 const userStore = useUserStore()
+
+const user = computed(() => {
+  return userStore.user
+})
 const settingStore = useSettingStore()
 const userForm = ref(userStore.user)
 const nicknameModalRef = ref<{ visible: boolean; show: () => void } | null>(

@@ -7,9 +7,16 @@
         <div>
           <h5 class="mb-2 text-xs">头像</h5>
           <button
-            class="bg-blue-600 button text-sm rounded py-[2px] px-4 h-8 mr-4"
+            class="relative bg-blue-600 rounded button text-sm flex items-center justify-center w-24 h-8"
           >
-            <div>更改头像</div>
+            <div class="absolute">上传图片</div>
+            <input
+              ref="uploadRef"
+              @change="upload()"
+              class="absolute cursor-pointer opacity-0 left-0 right-0 bottom-0 top-0 h-full text-[0px]"
+              type="file"
+              accept=".jpg,.jpeg,.png,.gif"
+            />
           </button>
         </div>
         <div class="h-[1px] my-6 bg-theme-primary"></div>
@@ -49,7 +56,10 @@
           ></div>
           <div class="flex -mt-10 justify-between items-center">
             <div class="p-2 theme-second w-24 h-24 rounded-full ml-4">
-              <img src="@icon/play.png" class="rounded-full" />
+              <img
+                :src="user.avatar"
+                class="w-full h-full object-cover rounded-full"
+              />
             </div>
           </div>
           <div class="text-xl flex ml-4 font-semibold">
@@ -83,13 +93,17 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
 import { useUserStore } from '@/store/user'
-import { update } from '@/api/user'
+import { preUpload, update, uploadImage } from '@/api/user'
 import Message from '@/components/base-message'
 
 const defaultColor = '#22c55e'
 const userStore = useUserStore()
 const showSave = ref(false)
 const pickColor = ref(userStore.user?.banner_color || defaultColor)
+const user = computed(() => {
+  return userStore.user
+})
+
 const defaultPickColor = computed(() => {
   return userStore.user.banner_color
 })
@@ -117,6 +131,29 @@ const handleUpdate = async () => {
     showSave.value = false
   } else {
     Message.error(result.message)
+  }
+}
+
+const uploadRef = ref<{ files: Array<File> } | null>(null)
+const upload = async () => {
+  let { data: result } = await preUpload()
+  if (result.code === 200) {
+    console.log(result)
+
+    const form = new FormData()
+    form.append('token', result.data)
+    form.append('file', uploadRef.value!.files[0])
+    let { data: res } = await uploadImage(form)
+
+    const avatar = 'http://qiniu.kaijinx.top/' + res.key
+
+    let { data: result2 } = await update({ id: userStore.user.id, avatar })
+    if (result2.code === 200) {
+      Message.success(result2.message)
+      await userStore.me()
+    } else {
+      Message.error(result2.message)
+    }
   }
 }
 </script>
