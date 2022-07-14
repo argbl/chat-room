@@ -53,48 +53,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import io from 'socket.io-client'
 const chatMessage = ref('')
 const chatList = ref<string[]>([])
 function publishMessage() {
   chatList.value = [...chatList.value, chatMessage.value]
-  console.log(chatList)
 }
-
-const initSocket = () => {
-  const socket = io('http://127.0.0.1:7001/', {
-    transports: ['websocket'],
-    reconnection: true, // 是否重连
-    reconnectionAttempts: 30, // 重新连接的次数
-    reconnectionDelay: 1000, // 每过多长时间重连一次
-    timeout: 5000, // 超时时间
-    autoConnect: false,
-    query: {
-      token: window.sessionStorage.getItem('token'),
-    },
-  })
-  socket.on('connect', () => {
-    console.log('连接成功') // x8WIv7-mJelg7on_ALbx
-  })
-  socket.on('disconnect', (res: any) => {
-    console.log('连接关闭') // undefined
-  })
-  socket.on('client_success', (res: any) => {
-    console.log(`连接成功${res.message}`) // x8WIv7-mJelg7on_ALbx
-  })
-  socket.on('connect_error', (e: any) => {
-    console.log('connect_error', e)
-  })
-
-  socket.connect()
-
-  socket.emit('chat', '123')
-  socket.on('res', (res: any) => {
-    console.log(res)
-  })
-}
-
-initSocket()
 </script>
 
 <style scoped></style>

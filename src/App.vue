@@ -9,6 +9,7 @@ import { useUserStore } from './store/user'
 import SettingView from './views/setting-view/SettingView.vue'
 import { useSettingStore } from './store/setting'
 import useTheme from '@/hooks/useTheme'
+import useSocket from './hooks/useSocket'
 const route = useRoute()
 const userStore = useUserStore()
 userStore.me()
@@ -23,6 +24,8 @@ const {
   textColorThird,
   borderColor,
 } = useTheme()
+
+useSocket()
 </script>
 
 <template>

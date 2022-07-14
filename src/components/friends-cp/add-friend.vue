@@ -29,6 +29,7 @@
 
 <script setup lang="ts">
 import { add } from '@/api/friend'
+import useSocket from '@/hooks/useSocket'
 import { ref } from 'vue'
 import Message from '../base-message'
 const id = ref('')
@@ -40,10 +41,16 @@ const handleFriendsReq = async () => {
   const { data: result } = await add({ id: Number(id.value) })
   if (result.code === 200) {
     Message.success(result.message)
+    socket.emit('friend', {
+      id: id.value,
+      message: '您有一条好友信息',
+    })
   } else {
     Message.error(result.message)
   }
 }
+
+const socket = useSocket()
 </script>
 
 <style scoped></style>
