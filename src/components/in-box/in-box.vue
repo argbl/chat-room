@@ -34,6 +34,7 @@
               </div>
               <div class="flex items-center">
                 <div
+                  @click="resolveMessage(message, 2)"
                   class="w-6 h-6 flex justify-center items-center rounded-full mr-2 cursor-pointer"
                 >
                   <svg
@@ -50,6 +51,7 @@
                   </svg>
                 </div>
                 <div
+                  @click="resolveMessage(message, 1)"
                   class="w-6 h-6 flex justify-center items-center rounded-full cursor-pointer"
                 >
                   <svg
@@ -75,9 +77,12 @@
 </template>
 
 <script setup lang="ts">
+import { resolve } from '@/api/message'
 import useTheme from '@/hooks/useTheme'
 import { useMessageStore } from '@/store/message'
+import { MessageModel } from '@model/message'
 import { ref, onUnmounted, computed } from 'vue'
+import Message from '../base-message'
 const visible = ref(false)
 const { bgColorThird } = useTheme()
 
@@ -94,15 +99,22 @@ const loading = ref(false)
 const handleInBox = async () => {
   visible.value = !visible.value
   loading.value = true
-  setTimeout(() => {
-    loading.value = false
-  }, 2000)
   await messageStore.me()
+  loading.value = false
 }
 
 const messageList = computed(() => {
   return messageStore.messageList
 })
+
+const resolveMessage = async (message: MessageModel, status: number) => {
+  const { data: result } = await resolve(message, status)
+  if (result.code === 200) {
+    Message.error(result.message)
+  } else {
+    Message.success(result.message)
+  }
+}
 </script>
 
 <style scoped>

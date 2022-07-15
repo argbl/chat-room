@@ -72,11 +72,11 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { register } from '@/api/user'
-import { UserProps } from '@model/user'
+import { UserModel } from '@model/user'
 import useValidate from '@/hooks/useValidate'
 import BaseInput from '@/components/base-input/base-input.vue'
 import Message from '@/components/base-message'
-const registerForm: UserProps = reactive({
+const registerForm: UserModel = reactive({
   email: '',
   nickname: '',
   password: '',

@@ -1,14 +1,14 @@
 // stores/counter.js
 import { logout, me } from '@/api/user'
 import Message from '@/components/base-message'
-import { UserProps } from '@/models/user'
+import { UserModel } from '@/models/user'
 import { defineStore } from 'pinia'
 import useLoginHistory from '@/hooks/useLoginHistory'
 
 const { updateHistory } = useLoginHistory()
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: JSON.parse(window.localStorage.getItem('user') || '{}') as UserProps,
+    user: JSON.parse(window.localStorage.getItem('user') || '{}') as UserModel,
     token: window.localStorage.getItem('token') || '',
   }),
 

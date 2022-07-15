@@ -1,4 +1,4 @@
-interface UserProps {
+interface UserModel {
   id?: number
   nickname?: string
   banner_color?: string
@@ -8,10 +8,10 @@ interface UserProps {
   email?: string
 }
 
-interface PassProps {
+interface PassModel {
   originalPassword: string
   newPassword: string
   checkPassword: string
 }
 
-export type { UserProps, PassProps }
+export type { UserModel, PassModel }

@@ -139,7 +139,7 @@ import { update, pass } from '@/api/user'
 import useValidate from '@/hooks/useValidate'
 import Message from '@/components/base-message'
 import { useSettingStore } from '@/store/setting'
-import { PassProps } from '@model/user'
+import { PassModel } from '@model/user'
 const userStore = useUserStore()
 
 const user = computed(() => {
@@ -152,7 +152,7 @@ const nicknameModalRef = ref<{ visible: boolean; show: () => void } | null>(
 )
 const emailModalRef = ref<{ visible: boolean; show: () => void } | null>(null)
 
-const passForm: PassProps = reactive({
+const passForm: PassModel = reactive({
   originalPassword: '',
   newPassword: '',
   checkPassword: '',

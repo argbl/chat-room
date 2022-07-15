@@ -1,15 +1,15 @@
 import axios from './axios'
-import { PassProps, UserProps } from '@/models/user'
+import { PassModel, UserModel } from '@/models/user'
 import { encrypt } from '@/helper/crypto'
 import authkey from '@/config/auth-key'
-export async function register(registerForm: UserProps) {
+export async function register(registerForm: UserModel) {
   return await axios.post('/user/register', {
     ...registerForm,
     password: encrypt(registerForm.password!, authkey),
   })
 }
 
-export async function login(loginForm: UserProps) {
+export async function login(loginForm: UserModel) {
   return await axios.post('/user/login', {
     ...loginForm,
     password: encrypt(loginForm.password!, authkey),
@@ -24,12 +24,12 @@ export async function logout() {
   return await axios.post('/user/logout')
 }
 
-export async function update(UserForm: UserProps) {
+export async function update(UserForm: UserModel) {
   return await axios.post('/user/update', UserForm)
 }
 
-export async function pass(passForm: PassProps) {
-  const encryptPassForm: PassProps = {
+export async function pass(passForm: PassModel) {
+  const encryptPassForm: PassModel = {
     originalPassword: '',
     newPassword: '',
     checkPassword: '',

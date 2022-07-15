@@ -1,4 +1,4 @@
-import { UserProps } from '@/models/user'
+import { UserModel } from '@/models/user'
 import { login } from '@/api/user'
 import useLoginHistory from './useLoginHistory'
 import useValidate from './useValidate'
@@ -10,7 +10,7 @@ export default function () {
   const router = useRouter()
   const store = useUserStore()
 
-  const doValid = (loginForm: UserProps) => {
+  const doValid = (loginForm: UserModel) => {
     const rules = {
       email: 'email',
       password: 'password',
@@ -19,7 +19,7 @@ export default function () {
     return useValidate(loginForm, rules)
   }
 
-  const doLogin = async (loginForm: UserProps) => {
+  const doLogin = async (loginForm: UserModel) => {
     const { data: result } = await login(loginForm)
 
     if (result.code === 200) {

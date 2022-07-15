@@ -58,10 +58,10 @@
 <script setup lang="ts">
 import { ref, reactive, inject } from 'vue'
 import BaseInput from '@/components/base-input/base-input.vue'
-import { UserProps } from '@model/user'
+import { UserModel } from '@model/user'
 import useLogin from '@/hooks/useLogin'
 const loading = ref(false)
-const loginForm: UserProps = reactive({
+const loginForm: UserModel = reactive({
   email: '',
   password: '',
 })

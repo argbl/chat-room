@@ -81,7 +81,7 @@
 import useLogin from '@/hooks/useLogin'
 import useLoginHistory from '@/hooks/useLoginHistory'
 import useTheme from '@/hooks/useTheme'
-import { UserProps } from '@model/user'
+import { UserModel } from '@model/user'
 import { reactive, onUnmounted, inject } from 'vue'
 const { loginHistory, getHistory, delHistory } = useLoginHistory()
 
@@ -94,7 +94,7 @@ const useOptMore = () => {
     optMore[index] = !optMore[index]
   }
 
-  const handleDel = (user: UserProps) => {
+  const handleDel = (user: UserModel) => {
     delHistory(user)
   }
 
@@ -118,7 +118,7 @@ window.document.addEventListener('click', cancleOptMore)
 
 const { doValid, doLogin } = useLogin()
 const setIsLoginForm: (value: boolean) => void = inject('setIsLoginForm')!
-const handleLogin = async (loginForm?: UserProps) => {
+const handleLogin = async (loginForm?: UserModel) => {
   if (loginForm) {
     const user = getHistory(loginForm)
     doValid(user!) && (await doLogin(user!))

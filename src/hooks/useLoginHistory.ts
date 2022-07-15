@@ -1,13 +1,13 @@
-import { UserProps } from '@/models/user'
+import { UserModel } from '@/models/user'
 import { useStorage } from '@vueuse/core'
 import { Ref } from 'vue'
 
 export default function () {
   const key = 'login_history'
 
-  const loginHistory: Ref<UserProps[]> = useStorage(key, [])
+  const loginHistory: Ref<UserModel[]> = useStorage(key, [])
 
-  const addHistory = (loginForm: UserProps) => {
+  const addHistory = (loginForm: UserModel) => {
     const result = updateHistory(loginForm)
     if (!result) {
       if (loginHistory.value.length >= 3) {
@@ -17,7 +17,7 @@ export default function () {
     }
   }
 
-  const delHistory = (loginForm: UserProps) => {
+  const delHistory = (loginForm: UserModel) => {
     for (let i = 0; i < loginHistory.value.length; i++) {
       if (loginHistory.value[i].id === loginForm.id) {
         loginHistory.value.splice(i, 1)
@@ -25,7 +25,7 @@ export default function () {
     }
   }
 
-  const getHistory = (loginForm: UserProps) => {
+  const getHistory = (loginForm: UserModel) => {
     for (let i = 0; i < loginHistory.value.length; i++) {
       if (loginHistory.value[i].id === loginForm.id) {
         return loginHistory.value[i]
@@ -33,7 +33,7 @@ export default function () {
     }
   }
 
-  const updateHistory = (loginForm: UserProps) => {
+  const updateHistory = (loginForm: UserModel) => {
     for (let i = 0; i < loginHistory.value.length; i++) {
       if (loginHistory.value[i].id === loginForm.id) {
         loginHistory.value[i] = loginForm
