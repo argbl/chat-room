@@ -20,12 +20,15 @@
         <h3 class="text-second mr-2">好友</h3>
       </div>
       <div class="w-[1px] h-6 mx-2 theme-second"></div>
-      <div class="flex text-third">
-        <div class="tab-item">在线</div>
-        <div class="tab-item">全部</div>
-        <div class="tab-item">待定</div>
-        <div class="tab-item">已屏蔽</div>
-        <div class="tab-item text-white bg-green-500">添加好友</div>
+      <div class="flex flex-1 justify-between">
+        <div class="flex text-third flex-1">
+          <div class="tab-item">在线</div>
+          <div class="tab-item">全部</div>
+          <div class="tab-item">待定</div>
+          <div class="tab-item">已屏蔽</div>
+          <div class="tab-item text-white bg-green-500">添加好友</div>
+        </div>
+        <slot></slot>
       </div>
     </section>
     <div class="flex">
