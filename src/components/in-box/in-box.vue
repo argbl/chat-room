@@ -1,6 +1,6 @@
 <template>
   <div class="text-second relative">
-    <div class="cursor-pointer" @click.stop="visible = !visible">
+    <div class="cursor-pointer" @click.stop="handleInBox">
       <svg x="0" y="0" width="24" height="24" viewBox="0 0 24 24">
         <path
           d="M19 3H4.99C3.88 3 3.01 3.89 3.01 5L3 19C3 20.1 3.88 21 4.99 21H19C20.1 21 21 20.1 21 19V5C21 3.89 20.1 3 19 3ZM19 15H15C15 16.66 13.65 18 12 18C10.35 18 9 16.66 9 15H4.99V5H19V15Z"
@@ -16,14 +16,20 @@
         <header class="theme-third px-4 py-3">
           <div class="my-[1px]">消息</div>
         </header>
-        <div class="pr-1">
+        <div v-loading="loading" class="pr-1">
           <div class="h-[350px] pl-4 py-3 overflow-y-scroll">
-            <div class="flex justify-between items-center">
+            <div
+              v-for="message in messageList"
+              :key="message.id"
+              class="flex justify-between items-center"
+            >
               <div class="flex items-center">
-                <img class="rounded-full mr-2 w-10 h-10" src="@icon/play.png" />
+                <img class="avatar mr-2 w-10 h-10" :src="message.avatar" />
                 <div class="text-second flex-1">
-                  <div class="font-semibold text-sm text-primary">霒蚀</div>
-                  <div class="text-xs">{{ '好友消息' }}</div>
+                  <div class="font-semibold text-sm text-primary">
+                    {{ message.nickname }}
+                  </div>
+                  <div class="text-xs">{{ message.content }}</div>
                 </div>
               </div>
               <div class="flex items-center">
@@ -70,7 +76,8 @@
 
 <script setup lang="ts">
 import useTheme from '@/hooks/useTheme'
-import { ref, onUnmounted } from 'vue'
+import { useMessageStore } from '@/store/message'
+import { ref, onUnmounted, computed } from 'vue'
 const visible = ref(false)
 const { bgColorThird } = useTheme()
 
@@ -80,6 +87,21 @@ const closeInBox = () => {
 window.document.addEventListener('click', closeInBox)
 onUnmounted(() => {
   window.document.removeEventListener('click', closeInBox)
+})
+
+const messageStore = useMessageStore()
+const loading = ref(false)
+const handleInBox = async () => {
+  visible.value = !visible.value
+  loading.value = true
+  setTimeout(() => {
+    loading.value = false
+  }, 2000)
+  await messageStore.me()
+}
+
+const messageList = computed(() => {
+  return messageStore.messageList
 })
 </script>
 

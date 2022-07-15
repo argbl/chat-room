@@ -35,9 +35,9 @@ export default {
   },
 }
 function append(el: loadingElement) {
-  el.classList.add('flex')
-  el.classList.add('items-center')
-  el.classList.add('justify-center')
+  // el.classList.add('flex')
+  // el.classList.add('items-center')
+  // el.classList.add('justify-center')
   el.normal.forEach((element) => {
     el.removeChild(element)
   })

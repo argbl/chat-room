@@ -5,3 +5,7 @@
 .button{
   @apply text-white cursor-pointer
 }
+
+.avatar{
+  @apply object-cover rounded-full
+}

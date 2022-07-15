@@ -10,11 +10,15 @@ import SettingView from './views/setting-view/SettingView.vue'
 import { useSettingStore } from './store/setting'
 import useTheme from '@/hooks/useTheme'
 import useSocket from './hooks/useSocket'
+import { useMessageStore } from './store/message'
 const route = useRoute()
 const userStore = useUserStore()
 userStore.me()
 
 const settingStore = useSettingStore()
+
+const messageStore = useMessageStore()
+messageStore.me()
 const {
   bgColorPrimary,
   textColorPrimary,

@@ -41,10 +41,12 @@ const handleFriendsReq = async () => {
   const { data: result } = await add({ id: Number(id.value) })
   if (result.code === 200) {
     Message.success(result.message)
-    socket.emit('friend', {
-      id: id.value,
-      message: '您有一条好友信息',
-    })
+    if (result.data) {
+      socket.emit('friend', {
+        id: id.value,
+        message: '您有一条好友信息',
+      })
+    }
   } else {
     Message.error(result.message)
   }
