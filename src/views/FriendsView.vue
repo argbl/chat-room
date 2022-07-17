@@ -21,28 +21,79 @@
       </div>
       <div class="w-[1px] h-6 mx-2 theme-second"></div>
       <div class="flex flex-1 justify-between">
-        <div class="flex text-third flex-1">
-          <div class="tab-item">在线</div>
-          <div class="tab-item">全部</div>
-          <div class="tab-item">待定</div>
-          <div class="tab-item">已屏蔽</div>
-          <div class="tab-item text-white bg-green-500">添加好友</div>
+        <div class="flex text-third flex-1 friend-items">
+          <div
+            v-for="(item, index) in FiendItems"
+            :key="index"
+            class="friend-item"
+            @click="handleFriend(index)"
+            :class="
+              friendStore.friendActiveIndex === index
+                ? 'friend-item-active'
+                : ''
+            "
+          >
+            {{ item.label }}
+          </div>
         </div>
         <slot></slot>
       </div>
     </section>
     <div class="flex">
-      <add-friend></add-friend>
+      <add-friend v-if="friendStore.friendActiveIndex === 4"></add-friend>
+      <friend-list v-else></friend-list>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useFriendStore } from '../store/friend'
 import AddFriend from '@cp/friends-cp/add-friend.vue'
+import useTheme from '@/hooks/useTheme'
+import FriendList from '@/components/friends-cp/friend-list.vue'
+const friendStore = useFriendStore()
+friendStore.me()
+
+const FiendItems: FiendProps[] = [
+  {
+    name: 'online',
+    label: '在线',
+  },
+  {
+    name: 'all',
+    label: '全部',
+  },
+  {
+    name: 'unhandle',
+    label: '待定',
+  },
+  {
+    name: 'reject',
+    label: '已屏蔽',
+  },
+  {
+    name: 'add',
+    label: '添加好友',
+  },
+]
+
+const handleFriend = (index: number) => {
+  friendStore.setFriendActiveIndex(index)
+}
+
+const { bgColorThird } = useTheme()
 </script>
 
 <style scoped lang="postcss">
-.tab-item {
-  @apply mx-2 my-0 px-2 rounded min-w-[32px];
+.friend-item {
+  @apply mx-2 my-0 px-2 rounded min-w-[32px] cursor-pointer;
+}
+
+.friend-item-active {
+  background-color: v-bind(bgColorThird);
+}
+
+.friend-items :hover {
+  background-color: v-bind(bgColorThird);
 }
 </style>

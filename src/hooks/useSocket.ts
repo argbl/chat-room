@@ -1,5 +1,6 @@
 import io from 'socket.io-client'
 import { useUserStore } from '@/store/user'
+import Message from '@/components/base-message'
 let socket: any = null
 export default function () {
   const userStore = useUserStore()
@@ -32,6 +33,7 @@ export default function () {
       socket.connect()
 
       socket.on('system', (res: any) => {
+        Message.text(res)
         console.log(res)
       })
       socket.on('message', (res: any) => {
