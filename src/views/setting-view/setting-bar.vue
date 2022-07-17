@@ -18,21 +18,16 @@
 
 <script setup lang="ts">
 import useTheme from '@/hooks/useTheme'
+import { TabProps } from '@/models/helper'
 import { useSettingStore } from '@/store/setting'
 import { useUserStore } from '@/store/user'
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const settingStore = useSettingStore()
 const userStore = useUserStore()
 const router = useRouter()
-interface SettingProps {
-  name: string
-  label: string
-  event?: () => void
-}
 
-const settingItems: SettingProps[] = [
+const settingItems: TabProps[] = [
   {
     name: 'MyAccount',
     label: '我的帐号',
@@ -58,7 +53,7 @@ const settingItems: SettingProps[] = [
   },
 ]
 
-const handleSetting = (item: SettingProps, index: number) => {
+const handleSetting = (item: TabProps, index: number) => {
   item.event && item.event()
   settingStore.setSettingActiveIndex(index)
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-screen overflow-hidden theme-primary">
+  <div class="w-full h-screen theme-primary">
     <section class="h-12 border-b border-theme px-2 flex items-center">
       <div class="flex h-[42px] items-center">
         <div class="w-6 h-6 mx-2 flex justify-center items-center">
@@ -39,7 +39,7 @@
         <slot></slot>
       </div>
     </section>
-    <div class="flex">
+    <div style="height: calc(100vh - 49px)" class="mr-1">
       <add-friend v-if="friendStore.friendActiveIndex === 4"></add-friend>
       <friend-list v-else></friend-list>
     </div>
@@ -51,10 +51,11 @@ import { useFriendStore } from '../store/friend'
 import AddFriend from '@cp/friends-cp/add-friend.vue'
 import useTheme from '@/hooks/useTheme'
 import FriendList from '@/components/friends-cp/friend-list.vue'
+import { TabProps } from '@/models/helper'
 const friendStore = useFriendStore()
 friendStore.me()
 
-const FiendItems: FiendProps[] = [
+const FiendItems: TabProps[] = [
   {
     name: 'online',
     label: '在线',

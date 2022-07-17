@@ -39,7 +39,7 @@ useSocket()
     <guild-nav></guild-nav>
     <div class="flex-1 flex">
       <side-bar></side-bar>
-      <main class="flex-1">
+      <main class="flex-1 overflow-y-hidden">
         <MainView></MainView>
       </main>
     </div>
