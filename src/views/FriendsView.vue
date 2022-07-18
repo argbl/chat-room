@@ -70,7 +70,7 @@ const FiendItems: TabProps[] = [
   },
   {
     name: 'reject',
-    label: '已屏蔽',
+    label: '已拒绝',
   },
   {
     name: 'add',

@@ -33,8 +33,7 @@ export default function () {
       socket.connect()
 
       socket.on('system', (res: any) => {
-        Message.text(res)
-        console.log(res)
+        Message.success(res)
       })
       socket.on('message', (res: any) => {
         console.log(res)

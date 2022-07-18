@@ -1,5 +1,5 @@
 <template>
-  <section class="h-[52px] px-2 pb-[1px] theme-third flex items-center z-30">
+  <section class="h-[52px] px-2 pb-[1px] theme-third flex items-center z-10">
     <div class="relative flex items-center mr-2">
       <img :src="user.avatar" class="rounded-full w-8 h-8 object-cover" />
       <svg

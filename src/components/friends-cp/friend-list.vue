@@ -5,32 +5,32 @@
       v-for="friend in friendStore.computedFriendList"
       :key="friend.id"
     >
-      <img class="avatar w-8 h-8 mr-2" :src="friend.avatar" alt="" />
+      <img class="avatar w-8 h-8 mr-2" :src="friend.avatar" />
       <div class="flex-1 text-sm flex items-center font-semibold">
         <div class="">{{ friend.nickname }}</div>
         <span>#{{ friend.uid }}</span>
       </div>
       <div
+        @click="dialogVisible = true"
         class="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer"
       >
-        <img src="@icon/close.svg" alt="" />
+        <img src="@icon/close.svg" />
       </div>
     </div>
   </div>
+  <base-dialog v-model="dialogVisible"></base-dialog>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref } from 'vue'
 import { useFriendStore } from '@/store/friend'
 import useTheme from '@/hooks/useTheme'
+import BaseDialog from '../base-dialog/base-dialog.vue'
 
 const friendStore = useFriendStore()
 
-const friendList = computed(() => {
-  return friendStore.computedFriendList
-})
-
-const { bgColorPrimary, bgColorSecond, bgColorThird } = useTheme()
+const dialogVisible = ref(false)
+const { bgColorSecond, bgColorThird } = useTheme()
 </script>
 
 <style scoped>
