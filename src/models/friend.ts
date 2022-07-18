@@ -1,12 +1,12 @@
 interface FriendModel {
-  id: number
-  user_send: number
-  user_accept: number
-  uid: number
-  avatar: string
-  nickname: string
-  status: StatusType
-  online: OnLineType
+  id?: number
+  user_send?: number
+  user_accept?: number
+  uid?: number
+  avatar?: string
+  nickname?: string
+  status?: StatusType
+  online?: OnLineType
 }
 
 enum StatusType {

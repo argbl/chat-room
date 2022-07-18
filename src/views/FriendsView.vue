@@ -40,7 +40,7 @@
       </div>
     </section>
     <div style="height: calc(100vh - 49px)" class="mr-1">
-      <add-friend v-if="friendStore.friendActiveIndex === 4"></add-friend>
+      <add-friend v-if="friendStore.friendActiveIndex === 3"></add-friend>
       <friend-list v-else></friend-list>
     </div>
   </div>
@@ -67,10 +67,6 @@ const FiendItems: TabProps[] = [
   {
     name: 'unhandle',
     label: '待定',
-  },
-  {
-    name: 'reject',
-    label: '已拒绝',
   },
   {
     name: 'add',

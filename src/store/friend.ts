@@ -29,10 +29,6 @@ export const useFriendStore = defineStore('friend', {
           return state.friendList.filter((friend: FriendModel) => {
             return friend.status === StatusType.UNHANDLE
           })
-        case 3:
-          return state.friendList.filter((friend: FriendModel) => {
-            return friend.status === StatusType.REJECT
-          })
       }
     },
   },

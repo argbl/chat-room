@@ -34,9 +34,7 @@
           <h3 class="text-primary text-xl">特色社区</h3>
           <div class="grid grid-cols-5 gap-4 mt-4">
             <router-link to="/channel">
-              <div
-                class="flex flex-col theme-second rounded-lg cursor-pointer"
-              >
+              <div class="flex flex-col theme-second rounded-lg cursor-pointer">
                 <div class="relative mb-8 h-[143px]">
                   <div class="w-full h-full">
                     <img

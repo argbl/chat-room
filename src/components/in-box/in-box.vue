@@ -110,9 +110,9 @@ const messageList = computed(() => {
 const resolveMessage = async (message: MessageModel, status: number) => {
   const { data: result } = await resolve(message, status)
   if (result.code === 200) {
-    Message.error(result.message)
-  } else {
     Message.success(result.message)
+  } else {
+    Message.error(result.message)
   }
 }
 </script>
