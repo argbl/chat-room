@@ -16,23 +16,23 @@
             class="mt-2 ml-2 max-w-[224px] p-[1px] rounded theme-third cursor-pointer"
           >
             <div class="flex h-[42px] items-center px-2">
-              <div class="w-8 h-8 mr-3 flex justify-center items-center">
+              <div
+                @click="jumpFriend()"
+                class="w-8 h-8 mr-3 flex justify-center items-center"
+              >
                 <svg
-                  aria-hidden="false"
-                  width="24"
-                  height="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
                   viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
                 >
-                  <g fill="none" fill-rule="evenodd">
-                    <path
-                      fill-rule="nonzero"
-                      d="M0.5,0 L0.5,1.5 C0.5,5.65 2.71,9.28 6,11.3 L6,16 L21,16 L21,14 C21,11.34 15.67,10 13,10 C13,10 12.83,10 12.75,10 C8,10 4,6 4,1.5 L4,0 L0.5,0 Z M13,0 C10.790861,0 9,1.790861 9,4 C9,6.209139 10.790861,8 13,8 C15.209139,8 17,6.209139 17,4 C17,1.790861 15.209139,0 13,0 Z"
-                      transform="translate(2 4)"
-                    ></path>
-                    <path
-                      d="M0,0 L24,0 L24,24 L0,24 L0,0 Z M0,0 L24,0 L24,24 L0,24 L0,0 Z M0,0 L24,0 L24,24 L0,24 L0,0 Z"
-                    ></path>
-                  </g>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  />
                 </svg>
               </div>
               <div class="text-second">好友</div>
@@ -91,8 +91,15 @@
 
 <script setup lang="ts">
 import useTheme from '@/hooks/useTheme'
+import { useRouter } from 'vue-router'
 
 const { bgColorThird } = useTheme()
+const router = useRouter()
+const jumpFriend = () => {
+  router.push({
+    path: '/',
+  })
+}
 </script>
 
 <style lang="postcss" scoped>

@@ -1,6 +1,6 @@
 // stores/counter.js
 import { me } from '@/api/message'
-import Message from '@/components/base-message'
+import Message from '@cp/base/base-message'
 import { defineStore } from 'pinia'
 
 export const useMessageStore = defineStore('message', {

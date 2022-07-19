@@ -56,7 +56,7 @@
           ></div>
           <div class="flex -mt-10 justify-between items-center">
             <div class="p-2 theme-second w-24 h-24 rounded-full ml-4">
-              <img
+              <base-img
                 :src="user.avatar"
                 class="w-full h-full object-cover rounded-full"
               />
@@ -94,7 +94,7 @@
 import { ref, watch, computed } from 'vue'
 import { useUserStore } from '@/store/user'
 import { avatar, update, uploadImage } from '@/api/user'
-import Message from '@/components/base-message'
+import Message from '@cp/base/base-message'
 
 const defaultColor = '#22c55e'
 const userStore = useUserStore()

@@ -3,7 +3,7 @@ import { login } from '@/api/user'
 import useLoginHistory from './useLoginHistory'
 import useValidate from './useValidate'
 import { useRouter } from 'vue-router'
-import Message from '@/components/base-message'
+import Message from '@cp/base/base-message'
 import { useUserStore } from '@/store/user'
 export default function () {
   const { addHistory } = useLoginHistory()

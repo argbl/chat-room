@@ -1,6 +1,6 @@
 // stores/counter.js
 import { logout, me } from '@/api/user'
-import Message from '@/components/base-message'
+import Message from '@cp/base/base-message'
 import { UserModel } from '@/models/user'
 import { defineStore } from 'pinia'
 import useLoginHistory from '@/hooks/useLoginHistory'

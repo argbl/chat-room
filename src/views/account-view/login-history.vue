@@ -15,7 +15,7 @@
           class="w-full flex items-center px-4 py-3 justify-between"
         >
           <div class="flex-1 flex items-center">
-            <img
+            <base-img
               class="h-10 w-10 rounded-full object-cover"
               :src="item.avatar"
               alt=""

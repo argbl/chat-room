@@ -5,44 +5,48 @@
       v-for="friend in friendStore.computedFriendList"
       :key="friend.id"
     >
-      <img class="avatar w-8 h-8 mr-2" :src="friend.avatar" />
+      <base-img class="avatar w-8 h-8 mr-2" :src="friend.avatar" />
       <div class="flex-1 text-sm flex items-center font-semibold">
         <div class="">{{ friend.nickname }}</div>
         <span>#{{ friend.uid }}</span>
       </div>
       <div
         @click=";(dialogVisible = true) && (currentId = friend.id!)"
-        class="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer"
+        class="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer theme-primary"
       >
-        <img src="@icon/close.svg" />
+        <img v-if="isHandle" class="w-5 h-5" src="@icons/svg/check.svg" />
+        <img v-else class="w-5 h-5" src="@icons/svg/close.svg" />
       </div>
     </div>
   </div>
   <base-dialog
     v-model="dialogVisible"
-    title="确认删除该好友?"
-    :onConfirm="handleDel"
+    :title="`是否${isHandle ? '添加' : '删除'}该好友?`"
+    :onConfirm="handleFriend"
   ></base-dialog>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useFriendStore } from '@/store/friend'
 import useTheme from '@/hooks/useTheme'
-import BaseDialog from '../base-dialog/base-dialog.vue'
 import { update } from '@/api/friend'
-import Message from '../base-message'
+import Message from '@cp/base/base-message'
 
 const friendStore = useFriendStore()
 
 const dialogVisible = ref(false)
 const { bgColorSecond, bgColorThird } = useTheme()
 
+const isHandle = computed(() => {
+  return friendStore.friendActiveIndex === 2
+})
+
 const currentId = ref(0)
-const handleDel = async () => {
+const handleFriend = async () => {
   const { data: result } = await update({
     id: currentId.value,
-    status: 2,
+    status: isHandle.value ? 1 : 2,
   })
   if (result.code === 200) {
     Message.success(result.message)
@@ -54,7 +58,7 @@ const handleDel = async () => {
 </script>
 
 <style scoped>
-.friend-list :hover {
+.friend-list > :hover {
   background-color: v-bind(bgColorSecond);
 }
 

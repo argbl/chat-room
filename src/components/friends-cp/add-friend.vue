@@ -31,7 +31,7 @@
 import { add } from '@/api/friend'
 import useSocket from '@/hooks/useSocket'
 import { ref } from 'vue'
-import Message from '../base-message'
+import Message from '@cp/base/base-message'
 const id = ref('')
 const handleFriendsReq = async () => {
   if (!/[0-9]/.test(id.value)) {

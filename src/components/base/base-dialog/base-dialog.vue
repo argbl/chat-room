@@ -4,14 +4,13 @@
     class="fixed left-0 top-0 z-20 w-screen h-screen mask flex items-center justify-center"
     @click="$emit('update:modelValue', false)"
   >
-    <div class="w-[600px] relative theme-third rounded">
-      <div
-        class="absolute right-4 top-4 cursor-pointer"
-        @click="$emit('update:modelValue', false)"
-      >
-        <img class="w-8 h-8" src="@icon/close.svg" alt="" />
+    <div class="w-[500px] theme-third rounded">
+      <div class="p-4 flex items-center justify-between">
+        <header class="text-lg font-semibold">{{ title || '对话框' }}</header>
+        <div class="cursor-pointer" @click="$emit('update:modelValue', false)">
+          <img class="w-5 h-5" src="@icons/svg/close.svg" />
+        </div>
       </div>
-      <header class="text-lg p-4">{{ title || '对话框' }}</header>
       <div v-if="content" class="px-4 pb-4">{{ content }}</div>
       <slot></slot>
       <div class="p-4 flex justify-end text-sm theme-second rounded-b">

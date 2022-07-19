@@ -11,7 +11,7 @@
       <div class="flex -mt-5 justify-between items-center">
         <div class="flex items-center text-xl">
           <div class="p-2 theme-second w-24 h-24 rounded-full ml-4">
-            <img
+            <base-img
               :src="user.avatar"
               class="w-full h-full rounded-full object-cover"
             />
@@ -133,11 +133,9 @@
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import { useUserStore } from '@/store/user'
-import baseModal from '@/components/base-modal/base-modal.vue'
-import baseInput from '@/components/base-input/base-input.vue'
 import { update, pass } from '@/api/user'
 import useValidate from '@/hooks/useValidate'
-import Message from '@/components/base-message'
+import Message from '@cp/base/base-message'
 import { useSettingStore } from '@/store/setting'
 import { PassModel } from '@model/user'
 const userStore = useUserStore()

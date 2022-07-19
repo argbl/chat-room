@@ -1,4 +1,4 @@
-import Message from '@/components/base-message'
+import Message from '@cp/base/base-message'
 import validators from '../validator/index'
 interface RulesProps {
   [key: string]: string

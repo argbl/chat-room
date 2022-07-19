@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 import { useUserStore } from '@/store/user'
-import Message from '@/components/base-message'
+import Message from '@cp/base/base-message'
 let socket: any = null
 export default function () {
   const userStore = useUserStore()

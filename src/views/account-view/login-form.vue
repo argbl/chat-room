@@ -57,7 +57,6 @@
 
 <script setup lang="ts">
 import { ref, reactive, inject } from 'vue'
-import BaseInput from '@/components/base-input/base-input.vue'
 import { UserModel } from '@model/user'
 import useLogin from '@/hooks/useLogin'
 const loading = ref(false)

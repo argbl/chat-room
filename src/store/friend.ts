@@ -2,17 +2,19 @@
 import { me } from '@/api/friend'
 import { FriendModel, OnLineType, StatusType } from '@/models/friend'
 import { defineStore } from 'pinia'
+import { useUserStore } from './user'
 
 export const useFriendStore = defineStore('friend', {
   state: () => ({
     friendActiveIndex: 0,
     friendList: JSON.parse(
-      window.localStorage.getItem('friendList') || '[]'
+      window.sessionStorage.getItem('friendList') || '[]'
     ) as Array<FriendModel>,
   }),
 
   getters: {
     computedFriendList: (state) => {
+      const userStore = useUserStore()
       switch (state.friendActiveIndex) {
         case 0:
           return state.friendList.filter((friend: FriendModel) => {
@@ -27,7 +29,10 @@ export const useFriendStore = defineStore('friend', {
           })
         case 2:
           return state.friendList.filter((friend: FriendModel) => {
-            return friend.status === StatusType.UNHANDLE
+            return (
+              friend.user_accept === userStore.user.id &&
+              friend.status === StatusType.UNHANDLE
+            )
           })
       }
     },

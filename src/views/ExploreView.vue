@@ -78,7 +78,7 @@
         </section>
       </div>
       <div class="mb-8 flex flex-col justify-center items-center">
-        <img src="@icon/explore.svg" class="mb-2" />
+        <img src="@icons/svg/explore.svg" class="mb-2" />
         <h3 class="text-primary">还有更多社区等你发现！</h3>
         <button class="text-sm text-blue-600">试着进行搜索吧。</button>
       </div>

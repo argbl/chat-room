@@ -74,8 +74,7 @@ import { ref, reactive } from 'vue'
 import { register } from '@/api/user'
 import { UserModel } from '@model/user'
 import useValidate from '@/hooks/useValidate'
-import BaseInput from '@/components/base-input/base-input.vue'
-import Message from '@/components/base-message'
+import Message from '@cp/base/base-message'
 const registerForm: UserModel = reactive({
   email: '',
   nickname: '',
