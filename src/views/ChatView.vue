@@ -2,11 +2,15 @@
   <div class="w-full h-screen theme-primary">
     <section class="h-12 border-b border-theme px-2 flex items-center">
       <div class="flex flex-1 justify-between">
-        <div>@{{}}</div>
+        <div class="text-lg font-semibold tracking-wider">
+          @{{ chatStore.user.nickname }}
+        </div>
         <slot></slot>
       </div>
     </section>
-    <div style="height: calc(100vh - 49px)" class="mr-1"></div>
+    <div style="height: calc(100vh - 49px)" class="mr-1">
+      <chat-room></chat-room>
+    </div>
   </div>
 </template>
 
@@ -15,6 +19,7 @@ import { useFriendStore } from '../store/friend'
 import useTheme from '@/hooks/useTheme'
 import { useChatStore } from '@/store/chat'
 import { useRoute } from 'vue-router'
+import ChatRoom from '../components/chat-room/chat-room.vue'
 const friendStore = useFriendStore()
 friendStore.me()
 

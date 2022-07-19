@@ -4,7 +4,7 @@
       class="ml-4 flex items-center rounded-md p-4"
       v-for="friend in friendStore.computedFriendList"
       :key="friend.id"
-      @click="jumpChat(friend.uid)"
+      @click="jumpChat(friend.uid!)"
     >
       <base-img class="avatar w-8 h-8 mr-2" :src="friend.avatar" />
       <div class="flex-1 text-sm flex items-center font-semibold">
