@@ -1,7 +1,7 @@
 <template>
   <div class="text-second relative">
     <div class="cursor-pointer" @click.stop="handleInBox">
-      <img src="@icons/svg/inbox.svg" />
+      <img class="w-6 h-6" src="@icons/svg/inbox.svg" />
     </div>
     <transition name="slide-fade">
       <div

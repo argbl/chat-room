@@ -2,6 +2,7 @@
   <div class="w-full h-screen theme-primary">
     <section class="h-12 border-b border-theme px-2 flex items-center">
       <div class="flex flex-1 justify-between">
+        <div>@{{}}</div>
         <slot></slot>
       </div>
     </section>
@@ -12,11 +13,15 @@
 <script setup lang="ts">
 import { useFriendStore } from '../store/friend'
 import useTheme from '@/hooks/useTheme'
-import { TabProps } from '@/models/helper'
+import { useChatStore } from '@/store/chat'
+import { useRoute } from 'vue-router'
 const friendStore = useFriendStore()
 friendStore.me()
 
+const route = useRoute()
 const { bgColorThird } = useTheme()
+const chatStore = useChatStore()
+chatStore.info(Number(route.params.id))
 </script>
 
 <style scoped lang="postcss">
