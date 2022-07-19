@@ -15,11 +15,18 @@ const routes = [
     component: () => import('../views/account-view/AccountView.vue'),
   },
   {
+    path: '/chat/:id',
+    name: 'Chat',
+    component: () => import('../views/ChatView.vue'),
+  },
+  {
     path: '/explore',
+    name: 'Explore',
     component: () => import('../views/ExploreView.vue'),
   },
   {
     path: '/channel',
+    name: 'Channel',
     component: () => import('../views/ChannelView.vue'),
   },
 ]

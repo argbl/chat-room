@@ -3,6 +3,7 @@ import { useRoute } from 'vue-router'
 import FriendsView from './FriendsView.vue'
 import ExploreView from './ExploreView.vue'
 import ChannelView from './ChannelView.vue'
+import ChatView from './ChatView.vue'
 import InBox from '@cp/in-box/in-box.vue'
 export default {
   setup() {
@@ -14,7 +15,11 @@ export default {
         ? h(FriendsView, null, {
             default: () => h(InBox),
           })
-        : route.path === '/explore'
+        : route.name === 'Chat'
+        ? h(ChatView, null, {
+            default: () => h(InBox),
+          })
+        : route.name === 'Explore'
         ? h(ExploreView)
         : h(ChannelView)
   },

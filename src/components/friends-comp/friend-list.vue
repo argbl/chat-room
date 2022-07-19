@@ -4,6 +4,7 @@
       class="ml-4 flex items-center rounded-md p-4"
       v-for="friend in friendStore.computedFriendList"
       :key="friend.id"
+      @click="jumpChat(friend.uid)"
     >
       <base-img class="avatar w-8 h-8 mr-2" :src="friend.avatar" />
       <div class="flex-1 text-sm flex items-center font-semibold">
@@ -28,13 +29,16 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { useFriendStore } from '@/store/friend'
+import { useUserStore } from '@/store/user'
 import useTheme from '@/hooks/useTheme'
 import { update } from '@/api/friend'
 import Message from '@cp/base/base-message'
+import { FriendModel } from '@model/friend'
 
 const friendStore = useFriendStore()
-
+const userStore = useUserStore()
 const dialogVisible = ref(false)
 const { bgColorSecond, bgColorThird } = useTheme()
 
@@ -54,6 +58,17 @@ const handleFriend = async () => {
   } else if (result.code === 400) {
     Message.error(result.error)
   }
+}
+const router = useRouter()
+const jumpChat = (uid: number) => {
+  console.log(uid)
+
+  router.push({
+    name: 'Chat',
+    params: {
+      id: uid,
+    },
+  })
 }
 </script>
 

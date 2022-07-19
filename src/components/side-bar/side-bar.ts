@@ -9,11 +9,11 @@ export default {
     const route = useRoute()
     // 返回渲染函数
     return () =>
-      route.path === '/'
+      route.path === '/' || route.name === 'Chat'
         ? h(HomeBar, null, {
             default: () => h(UserStatus),
           })
-        : route.path === '/explore'
+        : route.name === 'Explore'
         ? h(ExploreBar, null, {
             default: () => h(UserStatus),
           })
