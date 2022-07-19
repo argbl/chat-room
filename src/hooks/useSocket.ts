@@ -3,7 +3,6 @@ import { useUserStore } from '@/store/user'
 import Message from '@cp/base/base-message'
 let socket: any = null
 export default function () {
-  const userStore = useUserStore()
   const initSocket = () => {
     if (!socket) {
       socket = io('http://127.0.0.1:7001/', {
@@ -35,7 +34,7 @@ export default function () {
       socket.on('system', (res: any) => {
         Message.success(res)
       })
-      socket.on('message', (res: any) => {
+      socket.on('chat', (res: any) => {
         console.log(res)
       })
       socket.emit('ping', '测试是否连接')

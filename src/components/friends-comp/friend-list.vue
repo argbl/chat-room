@@ -61,8 +61,6 @@ const handleFriend = async () => {
 }
 const router = useRouter()
 const jumpChat = (uid: number) => {
-  console.log(uid)
-
   router.push({
     name: 'Chat',
     params: {

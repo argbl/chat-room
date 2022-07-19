@@ -17,17 +17,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, Ref } from 'vue'
 import useTheme from '@/hooks/useTheme'
+import useSocket from '@/hooks/useSocket'
+import { useChatStore } from '@/store/chat'
 
 const { bgColorThird } = useTheme()
-
+const chatStore = useChatStore()
+const user_chat = chatStore.user
 const history = ref([])
 const inputValue = ref('')
+const socket = useSocket()
 const submit = () => {
-  history.value.push(inputValue.value)
+  socket.emit('send', {
+    id: user_chat.id,
+    message: inputValue.value,
+  })
   inputValue.value = ''
 }
+chatStore.history()
 </script>
 
 <style scoped>
