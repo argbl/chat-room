@@ -1,8 +1,10 @@
 import io from 'socket.io-client'
 import { useUserStore } from '@/store/user'
 import Message from '@cp/base/base-message'
+import { useChatStore } from '@/store/chat'
 let socket: any = null
 export default function () {
+  const chatStore = useChatStore()
   const initSocket = () => {
     if (!socket) {
       socket = io('http://127.0.0.1:7001/', {
@@ -35,6 +37,7 @@ export default function () {
         Message.success(res)
       })
       socket.on('chat', (res: any) => {
+        chatStore.history()
         console.log(res)
       })
       socket.emit('ping', '测试是否连接')

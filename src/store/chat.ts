@@ -1,6 +1,7 @@
 // stores/counter.js
 import Message from '@cp/base/base-message'
-import { UserModel } from '@/models/user'
+import { UserModel } from '@model/user'
+import { ChatModel } from '@model/chat'
 import { defineStore } from 'pinia'
 import { info } from '@/api/user'
 import { history } from '@/api/chat'
@@ -10,11 +11,13 @@ export const useChatStore = defineStore('chat', {
     user: JSON.parse(
       window.sessionStorage.getItem('chat_user') || '{}'
     ) as UserModel,
-    chatHistory: {},
+    chatHistory: [] as Array<ChatModel>,
   }),
 
   actions: {
     async info(id: number) {
+      console.log('请求改变id', id)
+
       const { data: result } = await info(id)
       if (result.code === 200) {
         this.user = result.data
@@ -27,9 +30,7 @@ export const useChatStore = defineStore('chat', {
     async history(id: number) {
       const { data: result } = await history(id)
       if (result.code === 200) {
-        console.log(result.data)
-
-        return result.data
+        this.chatHistory = result.data
       } else if (result.code === 403) {
         Message.error(result.message)
       }
