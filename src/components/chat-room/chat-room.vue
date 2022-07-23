@@ -1,6 +1,10 @@
 <template>
   <div class="relative w-full h-full">
-    <div class="overflow-y-scroll" style="height: calc(100vh - (73px + 48px))">
+    <div
+      ref="el"
+      class="overflow-y-scroll"
+      style="height: calc(100vh - (73px + 48px))"
+    >
       <div class="p-4">
         <div v-for="(item, index) in chatHistory" :key="item.id">
           <div v-if="showTime(index)" class="flex justify-center text-sm">
@@ -39,14 +43,39 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watchEffect } from 'vue'
-import { useDateFormat } from '@vueuse/core'
+import { ref, reactive, computed, watchEffect, toRefs, nextTick } from 'vue'
+import { useDateFormat, useScroll } from '@vueuse/core'
 import useTheme from '@/hooks/useTheme'
 import useSocket from '@/hooks/useSocket'
 import { useChatStore } from '@/store/chat'
 import { useUserStore } from '@/store/user'
 import { useRoute } from 'vue-router'
 const { bgColorThird } = useTheme()
+
+const el = ref<HTMLElement | null>(null)
+
+const { arrivedState } = useScroll(el)
+const { top } = toRefs(arrivedState)
+
+// watchEffect(async () => {
+//   if (el.value) {
+//     console.log(el.value)
+//     await nextTick()
+//     el.value.scrollTo(0, 200)
+//     console.log('执行滚动')
+//   }
+// })
+
+watchEffect(() => {
+  if (top.value) {
+    console.log('到顶了')
+  }
+})
+
+const page = reactive({
+  num: 0,
+  size: 10,
+})
 
 const route = useRoute()
 
@@ -84,12 +113,12 @@ const submit = async () => {
     id: user_chat.value.id,
     message: inputValue.value,
   })
-  await chatStore.history(Number(route.params.id))
+  await chatStore.history(Number(route.params.id), page.num, page.size)
   inputValue.value = ''
 }
 
 watchEffect(() => {
-  chatStore.history(Number(route.params.id))
+  chatStore.history(Number(route.params.id), page.num, page.size)
 })
 </script>
 

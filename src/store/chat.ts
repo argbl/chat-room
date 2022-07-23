@@ -16,8 +16,6 @@ export const useChatStore = defineStore('chat', {
 
   actions: {
     async info(id: number) {
-      console.log('请求改变id', id)
-
       const { data: result } = await info(id)
       if (result.code === 200) {
         this.user = result.data
@@ -27,8 +25,8 @@ export const useChatStore = defineStore('chat', {
       }
     },
 
-    async history(id: number) {
-      const { data: result } = await history(id)
+    async history(id: number, pageNum: number, pageSize: number) {
+      const { data: result } = await history(id, pageNum, pageSize)
       if (result.code === 200) {
         this.chatHistory = result.data
       } else if (result.code === 403) {
