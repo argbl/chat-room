@@ -27,8 +27,10 @@ export const useChatStore = defineStore('chat', {
 
     async history(id: number, pageNum: number, pageSize: number) {
       const { data: result } = await history(id, pageNum, pageSize)
-      if (result.code === 200) {
-        this.chatHistory = result.data
+      if (result.code === 200 && result.data.length) {
+        this.chatHistory = [...result.data.reverse(), ...this.chatHistory]
+      } else if (result.code === 200 && !result.data.length) {
+        Message.error('加载完毕')
       } else if (result.code === 403) {
         Message.error(result.message)
       }

@@ -5,6 +5,7 @@
       class="overflow-y-scroll"
       style="height: calc(100vh - (73px + 48px))"
     >
+      <div v-loading:40="loading"></div>
       <div class="p-4">
         <div v-for="(item, index) in chatHistory" :key="item.id">
           <div v-if="showTime(index)" class="flex justify-center text-sm">
@@ -43,7 +44,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, watchEffect, toRefs, nextTick } from 'vue'
+import {
+  ref,
+  reactive,
+  computed,
+  watchEffect,
+  toRefs,
+  onUpdated,
+  watch,
+  onBeforeUpdate,
+} from 'vue'
 import { useDateFormat, useScroll } from '@vueuse/core'
 import useTheme from '@/hooks/useTheme'
 import useSocket from '@/hooks/useSocket'
@@ -51,26 +61,6 @@ import { useChatStore } from '@/store/chat'
 import { useUserStore } from '@/store/user'
 import { useRoute } from 'vue-router'
 const { bgColorThird } = useTheme()
-
-const el = ref<HTMLElement | null>(null)
-
-const { arrivedState } = useScroll(el)
-const { top } = toRefs(arrivedState)
-
-// watchEffect(async () => {
-//   if (el.value) {
-//     console.log(el.value)
-//     await nextTick()
-//     el.value.scrollTo(0, 200)
-//     console.log('执行滚动')
-//   }
-// })
-
-watchEffect(() => {
-  if (top.value) {
-    console.log('到顶了')
-  }
-})
 
 const page = reactive({
   num: 0,
@@ -117,8 +107,40 @@ const submit = async () => {
   inputValue.value = ''
 }
 
-watchEffect(() => {
-  chatStore.history(Number(route.params.id), page.num, page.size)
+const loading = ref(false)
+watchEffect(async () => {
+  await chatStore.history(Number(route.params.id), page.num, page.size)
+  loading.value = false
+})
+
+const init = ref(true)
+
+const el = ref<HTMLElement | null>(null)
+
+const { arrivedState } = useScroll(el)
+const { top } = toRefs(arrivedState)
+
+watch(
+  () => top.value,
+  async (newValue) => {
+    newValue && page.num++ && (loading.value = true)
+  }
+)
+
+const lastScrollHeight = ref<number>(0)
+onBeforeUpdate(() => {
+  lastScrollHeight.value = el.value?.scrollHeight || 0
+})
+
+onUpdated(() => {
+  init.value &&
+    el.value &&
+    (el.value.scrollTop = el.value?.scrollHeight || 0) &&
+    (init.value = false)
+
+  !init.value &&
+    el.value &&
+    (el.value.scrollTop = el.value?.scrollHeight - lastScrollHeight.value)
 })
 </script>
 
