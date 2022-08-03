@@ -53,7 +53,7 @@ import {
   onUpdated,
   watch,
   onBeforeUpdate,
-nextTick,
+  nextTick,
 } from 'vue'
 import { useDateFormat, useScroll } from '@vueuse/core'
 import useTheme from '@/hooks/useTheme'
