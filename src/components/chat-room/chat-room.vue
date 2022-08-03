@@ -53,6 +53,7 @@ import {
   onUpdated,
   watch,
   onBeforeUpdate,
+nextTick,
 } from 'vue'
 import { useDateFormat, useScroll } from '@vueuse/core'
 import useTheme from '@/hooks/useTheme'
@@ -132,12 +133,13 @@ onBeforeUpdate(() => {
   lastScrollHeight.value = el.value?.scrollHeight || 0
 })
 
-onUpdated(() => {
+onUpdated(async () => {
   init.value &&
     el.value &&
     (el.value.scrollTop = el.value?.scrollHeight || 0) &&
     (init.value = false)
 
+  await nextTick()
   !init.value &&
     el.value &&
     (el.value.scrollTop = el.value?.scrollHeight - lastScrollHeight.value)
