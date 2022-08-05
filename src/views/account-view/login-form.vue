@@ -54,9 +54,9 @@
         </div>
       </div>
     </div>
-    <div>
-      <div>三方登录</div>
-      <a href="http://localhost:7001/passport/github">GITHUB</a>
+    <div class="flex flex-col items-center w-[350px]">
+      <div class="font-semibold text-2xl text-primary mb-10">第三方登录</div>
+      <a href="http://127.0.0.1:7001/passport/github">GITHUB</a>
     </div>
   </div>
 </template>

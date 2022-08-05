@@ -25,11 +25,9 @@ export const useUserStore = defineStore('user', {
       }
     },
     async logout() {
-      const { data: result } = await logout()
-      if (result.code === 200) {
-        this.user = {}
-        window.localStorage.removeItem('token')
-      }
+      window.localStorage.removeItem('token')
+      window.localStorage.removeItem('user')
+      await logout()
     },
   },
 })
