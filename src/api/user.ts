@@ -5,14 +5,12 @@ import authkey from '@/config/auth-key'
 export async function register(registerForm: UserModel) {
   return await axios.post('/user/register', {
     ...registerForm,
-    password: encrypt(registerForm.password!, authkey),
   })
 }
 
 export async function login(loginForm: UserModel) {
   return await axios.post('/user/login', {
     ...loginForm,
-    password: encrypt(loginForm.password!, authkey),
   })
 }
 

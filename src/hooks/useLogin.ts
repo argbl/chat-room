@@ -21,10 +21,10 @@ export default function () {
 
   const doLogin = async (loginForm: UserModel) => {
     const { data: result } = await login(loginForm)
+    console.log('前端打印登录信息', result)
 
     if (result.code === 200) {
       Message.success(result.message)
-      window.localStorage.setItem('token', result.data.token)
       await store.me()
       addHistory({ ...result.data.user, password: loginForm.password })
       router.push({

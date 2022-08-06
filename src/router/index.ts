@@ -1,3 +1,4 @@
+import Message from '@/components/base/base-message'
 import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
@@ -41,9 +42,16 @@ function isAuthenticated() {
 }
 
 router.beforeEach(async (to, from) => {
+  console.log('当前登录用户信息', window.localStorage.getItem('user'))
+
   if (!isAuthenticated() && !['/login', '/register'].includes(to.path)) {
     // 将用户重定向到登录页面
     return { name: 'Login' }
+  }
+
+  if (['/login', '/register'].includes(to.path) && isAuthenticated()) {
+    Message.error('您已登录')
+    return { path: '/' }
   }
 })
 

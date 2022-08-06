@@ -8,6 +8,7 @@
       <div class="mt-5 w-full">
         <base-input
           v-model="loginForm.email"
+          name="email"
           label="电子邮箱"
           check="email"
           inputType="email"
@@ -16,6 +17,7 @@
         <base-input
           class="mt-5"
           v-model="loginForm.password"
+          name="password"
           label="密码"
           check="password"
           inputType="password"
@@ -24,6 +26,7 @@
         <button class="mt-1 mb-5 py-[2px] text-sm text-blue-600">
           <div>忘记密码?</div>
         </button>
+
         <button
           @click.stop="handleLogin"
           v-loading:20="loading"
@@ -31,6 +34,7 @@
         >
           <div class="mx-auto text-primary">登录</div>
         </button>
+
         <div class="text-sm flex justify-between">
           <span class="text-second"
             >需要新的帐号？<button>
@@ -77,6 +81,7 @@ const { doValid, doLogin } = useLogin()
 const handleLogin = async () => {
   loading.value = true
   const valid = doValid(loginForm)
+
   if (valid) {
     await doLogin(loginForm)
   }

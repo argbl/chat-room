@@ -6,6 +6,7 @@
     </div>
     <div class="w-full">
       <input
+        :name="name"
         :value="modelValue"
         @input="
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
@@ -26,6 +27,7 @@ import validators from '@/validator/index'
 const props = defineProps({
   modelValue: String,
   label: String,
+  name: String,
   check: {
     type: String,
     default: 'noCheck',
