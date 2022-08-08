@@ -43,7 +43,6 @@ export const useFriendStore = defineStore('friend', {
       const { data: result } = await me()
       if (result.code === 200) {
         this.friendList = result.data
-
         window.sessionStorage.setItem(
           'friendList',
           JSON.stringify(this.friendList)

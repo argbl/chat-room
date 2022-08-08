@@ -21,11 +21,11 @@
               <div class="flex items-center">
                 <base-img
                   class="avatar mr-2 w-10 h-10"
-                  :src="message.sender.avatar"
+                  :src="message.message_sender.avatar"
                 />
                 <div class="text-second flex-1">
                   <div class="font-semibold text-sm text-primary">
-                    {{ message.sender.nickname }}
+                    {{ message.message_sender.nickname }}
                   </div>
                   <div class="text-xs">{{ message.content }}</div>
                 </div>
