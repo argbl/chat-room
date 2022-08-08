@@ -12,7 +12,7 @@
         <span>#{{ friend.uid }}</span>
       </div>
       <div
-        @click=";(dialogVisible = true) && (currentId = friend.id!)"
+        @click.stop=";(dialogVisible = true) && (currentFriend = friend)"
         class="w-8 h-8 rounded-full flex items-center justify-center cursor-pointer theme-primary"
       >
         <img v-if="isHandle" class="w-5 h-5" src="@icons/svg/check.svg" />
@@ -46,17 +46,17 @@ const isHandle = computed(() => {
   return friendStore.friendActiveIndex === 2
 })
 
-const currentId = ref(0)
+const currentFriend = ref<FriendModel | null>(null)
 const handleFriend = async () => {
   const { data: result } = await update({
-    id: currentId.value,
+    ...currentFriend.value,
     status: isHandle.value ? 1 : 2,
   })
   if (result.code === 200) {
     Message.success(result.message)
     await friendStore.me()
   } else if (result.code === 400) {
-    Message.error(result.error)
+    Message.error(result.message)
   }
 }
 const router = useRouter()
