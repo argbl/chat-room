@@ -12,17 +12,20 @@
           <div class="my-[1px]">消息</div>
         </header>
         <div v-loading="loading" class="pr-1">
-          <div class="h-[350px] pl-4 py-3 overflow-y-scroll">
+          <div class="h-[350px] w-full pl-4 py-3 overflow-y-scroll">
             <div
               v-for="message in messageList"
               :key="message.id"
               class="flex justify-between items-center"
             >
               <div class="flex items-center">
-                <base-img class="avatar mr-2 w-10 h-10" :src="message.avatar" />
+                <base-img
+                  class="avatar mr-2 w-10 h-10"
+                  :src="message.sender.avatar"
+                />
                 <div class="text-second flex-1">
                   <div class="font-semibold text-sm text-primary">
-                    {{ message.nickname }}
+                    {{ message.sender.nickname }}
                   </div>
                   <div class="text-xs">{{ message.content }}</div>
                 </div>
