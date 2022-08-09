@@ -9,7 +9,6 @@ const { updateHistory } = useLoginHistory()
 export const useUserStore = defineStore('user', {
   state: () => ({
     user: JSON.parse(window.localStorage.getItem('user') || '{}') as UserModel,
-    token: window.localStorage.getItem('token') || '',
   }),
 
   actions: {
@@ -25,7 +24,6 @@ export const useUserStore = defineStore('user', {
       }
     },
     async logout() {
-      window.localStorage.removeItem('token')
       window.localStorage.removeItem('user')
       await logout()
     },

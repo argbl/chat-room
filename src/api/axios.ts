@@ -5,8 +5,6 @@ axios.defaults.withCredentials = true
 // 添加请求拦截器
 axios.interceptors.request.use(
   function (config: any) {
-    const token = window.localStorage.getItem('token')
-    token && (config.headers['Authorization'] = 'Bearer ' + token)
     return config
   },
   function (error) {
