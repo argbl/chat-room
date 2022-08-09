@@ -122,32 +122,26 @@ const el = ref<HTMLElement | null>(null)
 
 const { arrivedState } = useScroll(el)
 const { top } = toRefs(arrivedState)
-
+const lastScrollHeight = ref<number>(0)
 watch(
   () => top.value,
   async (newValue) => {
     console.log(top.value)
-    newValue &&
-      (loading.value = true) &&
-      chatStore.increasePage() &&
-      (await chatStore.history(Number(route.params.id)))
-    loading.value = false
+    if (newValue) {
+      loading.value = true
+      lastScrollHeight.value = el.value?.scrollHeight || 0
+      chatStore.increasePage()
+      await chatStore.history(Number(route.params.id))
+      loading.value = false
+      await nextTick()
+      el.value &&
+        (el.value.scrollTop = el.value?.scrollHeight - lastScrollHeight.value)
+    }
   }
 )
 
-const lastScrollHeight = ref<number>(0)
-onBeforeUpdate(() => {
-  lastScrollHeight.value = el.value?.scrollHeight || 0
-})
-
 onUpdated(async () => {
   init.value && scrollToBottom() && (init.value = false)
-
-  // await nextTick()
-  // !init.value &&
-  //   loading.value &&
-  //   el.value &&
-  //   (el.value.scrollTop = el.value?.scrollHeight - lastScrollHeight.value)
 })
 
 const scrollToBottom = () => {

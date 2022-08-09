@@ -25,7 +25,6 @@ export const useChatStore = defineStore('chat', {
 
     increasePage() {
       this.page.num++
-      return true
     },
 
     async init(id: number) {
