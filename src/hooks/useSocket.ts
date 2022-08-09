@@ -2,9 +2,11 @@ import io from 'socket.io-client'
 import { useUserStore } from '@/store/user'
 import Message from '@cp/base/base-message'
 import { useChatStore } from '@/store/chat'
+import { useRoute } from 'vue-router'
 let socket: any = null
 export default function () {
   const chatStore = useChatStore()
+  const route = useRoute()
   const initSocket = () => {
     if (!socket) {
       socket = io('http://127.0.0.1:7001/', {
@@ -14,9 +16,7 @@ export default function () {
         reconnectionDelay: 1000, // 每过多长时间重连一次
         timeout: 5000, // 超时时间
         autoConnect: false,
-        query: {
-          token: window.localStorage.getItem('token'),
-        },
+        withCredentials: true,
       })
       socket.on('connect', () => {
         console.log('连接成功') // x8WIv7-mJelg7on_ALbx
@@ -36,10 +36,7 @@ export default function () {
       socket.on('system', (res: any) => {
         Message.success(res)
       })
-      socket.on('chat', (res: any) => {
-        chatStore.history()
-        console.log(res)
-      })
+
       socket.emit('ping', '测试是否连接')
     }
 

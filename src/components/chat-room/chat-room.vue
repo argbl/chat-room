@@ -14,7 +14,7 @@
           <div class="relative min-h-[40px] px-12 mb-4">
             <div v-if="item.user_send === me.id">
               <base-img
-                :src="item.avatar"
+                :src="item.chat_sender?.avatar"
                 class="w-10 h-10 avatar absolute right-0 top-0"
               />
 
@@ -22,10 +22,10 @@
             </div>
             <div v-else>
               <base-img
-                :src="item.avatar"
+                :src="item.chat_sender?.avatar"
                 class="w-10 h-10 avatar absolute left-0 top-0"
               />
-              <div class="font-semibold">{{ item.nickname }}</div>
+              <div class="font-semibold">{{ item.chat_sender?.nickname }}</div>
               <div>{{ item.content }}</div>
             </div>
           </div>
@@ -61,12 +61,8 @@ import useSocket from '@/hooks/useSocket'
 import { useChatStore } from '@/store/chat'
 import { useUserStore } from '@/store/user'
 import { useRoute } from 'vue-router'
+import Message from '../base/base-message'
 const { bgColorThird } = useTheme()
-
-const page = reactive({
-  num: 0,
-  size: 10,
-})
 
 const route = useRoute()
 
@@ -77,7 +73,7 @@ const chatStore = useChatStore()
 const inputValue = ref('')
 
 const user_chat = computed(() => {
-  return chatStore.user
+  return chatStore.user_chat
 })
 
 const chatHistory = computed(() => {
@@ -98,33 +94,42 @@ const showTime = (index: number) => {
   }
 }
 
+chatStore.history(Number(route.params.id))
+
 const socket = useSocket()
 const submit = async () => {
   socket.emit('send', {
     id: user_chat.value.id,
     message: inputValue.value,
   })
-  await chatStore.history(Number(route.params.id), page.num, page.size)
   inputValue.value = ''
 }
 
-const loading = ref(false)
-watchEffect(async () => {
-  await chatStore.history(Number(route.params.id), page.num, page.size)
-  loading.value = false
+socket.on('chat', async (res: any) => {
+  if (res) {
+    Message.text(`${res.nickname}:${res.content}`)
+  }
+  chatStore.initPage()
+  await chatStore.history(Number(route.params.id))
+  scrollToBottom()
 })
+
+const loading = ref(false)
 
 const init = ref(true)
 
 const el = ref<HTMLElement | null>(null)
 
-const { arrivedState } = useScroll(el)
+const { y, arrivedState } = useScroll(el)
 const { top } = toRefs(arrivedState)
 
 watch(
   () => top.value,
   async (newValue) => {
-    newValue && page.num++ && (loading.value = true)
+    newValue &&
+      (loading.value = true) &&
+      (await chatStore.history(Number(route.params.id)))
+    loading.value = false
   }
 )
 
@@ -134,16 +139,23 @@ onBeforeUpdate(() => {
 })
 
 onUpdated(async () => {
-  init.value &&
-    el.value &&
-    (el.value.scrollTop = el.value?.scrollHeight || 0) &&
-    (init.value = false)
+  init.value && scrollToBottom() && (init.value = false)
 
   await nextTick()
   !init.value &&
+    loading.value &&
     el.value &&
     (el.value.scrollTop = el.value?.scrollHeight - lastScrollHeight.value)
 })
+
+const scrollToBottom = () => {
+  console.log(
+    `执行滚动到底部,scrollTop=${el.value?.scrollTop},scrollHeight=${el.value?.scrollHeight}`
+  )
+
+  el.value && (el.value.scrollTop = el.value?.scrollHeight || 0)
+  return true
+}
 </script>
 
 <style scoped>

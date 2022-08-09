@@ -8,32 +8,54 @@ import { history } from '@/api/chat'
 
 export const useChatStore = defineStore('chat', {
   state: () => ({
-    user: JSON.parse(
+    user_chat: JSON.parse(
       window.sessionStorage.getItem('chat_user') || '{}'
     ) as UserModel,
     chatHistory: [] as Array<ChatModel>,
+    page: {
+      num: 0,
+      size: 10,
+    },
   }),
 
   actions: {
-    async info(id: number) {
+    initPage() {
+      this.page.num = 0
+    },
+
+    async init(id: number) {
+      this.initPage()
       const { data: result } = await info(id)
       if (result.code === 200) {
-        this.user = result.data
-        window.sessionStorage.setItem('chat_user', JSON.stringify(this.user))
+        this.user_chat = result.data
+        window.sessionStorage.setItem(
+          'chat_user',
+          JSON.stringify(this.user_chat)
+        )
       } else if (result.code === 403) {
         Message.error(result.message)
       }
     },
 
-    async history(id: number, pageNum: number, pageSize: number) {
-      const { data: result } = await history(id, pageNum, pageSize)
+    async history(id: number) {
+      const { data: result } = await history(id, this.page.num, this.page.size)
       if (result.code === 200 && result.data.length) {
-        this.chatHistory = [...result.data.reverse(), ...this.chatHistory]
+        if (this.page.num === 0) {
+          this.chatHistory = result.data.reverse()
+        } else {
+          this.chatHistory = [...result.data.reverse(), ...this.chatHistory]
+          this.page.num++
+        }
       } else if (result.code === 200 && !result.data.length) {
-        Message.error('加载完毕')
+        if (this.page.num === 0) {
+          Message.error('暂无聊天记录')
+        } else {
+          Message.error('加载完毕')
+        }
       } else if (result.code === 403) {
         Message.error(result.message)
       }
+      return true
     },
   },
 })

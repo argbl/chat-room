@@ -3,7 +3,7 @@
     <section class="h-12 border-b border-theme px-2 flex items-center">
       <div class="flex flex-1 justify-between">
         <div class="text-lg font-semibold tracking-wider">
-          @{{ chatStore.user.nickname }}
+          @{{ chatStore.user_chat.nickname }}
         </div>
         <slot></slot>
       </div>
@@ -26,7 +26,7 @@ friendStore.me()
 const route = useRoute()
 const { bgColorThird } = useTheme()
 const chatStore = useChatStore()
-chatStore.info(Number(route.params.id))
+chatStore.init(Number(route.params.id))
 </script>
 
 <style scoped lang="postcss">
