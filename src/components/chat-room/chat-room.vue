@@ -120,14 +120,16 @@ const init = ref(true)
 
 const el = ref<HTMLElement | null>(null)
 
-const { y, arrivedState } = useScroll(el)
+const { arrivedState } = useScroll(el)
 const { top } = toRefs(arrivedState)
 
 watch(
   () => top.value,
   async (newValue) => {
+    console.log(top.value)
     newValue &&
       (loading.value = true) &&
+      chatStore.increasePage() &&
       (await chatStore.history(Number(route.params.id)))
     loading.value = false
   }
@@ -141,18 +143,14 @@ onBeforeUpdate(() => {
 onUpdated(async () => {
   init.value && scrollToBottom() && (init.value = false)
 
-  await nextTick()
-  !init.value &&
-    loading.value &&
-    el.value &&
-    (el.value.scrollTop = el.value?.scrollHeight - lastScrollHeight.value)
+  // await nextTick()
+  // !init.value &&
+  //   loading.value &&
+  //   el.value &&
+  //   (el.value.scrollTop = el.value?.scrollHeight - lastScrollHeight.value)
 })
 
 const scrollToBottom = () => {
-  console.log(
-    `执行滚动到底部,scrollTop=${el.value?.scrollTop},scrollHeight=${el.value?.scrollHeight}`
-  )
-
   el.value && (el.value.scrollTop = el.value?.scrollHeight || 0)
   return true
 }

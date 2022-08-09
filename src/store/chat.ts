@@ -23,6 +23,11 @@ export const useChatStore = defineStore('chat', {
       this.page.num = 0
     },
 
+    increasePage() {
+      this.page.num++
+      return true
+    },
+
     async init(id: number) {
       this.initPage()
       const { data: result } = await info(id)
@@ -44,7 +49,6 @@ export const useChatStore = defineStore('chat', {
           this.chatHistory = result.data.reverse()
         } else {
           this.chatHistory = [...result.data.reverse(), ...this.chatHistory]
-          this.page.num++
         }
       } else if (result.code === 200 && !result.data.length) {
         if (this.page.num === 0) {

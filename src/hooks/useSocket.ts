@@ -1,12 +1,7 @@
 import io from 'socket.io-client'
-import { useUserStore } from '@/store/user'
 import Message from '@cp/base/base-message'
-import { useChatStore } from '@/store/chat'
-import { useRoute } from 'vue-router'
 let socket: any = null
 export default function () {
-  const chatStore = useChatStore()
-  const route = useRoute()
   const initSocket = () => {
     if (!socket) {
       socket = io('http://127.0.0.1:7001/', {
