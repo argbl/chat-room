@@ -43,7 +43,10 @@ export async function avatar() {
 }
 
 export async function uploadImage(form: FormData) {
-  return await axios.post('http://upload-cn-east-2.qiniup.com', form)
+  const instance = axios.create({
+    withCredentials: false,
+  })
+  return await instance.post('http://upload-cn-east-2.qiniup.com', form)
 }
 
 export async function info(id: number) {

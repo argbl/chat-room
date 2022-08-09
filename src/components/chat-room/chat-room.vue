@@ -126,7 +126,6 @@ const lastScrollHeight = ref<number>(0)
 watch(
   () => top.value,
   async (newValue) => {
-    console.log(top.value)
     if (newValue) {
       loading.value = true
       lastScrollHeight.value = el.value?.scrollHeight || 0
@@ -141,12 +140,14 @@ watch(
 )
 
 onUpdated(async () => {
-  init.value && scrollToBottom() && (init.value = false)
+  if (init.value) {
+    scrollToBottom()
+    init.value = false
+  }
 })
 
 const scrollToBottom = () => {
   el.value && (el.value.scrollTop = el.value?.scrollHeight || 0)
-  return true
 }
 </script>
 
