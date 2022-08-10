@@ -1,24 +1,15 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
-import GuildNav from '@/components/guild-nav/index.vue'
-import SideBar from '@/components/side-bar/index'
-import MainView from './views/main-view'
-import LoginView from './views/login/index.vue'
-import { useUserStore } from './store/user'
-import SettingView from './views/setting/index.vue'
-import { useSettingStore } from './store/setting'
 import useTheme from '@/hooks/useTheme'
 import useSocket from './hooks/useSocket'
-import { useMessageStore } from './store/message'
-import { storeToRefs } from 'pinia'
-const route = useRoute()
+import { useUserStore } from '@/store/user'
+import { useMessageStore } from '@/store/message'
+import { useFriendStore } from '@/store/friend'
 const { me: MyInfo } = useUserStore()
 const { me: MyMessage } = useMessageStore()
-const { isSettingView } = storeToRefs(useSettingStore())
+const { me: MyFriend } = useFriendStore()
 MyInfo()
 MyMessage()
-
+MyFriend()
 const {
   bgColorPrimary,
   textColorPrimary,
@@ -33,18 +24,7 @@ useSocket()
 </script>
 
 <template>
-  <LoginView v-if="['Login', 'Register'].includes(route.name as string)">
-  </LoginView>
-  <div v-else class="flex">
-    <guild-nav></guild-nav>
-    <div class="flex-1 flex">
-      <side-bar></side-bar>
-      <main class="flex-1 overflow-y-hidden">
-        <MainView></MainView>
-      </main>
-    </div>
-  </div>
-  <SettingView v-show="isSettingView"></SettingView>
+  <router-view></router-view>
 </template>
 
 <style>

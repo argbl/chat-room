@@ -11,7 +11,7 @@
       <div class="flex flex-1 justify-between">
         <div class="flex text-third flex-1 friend-items">
           <div
-            v-for="(item, index) in FiendItems"
+            v-for="(item, index) in FriendTabs"
             :key="index"
             class="friend-item"
             @click="handleFriend(index)"
@@ -33,30 +33,13 @@
 <script setup lang="ts">
 import { useFriendStore } from '@/store/friend'
 import useTheme from '@/hooks/useTheme'
-import { TabProps } from '@/models/helper'
 import FriendList from './friend-list/index.vue'
 import FriendAdd from './friend-add/index.vue'
-
-const { friendActiveIndex, setFriendActiveIndex, me } = useFriendStore()
+import { storeToRefs } from 'pinia'
+import FriendTabs from './friend-tabs'
+const { friendActiveIndex } = storeToRefs(useFriendStore())
+const { setFriendActiveIndex, me } = useFriendStore()
 me()
-const FiendItems: TabProps[] = [
-  {
-    name: 'online',
-    label: '在线',
-  },
-  {
-    name: 'all',
-    label: '全部',
-  },
-  {
-    name: 'unhandle',
-    label: '待定',
-  },
-  {
-    name: 'add',
-    label: '添加好友',
-  },
-]
 
 const handleFriend = (index: number) => {
   setFriendActiveIndex(index)

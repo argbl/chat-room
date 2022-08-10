@@ -6,7 +6,7 @@ import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import BaseComp from './components/base/index'
 
-import loadingDirective from '@/components/loading-status'
+import loadingDirective from '@/components/loading'
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)

@@ -3,7 +3,24 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    component: () => import('../views/main-view'),
+    component: () => import('../layout/index.vue'),
+    children: [
+      {
+        path: 'chat/:id',
+        name: 'Chat',
+        component: () => import('../views/chat/index.vue'),
+      },
+      {
+        path: 'explore',
+        name: 'Explore',
+        component: () => import('../views/explore/index.vue'),
+      },
+      {
+        path: 'channel',
+        name: 'Channel',
+        component: () => import('../views/channel/index.vue'),
+      },
+    ],
   },
   {
     path: '/login',
@@ -14,21 +31,6 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: () => import('../views/login/index.vue'),
-  },
-  {
-    path: '/chat/:id',
-    name: 'Chat',
-    component: () => import('../views/chat/index.vue'),
-  },
-  {
-    path: '/explore',
-    name: 'Explore',
-    component: () => import('../views/explore/index.vue'),
-  },
-  {
-    path: '/channel',
-    name: 'Channel',
-    component: () => import('../views/channel/index.vue'),
   },
 ]
 

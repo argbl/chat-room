@@ -59,8 +59,8 @@ const route = useRoute()
 
 const { user: me } = storeToRefs(useUserStore())
 
-const { user_chat, chatHistory } = storeToRefs(useChatStore())
-const { history, initPage, increasePage } = useChatStore()
+const { user_chat, chatHistory, page } = storeToRefs(useChatStore())
+const { history } = useChatStore()
 const inputValue = ref('')
 
 const showTime = (index: number) => {
@@ -92,7 +92,7 @@ socket.on('chat', async (res: any) => {
   if (res) {
     Message.text(`${res.nickname}:${res.content}`)
   }
-  initPage()
+  page.value.num = 0
   await history(Number(route.params.id))
   scrollToBottom()
 })
@@ -112,7 +112,7 @@ watch(
     if (newValue) {
       loading.value = true
       lastScrollHeight.value = el.value?.scrollHeight || 0
-      increasePage()
+      page.value.num++
       await history(Number(route.params.id))
       loading.value = false
       await nextTick()

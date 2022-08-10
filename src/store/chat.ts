@@ -17,16 +17,8 @@ export const useChatStore = defineStore('RECORD_PINIA_CHAT', {
   }),
 
   actions: {
-    initPage() {
-      this.page.num = 0
-    },
-
-    increasePage() {
-      this.page.num++
-    },
-
     async init(id: number) {
-      this.initPage()
+      this.page.num = 0
       const { data: result } = await info(id)
       if (result.code === 200) {
         this.user_chat = result.data

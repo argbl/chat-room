@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import LoadingStatus from './index.vue'
+import Loading from './index.vue'
 
 interface loadingElement extends HTMLElement {
   loading: HTMLElement
@@ -7,7 +7,7 @@ interface loadingElement extends HTMLElement {
 
 export default {
   mounted(el: loadingElement, binding: any) {
-    const app = createApp(LoadingStatus, {
+    const app = createApp(Loading, {
       size: Number(binding.arg),
     }) // 根据模板创建app
 

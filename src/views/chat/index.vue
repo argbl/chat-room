@@ -15,17 +15,16 @@
 </template>
 
 <script setup lang="ts">
-import { useFriendStore } from '@/store/friend'
 import useTheme from '@/hooks/useTheme'
 import { useChatStore } from '@/store/chat'
 import { useRoute } from 'vue-router'
+import { storeToRefs } from 'pinia'
 import ChatRoom from './chat-room/index.vue'
-const { me: myFriend } = useFriendStore()
-myFriend()
 
 const route = useRoute()
 const { bgColorThird } = useTheme()
-const { user_chat, init } = useChatStore()
+const { user_chat } = storeToRefs(useChatStore())
+const { init } = useChatStore()
 init(Number(route.params.id))
 </script>
 
