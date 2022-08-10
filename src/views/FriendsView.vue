@@ -15,11 +15,7 @@
             :key="index"
             class="friend-item"
             @click="handleFriend(index)"
-            :class="
-              friendStore.friendActiveIndex === index
-                ? 'friend-item-active'
-                : ''
-            "
+            :class="friendActiveIndex === index ? 'friend-item-active' : ''"
           >
             {{ item.label }}
           </div>
@@ -28,7 +24,7 @@
       </div>
     </section>
     <div style="height: calc(100vh - 49px)" class="mr-1">
-      <add-friend v-if="friendStore.friendActiveIndex === 3"></add-friend>
+      <add-friend v-if="friendActiveIndex === 3"></add-friend>
       <friend-list v-else></friend-list>
     </div>
   </div>
@@ -40,9 +36,8 @@ import AddFriend from '@cp/friends-comp/add-friend.vue'
 import useTheme from '@/hooks/useTheme'
 import FriendList from '@/components/friends-comp/friend-list.vue'
 import { TabProps } from '@/models/helper'
-const friendStore = useFriendStore()
-friendStore.me()
-
+const { friendActiveIndex, setFriendActiveIndex, me } = useFriendStore()
+me()
 const FiendItems: TabProps[] = [
   {
     name: 'online',
@@ -63,7 +58,7 @@ const FiendItems: TabProps[] = [
 ]
 
 const handleFriend = (index: number) => {
-  friendStore.setFriendActiveIndex(index)
+  setFriendActiveIndex(index)
 }
 
 const { bgColorThird } = useTheme()

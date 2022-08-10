@@ -11,14 +11,14 @@ import { useSettingStore } from './store/setting'
 import useTheme from '@/hooks/useTheme'
 import useSocket from './hooks/useSocket'
 import { useMessageStore } from './store/message'
+import { storeToRefs } from 'pinia'
 const route = useRoute()
-const userStore = useUserStore()
-userStore.me()
+const { me: MyInfo } = useUserStore()
+const { me: MyMessage } = useMessageStore()
+const { isSettingView } = storeToRefs(useSettingStore())
+MyInfo()
+MyMessage()
 
-const settingStore = useSettingStore()
-
-const messageStore = useMessageStore()
-messageStore.me()
 const {
   bgColorPrimary,
   textColorPrimary,
@@ -44,7 +44,7 @@ useSocket()
       </main>
     </div>
   </div>
-  <SettingView v-show="settingStore.isSettingView"></SettingView>
+  <SettingView v-show="isSettingView"></SettingView>
 </template>
 
 <style>

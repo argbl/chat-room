@@ -57,8 +57,9 @@ import { resolve } from '@/api/message'
 import useTheme from '@/hooks/useTheme'
 import { useMessageStore } from '@/store/message'
 import { MessageModel } from '@model/message'
-import { ref, onUnmounted, computed } from 'vue'
+import { ref, onUnmounted } from 'vue'
 import Message from '@cp/base/base-message'
+import { storeToRefs } from 'pinia'
 const visible = ref(false)
 const { bgColorThird } = useTheme()
 
@@ -70,18 +71,15 @@ onUnmounted(() => {
   window.document.removeEventListener('click', closeInBox)
 })
 
-const messageStore = useMessageStore()
+const { messageList } = storeToRefs(useMessageStore())
+const { me: MyMessage } = useMessageStore()
 const loading = ref(false)
 const handleInBox = async () => {
   visible.value = !visible.value
   loading.value = true
-  await messageStore.me()
+  await MyMessage()
   loading.value = false
 }
-
-const messageList = computed(() => {
-  return messageStore.messageList
-})
 
 const resolveMessage = async (message: MessageModel, status: number) => {
   const { data: result } = await resolve(message, status)

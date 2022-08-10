@@ -18,6 +18,7 @@ module.exports = {
   plugins: ['vue', '@typescript-eslint'],
   rules: {
     'linebreak-style': ['error', 'unix'],
+    'vue/multi-word-component-names': 'off',
     quotes: ['error', 'single'],
     semi: ['error', 'never'],
   },

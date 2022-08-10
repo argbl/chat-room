@@ -38,11 +38,14 @@ const router = createRouter({
 })
 
 function isAuthenticated() {
-  return !!window.localStorage.getItem('user')
+  return !!window.localStorage.getItem('RECORD_PINIA_USER')
 }
 
 router.beforeEach(async (to, from) => {
-  console.log('当前登录用户信息', window.localStorage.getItem('user'))
+  console.log(
+    '当前登录用户信息',
+    window.localStorage.getItem('RECORD_PINIA_USER')
+  )
 
   if (!isAuthenticated() && !['/login', '/register'].includes(to.path)) {
     // 将用户重定向到登录页面

@@ -1,3 +1,5 @@
+import { UserModel } from './user'
+
 interface MessageModel {
   id: number
   user_send: number
@@ -8,6 +10,8 @@ interface MessageModel {
   content: string
   avatar: string
   nickname: string
+  message_sender: UserModel
+  message_accept: UserModel
 }
 
 export type { MessageModel }

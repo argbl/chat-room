@@ -1,11 +1,12 @@
 // stores/counter.js
 import { me } from '@/api/message'
+import { MessageModel } from '@/models/message'
 import Message from '@cp/base/base-message'
 import { defineStore } from 'pinia'
 
-export const useMessageStore = defineStore('message', {
+export const useMessageStore = defineStore('RECORD_PINIA_MESSAGE', {
   state: () => ({
-    messageList: JSON.parse(window.localStorage.getItem('messageList') || '{}'),
+    messageList: [] as Array<MessageModel>,
   }),
 
   actions: {
@@ -13,13 +14,10 @@ export const useMessageStore = defineStore('message', {
       const { data: result } = await me()
       if (result.code === 200) {
         this.messageList = result.data
-        window.localStorage.setItem(
-          'messageList',
-          JSON.stringify(this.messageList)
-        )
       } else {
         Message.error(result.message)
       }
     },
   },
+  persist: true,
 })

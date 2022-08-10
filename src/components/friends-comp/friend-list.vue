@@ -2,7 +2,7 @@
   <div class="w-full h-full relative overflow-y-scroll friend-list">
     <div
       class="ml-4 flex items-center rounded-md p-4"
-      v-for="friend in friendStore.computedFriendList"
+      v-for="friend in computedFriendList"
       :key="friend.id"
       @click="jumpChat(friend.uid!)"
     >
@@ -31,19 +31,19 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useFriendStore } from '@/store/friend'
-import { useUserStore } from '@/store/user'
 import useTheme from '@/hooks/useTheme'
 import { update } from '@/api/friend'
 import Message from '@cp/base/base-message'
 import { FriendModel } from '@model/friend'
+import { storeToRefs } from 'pinia'
 
-const friendStore = useFriendStore()
-const userStore = useUserStore()
+const { friendActiveIndex, computedFriendList } = storeToRefs(useFriendStore())
+const { me: MyFriend } = useFriendStore()
 const dialogVisible = ref(false)
 const { bgColorSecond, bgColorThird } = useTheme()
 
 const isHandle = computed(() => {
-  return friendStore.friendActiveIndex === 2
+  return friendActiveIndex.value === 2
 })
 
 const currentFriend = ref<FriendModel | null>(null)
@@ -54,7 +54,7 @@ const handleFriend = async () => {
   })
   if (result.code === 200) {
     Message.success(result.message)
-    await friendStore.me()
+    await MyFriend()
   } else if (result.code === 400) {
     Message.error(result.message)
   }

@@ -21,7 +21,7 @@
     </div>
     <div class="flex-initial setting-button">
       <button
-        @click="settingStore.handleSettingView()"
+        @click="handleSettingView()"
         class="w-8 h-8 rounded hover:theme-second flex justify-center items-center"
       >
         <div class="w-5 h-5">
@@ -43,15 +43,11 @@
 import useTheme from '@/hooks/useTheme'
 import { useSettingStore } from '@/store/setting'
 import { useUserStore } from '@/store/user'
-import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
 
-const userStore = useUserStore()
+const { user } = storeToRefs(useUserStore())
 
-const settingStore = useSettingStore()
-
-const user = computed(() => {
-  return userStore.user
-})
+const { handleSettingView } = useSettingStore()
 
 const { bgColorPrimary } = useTheme()
 </script>

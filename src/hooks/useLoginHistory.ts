@@ -3,7 +3,7 @@ import { useStorage } from '@vueuse/core'
 import { Ref } from 'vue'
 
 export default function () {
-  const key = 'login_history'
+  const key = 'RECORD_LOGIN_HISTORY'
 
   const loginHistory: Ref<UserModel[]> = useStorage(key, [])
 

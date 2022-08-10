@@ -138,13 +138,11 @@ import useValidate from '@/hooks/useValidate'
 import Message from '@cp/base/base-message'
 import { useSettingStore } from '@/store/setting'
 import { PassModel } from '@model/user'
-const userStore = useUserStore()
-
-const user = computed(() => {
-  return userStore.user
-})
+import { storeToRefs } from 'pinia'
+const { user } = storeToRefs(useUserStore())
+const { me: MyInfo } = useUserStore()
 const settingStore = useSettingStore()
-const userForm = ref(userStore.user)
+const userForm = ref({ ...user.value })
 const nicknameModalRef = ref<{ visible: boolean; show: () => void } | null>(
   null
 )
@@ -165,7 +163,7 @@ const confirmUser = async () => {
   }
   if (useValidate(userForm.value, rules)) {
     const { data: result } = await update(userForm.value)
-    await userStore.me()
+    await MyInfo()
     if (result.code === 200) {
       Message.success(result.message)
     } else {
@@ -178,7 +176,7 @@ const confirmPass = async () => {
   const { data: result } = await pass(passForm)
   if (result.code === 200) {
     Message.success(result.message)
-    await userStore.me()
+    await MyInfo()
   } else {
     Message.error(result.message)
   }

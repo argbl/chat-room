@@ -44,17 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  reactive,
-  computed,
-  watchEffect,
-  toRefs,
-  onUpdated,
-  watch,
-  onBeforeUpdate,
-  nextTick,
-} from 'vue'
+import { ref, toRefs, onUpdated, watch, nextTick } from 'vue'
 import { useDateFormat, useScroll } from '@vueuse/core'
 import useTheme from '@/hooks/useTheme'
 import useSocket from '@/hooks/useSocket'
@@ -62,23 +52,16 @@ import { useChatStore } from '@/store/chat'
 import { useUserStore } from '@/store/user'
 import { useRoute } from 'vue-router'
 import Message from '../base/base-message'
+import { storeToRefs } from 'pinia'
 const { bgColorThird } = useTheme()
 
 const route = useRoute()
 
-const userStore = useUserStore()
-const me = userStore.user
+const { user: me } = storeToRefs(useUserStore())
 
-const chatStore = useChatStore()
+const { user_chat, chatHistory } = storeToRefs(useChatStore())
+const { history, initPage, increasePage } = useChatStore()
 const inputValue = ref('')
-
-const user_chat = computed(() => {
-  return chatStore.user_chat
-})
-
-const chatHistory = computed(() => {
-  return chatStore.chatHistory
-})
 
 const showTime = (index: number) => {
   const last = chatHistory.value[index - 1]
@@ -94,7 +77,7 @@ const showTime = (index: number) => {
   }
 }
 
-chatStore.history(Number(route.params.id))
+history(Number(route.params.id))
 
 const socket = useSocket()
 const submit = async () => {
@@ -109,8 +92,8 @@ socket.on('chat', async (res: any) => {
   if (res) {
     Message.text(`${res.nickname}:${res.content}`)
   }
-  chatStore.initPage()
-  await chatStore.history(Number(route.params.id))
+  initPage()
+  await history(Number(route.params.id))
   scrollToBottom()
 })
 
@@ -129,8 +112,8 @@ watch(
     if (newValue) {
       loading.value = true
       lastScrollHeight.value = el.value?.scrollHeight || 0
-      chatStore.increasePage()
-      await chatStore.history(Number(route.params.id))
+      increasePage()
+      await history(Number(route.params.id))
       loading.value = false
       await nextTick()
       el.value &&

@@ -1,20 +1,17 @@
 // stores/counter.js
 import { me } from '@/api/friend'
 import { FriendModel, OnLineType, StatusType } from '@/models/friend'
-import { defineStore } from 'pinia'
+import { storeToRefs, defineStore } from 'pinia'
 import { useUserStore } from './user'
-
-export const useFriendStore = defineStore('friend', {
+export const useFriendStore = defineStore('RECORD_PINIA_FRIEND', {
   state: () => ({
     friendActiveIndex: 0,
-    friendList: JSON.parse(
-      window.sessionStorage.getItem('friendList') || '[]'
-    ) as Array<FriendModel>,
+    friendList: [] as Array<FriendModel>,
   }),
 
   getters: {
     computedFriendList: (state) => {
-      const userStore = useUserStore()
+      const { user } = storeToRefs(useUserStore())
       switch (state.friendActiveIndex) {
         case 0:
           return state.friendList.filter((friend: FriendModel) => {
@@ -30,7 +27,7 @@ export const useFriendStore = defineStore('friend', {
         case 2:
           return state.friendList.filter((friend: FriendModel) => {
             return (
-              friend.user_accept === userStore.user.id &&
+              friend.user_accept === user.value.id &&
               friend.status === StatusType.UNHANDLE
             )
           })
@@ -43,14 +40,11 @@ export const useFriendStore = defineStore('friend', {
       const { data: result } = await me()
       if (result.code === 200) {
         this.friendList = result.data
-        window.sessionStorage.setItem(
-          'friendList',
-          JSON.stringify(this.friendList)
-        )
       }
     },
     setFriendActiveIndex(index: number) {
       this.friendActiveIndex = index
     },
   },
+  persist: true,
 })

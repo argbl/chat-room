@@ -6,9 +6,9 @@ import { defineStore } from 'pinia'
 import useLoginHistory from '@/hooks/useLoginHistory'
 
 const { updateHistory } = useLoginHistory()
-export const useUserStore = defineStore('user', {
+export const useUserStore = defineStore('RECORD_PINIA_USER', {
   state: () => ({
-    user: JSON.parse(window.localStorage.getItem('user') || '{}') as UserModel,
+    user: {} as UserModel,
   }),
 
   actions: {
@@ -16,7 +16,6 @@ export const useUserStore = defineStore('user', {
       const { data: result } = await me()
       if (result.code === 200) {
         const user = result.data.user
-        window.localStorage.setItem('user', JSON.stringify(user))
         updateHistory(user)
         this.user = user
       } else if (result.code === 403) {
@@ -24,8 +23,9 @@ export const useUserStore = defineStore('user', {
       }
     },
     async logout() {
-      window.localStorage.removeItem('user')
+      window.localStorage.removeItem('RECORD_PINIA_USER')
       await logout()
     },
   },
+  persist: true,
 })

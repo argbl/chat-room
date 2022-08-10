@@ -8,7 +8,7 @@
         :key="item.label"
         @click="handleSetting(item, index)"
         class="w-full leading-5 px-[10px] py-[6px] rounded mb-1 cursor-pointer"
-        :class="settingStore.settingActiveIndex === index ? 'activeItem' : ''"
+        :class="settingActiveIndex === index ? 'activeItem' : ''"
       >
         {{ item.label }}
       </div>
@@ -22,9 +22,11 @@ import { TabProps } from '@/models/helper'
 import { useSettingStore } from '@/store/setting'
 import { useUserStore } from '@/store/user'
 import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 
-const settingStore = useSettingStore()
-const userStore = useUserStore()
+const { settingActiveIndex } = storeToRefs(useSettingStore())
+const { handleSettingView, setSettingActiveIndex } = useSettingStore()
+const { logout } = useUserStore()
 const router = useRouter()
 
 const settingItems: TabProps[] = [
@@ -44,8 +46,8 @@ const settingItems: TabProps[] = [
     name: 'Logout',
     label: '登出',
     event: () => {
-      userStore.logout()
-      settingStore.handleSettingView()
+      logout()
+      handleSettingView()
       router.push({
         name: 'Login',
       })
@@ -55,7 +57,7 @@ const settingItems: TabProps[] = [
 
 const handleSetting = (item: TabProps, index: number) => {
   item.event && item.event()
-  settingStore.setSettingActiveIndex(index)
+  setSettingActiveIndex(index)
 }
 
 const { bgColorSecond } = useTheme()

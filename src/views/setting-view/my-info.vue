@@ -63,8 +63,8 @@
             </div>
           </div>
           <div class="text-xl flex ml-4 font-semibold">
-            <div>{{ userStore.user.nickname }}</div>
-            <span>#{{ userStore.user.id }}</span>
+            <div>{{ user.nickname }}</div>
+            <span>#{{ user.id }}</span>
           </div>
           <p class="p-4 text-xs">自定义我的个人资料</p>
         </div>
@@ -95,17 +95,16 @@ import { ref, watch, computed } from 'vue'
 import { useUserStore } from '@/store/user'
 import { avatar, update, uploadImage } from '@/api/user'
 import Message from '@cp/base/base-message'
+import { storeToRefs } from 'pinia'
 
 const defaultColor = '#22c55e'
-const userStore = useUserStore()
+const { user } = storeToRefs(useUserStore())
+const { me: MyInfo } = useUserStore()
 const showSave = ref(false)
-const pickColor = ref(userStore.user?.banner_color || defaultColor)
-const user = computed(() => {
-  return userStore.user
-})
+const pickColor = ref(user.value.banner_color || defaultColor)
 
 const defaultPickColor = computed(() => {
-  return userStore.user.banner_color
+  return user.value.banner_color
 })
 watch(pickColor, (newColor) => {
   console.log(newColor)
@@ -122,12 +121,12 @@ const handleReset = () => {
 
 const handleUpdate = async () => {
   const { data: result } = await update({
-    ...userStore.user,
+    ...user,
     banner_color: pickColor.value,
   })
   if (result.code === 200) {
     Message.success(result.message)
-    await userStore.me()
+    await MyInfo()
     showSave.value = false
   } else {
     Message.error(result.message)
@@ -147,10 +146,10 @@ const upload = async () => {
 
     const avatar = 'http://qiniu.kaijinx.top/' + res.key
 
-    let { data: result2 } = await update({ id: userStore.user.id, avatar })
+    let { data: result2 } = await update({ id: user.value.id, avatar })
     if (result2.code === 200) {
       Message.success(result2.message)
-      await userStore.me()
+      await MyInfo()
     } else {
       Message.error(result2.message)
     }
