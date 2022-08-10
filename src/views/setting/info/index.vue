@@ -121,7 +121,7 @@ const handleReset = () => {
 
 const handleUpdate = async () => {
   const { data: result } = await update({
-    ...user,
+    ...user.value,
     banner_color: pickColor.value,
   })
   if (result.code === 200) {
