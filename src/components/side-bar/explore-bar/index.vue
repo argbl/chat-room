@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import exploreList from './explore-list'
+import exploreList from '.'
 </script>
 
 <style lang="postcss" scoped>

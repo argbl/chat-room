@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import LoadingStatus from './loading-status.vue'
+import LoadingStatus from './index.vue'
 
 interface loadingElement extends HTMLElement {
   loading: HTMLElement

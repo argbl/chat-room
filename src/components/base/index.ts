@@ -1,4 +1,4 @@
-import BaseModal from '@cp/base/base-modal/base-modal.vue'
+import BaseModal from '@/components/base/base-modal/index.vue'
 import BaseImg from '@cp/base/base-img/base-img.vue'
 import BaseDialog from '@cp/base/base-dialog/base-dialog.vue'
 import BaseInput from '@cp/base/base-input/base-input.vue'

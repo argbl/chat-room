@@ -69,7 +69,7 @@
 import { ref, reactive, inject } from 'vue'
 import { UserModel } from '@model/user'
 import useLogin from '@/hooks/useLogin'
-import axios from 'axios'
+
 const loading = ref(false)
 const loginForm: UserModel = reactive({
   email: '',

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import GuildNav from '@cp/guild-nav/guild-nav.vue'
-import SideBar from '@cp/side-bar/side-bar'
+import GuildNav from '@/components/guild-nav/index.vue'
+import SideBar from '@/components/side-bar/index'
 import MainView from './views/main-view'
-import AccountView from './views/account-view/AccountView.vue'
+import LoginView from './views/login/index.vue'
 import { useUserStore } from './store/user'
-import SettingView from './views/setting-view/SettingView.vue'
+import SettingView from './views/setting/index.vue'
 import { useSettingStore } from './store/setting'
 import useTheme from '@/hooks/useTheme'
 import useSocket from './hooks/useSocket'
@@ -33,8 +33,8 @@ useSocket()
 </script>
 
 <template>
-  <AccountView v-if="['Login', 'Register'].includes(route.name as string)">
-  </AccountView>
+  <LoginView v-if="['Login', 'Register'].includes(route.name as string)">
+  </LoginView>
   <div v-else class="flex">
     <guild-nav></guild-nav>
     <div class="flex-1 flex">

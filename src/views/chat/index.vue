@@ -15,11 +15,11 @@
 </template>
 
 <script setup lang="ts">
-import { useFriendStore } from '../store/friend'
+import { useFriendStore } from '@/store/friend'
 import useTheme from '@/hooks/useTheme'
 import { useChatStore } from '@/store/chat'
 import { useRoute } from 'vue-router'
-import ChatRoom from '../components/chat-room/chat-room.vue'
+import ChatRoom from './chat-room/index.vue'
 const { me: myFriend } = useFriendStore()
 myFriend()
 

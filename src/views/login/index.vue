@@ -24,9 +24,9 @@
 <script setup lang="ts">
 import { provide, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import LoginForm from './login-form.vue'
-import LoginHistory from './login-history.vue'
-import RegisterForm from './register-form.vue'
+import LoginForm from './login-form/index.vue'
+import LoginHistory from './login-history/index.vue'
+import RegisterForm from './register-form/index.vue'
 const route = useRoute()
 const isLoginForm = ref(false)
 

@@ -10,9 +10,9 @@
 
 <script setup lang="ts">
 import { useSettingStore } from '@/store/setting'
-import MyAccount from './my-account.vue'
-import MyInfo from './my-info.vue'
-import MyDisplay from './my-display.vue'
+import MyAccount from './account/index.vue'
+import MyInfo from './info/index.vue'
+import MyDisplay from './display/index.vue'
 
 const settingStore = useSettingStore()
 </script>

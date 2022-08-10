@@ -27,8 +27,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import settingBar from './setting-bar.vue'
-import SettingContent from './setting-content.vue'
+import settingBar from './bar.vue'
+import SettingContent from './content.vue'
 import { useSettingStore } from '@/store/setting'
 
 const settingStore = useSettingStore()

@@ -1,15 +1,13 @@
-import { ref, h } from 'vue'
+import { h } from 'vue'
 import { useRoute } from 'vue-router'
-import FriendsView from './FriendsView.vue'
-import ExploreView from './ExploreView.vue'
-import ChannelView from './ChannelView.vue'
-import ChatView from './ChatView.vue'
-import InBox from '@cp/in-box/in-box.vue'
+import FriendsView from './friend/index.vue'
+import ExploreView from './explore/index.vue'
+import ChannelView from './channel/index.vue'
+import ChatView from './chat/index.vue'
+import InBox from '@/components/in-box/index.vue'
 export default {
   setup() {
     const route = useRoute()
-    // 返回渲染函数
-    // return () => (route.path === '/' ? h(FriendsView) : h(ExploreView))
     return () =>
       route.path === '/'
         ? h(FriendsView, null, {

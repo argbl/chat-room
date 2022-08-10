@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
-import navItem from './nav-item.vue'
+import navItem from './item.vue'
 import NavList from './index'
 const route = useRoute()
 </script>

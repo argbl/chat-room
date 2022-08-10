@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import BaseMessage from './base-message.vue'
+import BaseMessage from './index.vue'
 import { MessageConfig } from './base-message'
 const createInstance = (message: string, config: MessageConfig) => {
   const messageNode = document.createElement('div')

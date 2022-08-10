@@ -51,7 +51,7 @@ import useSocket from '@/hooks/useSocket'
 import { useChatStore } from '@/store/chat'
 import { useUserStore } from '@/store/user'
 import { useRoute } from 'vue-router'
-import Message from '../base/base-message'
+import Message from '@/components/base/base-message'
 import { storeToRefs } from 'pinia'
 const { bgColorThird } = useTheme()
 
