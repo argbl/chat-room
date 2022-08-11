@@ -8,24 +8,17 @@
           发现
         </h2>
         <div
-          v-for="item in exploreList"
-          :key="item.name"
+          v-for="channel in channelList"
+          :key="channel.id"
           class="ml-2 py-[1px] text-second"
         >
           <div
             class="rouned py-[5px] px-2 hover:bg-blue-600 hover:text-white rounded flex items-center"
           >
             <div class="mr-3 w-8 h-8 flex justify-center items-center">
-              <svg
-                aria-hidden="false"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path fill="currentColor" :d="item.d"></path>
-              </svg>
+              <img :src="channel.icon" />
             </div>
-            <div class="flex-1 leading-5">{{ item.name }}</div>
+            <div class="flex-1 leading-5">{{ channel.title }}</div>
           </div>
         </div>
       </div>
@@ -35,7 +28,17 @@
 </template>
 
 <script setup lang="ts">
-import exploreList from '.'
+import { ref } from 'vue'
+import { list } from '@/api/channel'
+import { ChannelModel } from '@/models/channel'
+const channelList = ref<Array<ChannelModel>>([])
+const init = async () => {
+  const { data: result } = await list()
+  if (result.code === 200) {
+    channelList.value = result.data
+  }
+}
+init()
 </script>
 
 <style lang="postcss" scoped>
