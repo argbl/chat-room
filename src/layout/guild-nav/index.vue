@@ -1,31 +1,33 @@
 <template>
   <nav class="h-screen overflow-scroll theme-third w-[72px] min-w-[72px]">
     <ul class="flex flex-col justify-center items-center py-3">
-      <nav-item
-        v-for="nav in NavList"
+      <guild-item
+        v-for="guild in GuildList"
         v-slot="{ iconColor }"
-        :key="nav.name"
-        :type="nav.type"
-        :path="nav.path"
-        :is-active="route.path === nav.path"
-        :handle-event="nav.handleEvent"
-        :active-color="nav.activeColor"
-        :default-color="nav.defaultColor"
-        :icon-default-color="nav.iconDefaultColor"
-        :svg-width="nav.svgWidth"
-        :svg-height="nav.svgHeight"
+        :key="guild.name"
+        :name="guild.name"
+        :type="guild.type"
+        :path="guild.path"
+        :is-active="route.path === guild.path"
+        :active-bg-color="guild.activeColor"
+        :default-bg-color="guild.defaultColor"
+        :icon-default-color="guild.iconDefaultColor"
+        :width="guild.width"
       >
-        <path :fill="iconColor" :d="nav.d"></path>
-      </nav-item>
+        <path :fill="iconColor" :d="guild.d"></path>
+      </guild-item>
     </ul>
   </nav>
+  <AddGuild></AddGuild>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
-import navItem from './item.vue'
-import NavList from './index'
+import GuildItem from './guild-item.vue'
+import GuildList from './index'
+import AddGuild from './add-guild.vue'
+
 const route = useRoute()
 </script>
 

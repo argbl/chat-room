@@ -28,17 +28,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { list } from '@/api/channel'
-import { ChannelModel } from '@/models/channel'
-const channelList = ref<Array<ChannelModel>>([])
-const init = async () => {
-  const { data: result } = await list()
-  if (result.code === 200) {
-    channelList.value = result.data
-  }
-}
-init()
+import useChannel from '@/hooks/useChannel'
+const { channelList, initChannel } = useChannel()
+initChannel()
 </script>
 
 <style lang="postcss" scoped>

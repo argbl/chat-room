@@ -2,7 +2,7 @@
   <div
     v-if="modelValue"
     class="fixed left-0 top-0 z-20 w-screen h-screen mask flex items-center justify-center"
-    @click="$emit('update:modelValue', false)"
+    @click.self="$emit('update:modelValue', false)"
   >
     <div class="w-[500px] theme-third rounded">
       <div class="p-4 flex items-center justify-between">

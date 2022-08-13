@@ -21,15 +21,15 @@
         class="navIcon"
         :class="
           isActive || isHover
-            ? activeColor + ' rounded-2xl'
-            : defaultColor + ' rounded-full'
+            ? activeBgColor + ' rounded-2xl'
+            : defaultBgColor + ' rounded-full'
         "
       >
         <svg
           aria-hidden="false"
-          :width="svgWidth"
-          :height="svgHeight"
-          :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
+          :width="width"
+          :height="height"
+          :viewBox="`0 0 ${width} ${height}`"
         >
           <slot
             :iconColor="
@@ -43,15 +43,16 @@
 </template>
 
 <script setup lang="ts">
+import { useAppStore } from '@/store/app'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 const props = defineProps({
   type: String,
+  name: String,
   path: String,
-  handleEvent: Function,
   isActive: Boolean,
-  activeColor: String,
-  defaultColor: String,
+  defaultBgColor: String,
+  activeBgColor: String,
   iconDefaultColor: {
     type: String,
     default() {
@@ -64,23 +65,37 @@ const props = defineProps({
       return '#fff'
     },
   },
-  svgWidth: Number,
-  svgHeight: Number,
+  width: {
+    type: Number,
+    default: 24,
+  },
+  height: {
+    type: Number,
+    default: 24,
+  },
+  toggleDialog: {
+    type: Function,
+    default() {
+      return () => true
+    },
+  },
 })
 const isHover = ref(false)
 
 const clickButton = ref(false)
+const appStore = useAppStore()
 const router = useRouter()
 function handleEvent() {
-  if (props.handleEvent) {
-    props.handleEvent()
-    clickButton.value = true
-    setTimeout(() => {
-      clickButton.value = false
-    }, 1000)
-  } else {
+  if (props.type === 'system') {
+    if (props.name === 'Add') {
+      appStore.addGuildVisible = !appStore.addGuildVisible
+    } else if (props.name === 'Download') {
+      console.log('下载')
+    }
+  }
+  if (props.path) {
     router.push({
-      path: props.path!,
+      path: props.path,
     })
   }
 }
