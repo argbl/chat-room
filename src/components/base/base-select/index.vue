@@ -1,15 +1,17 @@
 <template>
   <div class="relative">
     <input
-      class="w-full outline-none h-8 py-2"
-      v-model="selectedValue"
+      class="w-full outline-none h-[40px] px-[10px] py-[10px] theme-third"
+      v-model="selectLabel"
       @click="handleVisible"
     />
-    <ul class="w-full outline-none absolute theme-second">
+    <ul
+      v-show="visible"
+      class="w-full top-14 outline-none absolute theme-third"
+    >
       <li
-        v-show="visible"
         @click="handleOption(item)"
-        class="py-2 px-3"
+        class="px-[10px] py-[10px]"
         v-for="item in (list as Array<SelectProps>)"
         :key="item.id"
         :value="item.id"
@@ -50,10 +52,11 @@ const selectedValue = computed({
   set: (val: any) => emit('update:value', val),
 })
 
-const handleOption = (item) => {
-  console.log(item)
+const selectLabel = ref('')
 
+const handleOption = (item: SelectProps) => {
   selectedValue.value = item.id
+  selectLabel.value = item.title
   visible.value = false
 }
 </script>

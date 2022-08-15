@@ -38,17 +38,6 @@ export async function pass(passForm: PassModel) {
   return await axios.post('/user/pass', encryptPassForm)
 }
 
-export async function avatar() {
-  return await axios.get('/user/avatar')
-}
-
-export async function uploadImage(form: FormData) {
-  const instance = axios.create({
-    withCredentials: false,
-  })
-  return await instance.post('http://upload-cn-east-2.qiniup.com', form)
-}
-
 export async function info(id: number) {
   return await axios.get('/user/info?id=' + id)
 }

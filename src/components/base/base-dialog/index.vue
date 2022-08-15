@@ -4,7 +4,7 @@
     class="fixed left-0 top-0 z-20 w-screen h-screen mask flex items-center justify-center"
     @click.self="$emit('update:modelValue', false)"
   >
-    <div class="w-[500px] theme-third rounded">
+    <div class="w-[500px] theme-second rounded">
       <div class="p-4 flex items-center justify-between">
         <header class="text-lg font-semibold">{{ title || '对话框' }}</header>
         <div class="cursor-pointer" @click="$emit('update:modelValue', false)">
@@ -13,7 +13,7 @@
       </div>
       <div v-if="content" class="px-4 pb-4">{{ content }}</div>
       <slot></slot>
-      <div class="p-4 flex justify-end text-sm theme-third rounded-b">
+      <div class="p-4 flex justify-end text-sm rounded-b">
         <button @click="handleCancel()" class="px-4 py-[2px] h-8">
           <div class="mx-4">取消</div>
         </button>

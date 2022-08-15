@@ -93,7 +93,8 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
 import { useUserStore } from '@/store/user'
-import { avatar, update, uploadImage } from '@/api/user'
+import { update } from '@/api/user'
+import { avatar, uploadImage } from '@/api/common'
 import Message from '@cp/base/base-message'
 import { storeToRefs } from 'pinia'
 
