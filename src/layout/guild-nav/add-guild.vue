@@ -1,9 +1,14 @@
 <template>
   <base-dialog v-model="addGuildVisible" title="创建房间">
-    <base-select
-      v-model:value="channelValue"
-      v-model:list="channelList"
-    ></base-select>
+    <div class="p-4">
+      <div>
+        <div class="text-lg">请选择房间类型</div>
+        <base-select
+          v-model:value="channelValue"
+          v-model:list="channelList"
+        ></base-select>
+      </div>
+    </div>
   </base-dialog>
 </template>
 

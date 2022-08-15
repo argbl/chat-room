@@ -13,7 +13,7 @@
       </div>
       <div v-if="content" class="px-4 pb-4">{{ content }}</div>
       <slot></slot>
-      <div class="p-4 flex justify-end text-sm theme-second rounded-b">
+      <div class="p-4 flex justify-end text-sm theme-third rounded-b">
         <button @click="handleCancel()" class="px-4 py-[2px] h-8">
           <div class="mx-4">取消</div>
         </button>
