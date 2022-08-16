@@ -6,8 +6,12 @@
           <div class="flex-1">
             <div>请上传一张图片作为图标</div>
             <button
-              class="relative bg-third rounded-full w-20 h-20 border-4 border-dashed"
+              class="relative rounded-full w-24 h-24 border-4 border-dashed flex justify-center items-center"
             >
+              <base-img
+                :src="roomProps.avatar"
+                class="w-full h-full rounded-full object-cover"
+              />
               <input
                 ref="uploadAvatarRef"
                 @change="upload(ROOM_UPLAD.AVATAR)"
@@ -21,8 +25,12 @@
             <div>请上传一张图片作为封面</div>
 
             <button
-              class="relative bg-third rounded-full w-20 h-20 border-4 border-dashed"
+              class="relative rounded-full w-24 h-24 border-4 border-dashed flex justify-center items-center"
             >
+              <base-img
+                :src="roomProps.cover"
+                class="w-full h-full rounded-full object-cover"
+              />
               <input
                 ref="uploadCoverRef"
                 @change="upload(ROOM_UPLAD.COVER)"
@@ -54,11 +62,13 @@ import { ref, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAppStore } from '@/store/app'
 import BaseSelect from '@/components/base/base-select/index.vue'
-import useChannel from '@/hooks/useChannel'
 import BaseInput from '@/components/base/base-input/index.vue'
+import BaseImg from '@/components/base/base-img/index.vue'
+import useChannel from '@/hooks/useChannel'
 import { avatar, uploadImage } from '@/api/common'
 import { add } from '@/api/room'
 import Message from '@/components/base/base-message'
+
 const { channelList, initChannel } = useChannel()
 const { addGuildVisible } = storeToRefs(useAppStore())
 
@@ -101,7 +111,6 @@ const upload = async (uploadType: number) => {
 }
 
 const confirm = async () => {
-  console.log(roomProps)
   const { data: result } = await add(roomProps)
   if (result.code === 200) {
     Message.success(result.message)
