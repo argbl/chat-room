@@ -1,5 +1,5 @@
 interface ChannelModel {
-  id?: number
+  id: number
   title?: string
   icon?: string
   introduce?: string

@@ -11,14 +11,14 @@ const routes = [
         component: () => import('../views/chat/index.vue'),
       },
       {
-        path: 'explore',
+        path: 'explore/:id?',
         name: 'Explore',
         component: () => import('../views/explore/index.vue'),
       },
       {
-        path: 'channel',
-        name: 'Channel',
-        component: () => import('../views/channel/index.vue'),
+        path: 'room/:id',
+        name: 'Room',
+        component: () => import('../views/room/index.vue'),
       },
     ],
   },

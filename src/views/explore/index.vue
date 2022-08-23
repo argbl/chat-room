@@ -33,47 +33,56 @@
         <section class="mb-8 min-w-[580px]">
           <h3 class="text-primary text-xl">特色社区</h3>
           <div class="grid grid-cols-5 gap-4 mt-4">
-            <router-link to="/channel">
-              <div class="flex flex-col theme-second rounded-lg cursor-pointer">
-                <div class="relative mb-8 h-[143px]">
-                  <div class="w-full h-full">
-                    <img
-                      class="rounded-t-lg object-cover w-full h-full"
-                      src="https://cdn.discordapp.com/discovery-splashes/522681957373575168/f9c7d500f8d7002ca4220f09548852a0.jpg?size=300"
-                    />
-                  </div>
-                  <div
-                    class="absolute left-3 -bottom-5 w-12 h-12 rounded-lg bg-black flex justify-center items-center"
-                  >
-                    <img
-                      src="https://cdn.discordapp.com/icons/522681957373575168/b735610da8c0d49a1cc2a14c5146801b.webp?size=40"
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <div class="flex flex-col pt-0 p-4 text-second">
-                  <div>
-                    <h4 class="text-ellipsis font-semibold text-primary">
-                      Genshin Impact Official
-                    </h4>
-                  </div>
-                  <div class="flex-1 mt-1 mb-4 line-clamp-4 text-sm text-third">
-                    Welcome to Teyvat, Traveler! This is the place to discuss
-                    with others about your favorite game: Genshin Impact!
-                  </div>
-                  <div class="flex text-xs text-third">
-                    <div class="mr-4 flex items-center">
-                      <div class="w-2 h-2 rounded-full bg-green-500 mr-1"></div>
-                      <div>275,455 人在线</div>
+            <div v-for="room in rooms" :key="room.id">
+              <router-link :to="{ name: 'Room', params: { id: room.id } }">
+                <div
+                  class="flex flex-col theme-second rounded-lg cursor-pointer"
+                >
+                  <div class="relative mb-8 h-[143px]">
+                    <div class="w-full h-full">
+                      <img
+                        class="rounded-t-lg object-cover w-full h-full"
+                        :src="room.avatar"
+                      />
                     </div>
-                    <div class="flex items-center">
-                      <div class="w-2 h-2 rounded-full bg-gray-500 mr-1"></div>
-                      <div>994,236 位成员</div>
+                    <div
+                      class="absolute left-3 -bottom-5 w-12 h-12 rounded-lg bg-black flex justify-center items-center"
+                    >
+                      <img
+                        :src="room.cover"
+                        class="object-cover rounded-full h-10 w-10"
+                      />
                     </div>
                   </div>
+                  <div class="flex flex-col pt-0 p-4 text-second">
+                    <div>
+                      <h4 class="text-ellipsis font-semibold text-primary">
+                        {{ room.title }}
+                      </h4>
+                    </div>
+                    <div
+                      class="flex-1 mt-1 mb-4 line-clamp-4 text-sm text-third min-h-[60px]"
+                    >
+                      {{ room.introduce }}
+                    </div>
+                    <div class="flex text-xs text-third">
+                      <div class="mr-4 flex items-center">
+                        <div
+                          class="w-2 h-2 rounded-full bg-green-500 mr-1"
+                        ></div>
+                        <div>275,455 人在线</div>
+                      </div>
+                      <div class="flex items-center">
+                        <div
+                          class="w-2 h-2 rounded-full bg-gray-500 mr-1"
+                        ></div>
+                        <div>994,236 位成员</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div></router-link
-            >
+              </router-link>
+            </div>
           </div>
         </section>
       </div>
@@ -87,7 +96,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { Ref, ref, watchEffect } from 'vue'
+import { list } from '@/api/room'
+import { useRoute } from 'vue-router'
+import { RoomModel } from '@/models/room'
+
+const route = useRoute()
+const rooms: Ref<Array<RoomModel>> = ref([])
+const initRooms = async () => {
+  const { data: result } = await list(Number(route.params.id))
+  rooms.value = result.data
+  console.log(rooms.value)
+}
+
+watchEffect(() => {
+  initRooms()
+})
 </script>
 
 <style scoped>

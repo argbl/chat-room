@@ -11,6 +11,7 @@
           v-for="channel in channelList"
           :key="channel.id"
           class="ml-2 py-[1px] text-second"
+          @click="JumpToChannel(channel.id)"
         >
           <div
             class="rouned py-[5px] px-2 hover:bg-blue-600 hover:text-white rounded flex items-center"
@@ -29,8 +30,19 @@
 
 <script setup lang="ts">
 import useChannel from '@/hooks/useChannel'
+import { useRouter } from 'vue-router'
 const { channelList, initChannel } = useChannel()
 initChannel()
+
+const router = useRouter()
+const JumpToChannel = (id: number) => {
+  router.push({
+    name: 'Explore',
+    params: {
+      id,
+    },
+  })
+}
 </script>
 
 <style lang="postcss" scoped>
