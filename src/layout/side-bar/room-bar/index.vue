@@ -10,7 +10,7 @@
                 color: titleColor,
               }"
             >
-              Genshin Impact Official
+              {{ currentRoom.title }}
             </h1>
           </div>
         </header>
@@ -24,7 +24,7 @@
               })`,
             }"
             width="240"
-            src="https://cdn.discordapp.com/banners/522681957373575168/80b2051c037e22dbaefd15bbf528fde5.webp?size=240"
+            :src="currentRoom.cover"
           />
         </div>
       </div>
@@ -60,7 +60,9 @@
 <script setup lang="ts">
 import { ThemeType } from '@/models/theme'
 import { useSettingStore } from '@/store/setting'
+import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
+import { useAppStore } from '../../../store/app'
 const userListRef = ref<HTMLElement | null>(null)
 const scrollTop = ref(0)
 const titleColor = ref('#ffffff')
@@ -75,6 +77,8 @@ setTimeout(() => {
     }
   })
 })
+
+const { currentRoom } = storeToRefs(useAppStore())
 </script>
 
 <style lang="postcss" scoped>

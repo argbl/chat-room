@@ -8,5 +8,9 @@ export async function add(RoomForm: RoomModel) {
 }
 
 export async function list(id: number) {
-  return await axios.get(`/room/list?id=${id}`)
+  return await axios.get(`/room/list?channel_id=${id}`)
+}
+
+export async function info(id: number) {
+  return await axios.get(`/room/info?id=${id}`)
 }

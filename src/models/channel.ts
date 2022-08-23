@@ -3,6 +3,7 @@ interface ChannelModel {
   title?: string
   icon?: string
   introduce?: string
+  avatar?: string
 }
 
 export type { ChannelModel }

@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router'
 import HomeBar from './home-bar/index.vue'
 import ExploreBar from './explore-bar/index.vue'
 import UserStatus from './user-status/index.vue'
-import ChannelBar from './channel-bar/index.vue'
+import RoomBar from './room-bar/index.vue'
 export default {
   setup() {
     const route = useRoute()
@@ -17,7 +17,7 @@ export default {
         ? h(ExploreBar, null, {
             default: () => h(UserStatus),
           })
-        : h(ChannelBar, null, {
+        : h(RoomBar, null, {
             default: () => h(UserStatus),
           })
   },

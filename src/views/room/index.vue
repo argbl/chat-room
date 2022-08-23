@@ -11,7 +11,7 @@
             ></path>
           </svg>
         </div>
-        <h3 class="text-primary font-semibold mr-2">Genshin Impact Official</h3>
+        <h3 class="text-primary font-semibold mr-2">{{ currentRoom.title }}</h3>
       </div>
     </section>
     <div class="flex flex-col">
@@ -52,12 +52,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { Ref, ref, watchEffect } from 'vue'
+import { useAppStore } from '../../store/app'
 const chatMessage = ref('')
 const chatList = ref<string[]>([])
 function publishMessage() {
   chatList.value = [...chatList.value, chatMessage.value]
 }
+
+const { currentRoom } = storeToRefs(useAppStore())
 </script>
 
 <style scoped></style>

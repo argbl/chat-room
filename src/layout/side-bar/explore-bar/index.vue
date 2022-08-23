@@ -7,20 +7,19 @@
         <h2 class="m-4 mr-0 font-bold text-2xl leading-[30px] text-primary">
           发现
         </h2>
-        <div
-          v-for="channel in channelList"
-          :key="channel.id"
-          class="ml-2 py-[1px] text-second"
-          @click="JumpToChannel(channel.id)"
-        >
-          <div
-            class="rouned py-[5px] px-2 hover:bg-blue-600 hover:text-white rounded flex items-center"
+        <div v-for="channel in channelList" :key="channel.id" class="py-[1px]">
+          <router-link
+            class="ml-2 px-2 text-second rounded block hover:bg-blue-600 hover:text-white"
+            active-class="bg-blue-600 text-white"
+            :to="{ name: 'Explore', params: { id: channel.id } }"
           >
-            <div class="mr-3 w-8 h-8 flex justify-center items-center">
-              <img :src="channel.icon" />
+            <div class="py-[5px] flex items-center">
+              <div class="mr-3 w-8 h-8 flex justify-center items-center">
+                <img :src="channel.avatar" />
+              </div>
+              <div class="flex-1 leading-5">{{ channel.title }}</div>
             </div>
-            <div class="flex-1 leading-5">{{ channel.title }}</div>
-          </div>
+          </router-link>
         </div>
       </div>
     </nav>
@@ -31,6 +30,7 @@
 <script setup lang="ts">
 import useChannel from '@/hooks/useChannel'
 import { useRouter } from 'vue-router'
+import BaseImg from '@/components/base/base-img/index.vue'
 const { channelList, initChannel } = useChannel()
 initChannel()
 

@@ -33,7 +33,11 @@
         <section class="mb-8 min-w-[580px]">
           <h3 class="text-primary text-xl">特色社区</h3>
           <div class="grid grid-cols-5 gap-4 mt-4">
-            <div v-for="room in rooms" :key="room.id">
+            <div
+              v-for="room in roomList"
+              :key="room.id"
+              @click="saveBeforeJump(room)"
+            >
               <router-link :to="{ name: 'Room', params: { id: room.id } }">
                 <div
                   class="flex flex-col theme-second rounded-lg cursor-pointer"
@@ -42,14 +46,14 @@
                     <div class="w-full h-full">
                       <img
                         class="rounded-t-lg object-cover w-full h-full"
-                        :src="room.avatar"
+                        :src="room.cover"
                       />
                     </div>
                     <div
                       class="absolute left-3 -bottom-5 w-12 h-12 rounded-lg bg-black flex justify-center items-center"
                     >
                       <img
-                        :src="room.cover"
+                        :src="room.avatar"
                         class="object-cover rounded-full h-10 w-10"
                       />
                     </div>
@@ -96,22 +100,33 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref, watchEffect } from 'vue'
+import { onUnmounted, Ref, ref, watchEffect } from 'vue'
 import { list } from '@/api/room'
 import { useRoute } from 'vue-router'
 import { RoomModel } from '@/models/room'
+import { useAppStore } from '@/store/app'
 
 const route = useRoute()
-const rooms: Ref<Array<RoomModel>> = ref([])
-const initRooms = async () => {
+const roomList: Ref<Array<RoomModel>> = ref([])
+const initRoomList = async () => {
   const { data: result } = await list(Number(route.params.id))
-  rooms.value = result.data
-  console.log(rooms.value)
+  roomList.value = result.data
 }
 
-watchEffect(() => {
-  initRooms()
+const stop = watchEffect(() => {
+  console.log('监听room.id')
+  initRoomList()
 })
+
+onUnmounted(() => {
+  stop()
+})
+
+const appStore = useAppStore()
+const saveBeforeJump = (room: RoomModel) => {
+  console.log(room)
+  appStore.currentRoom = room
+}
 </script>
 
 <style scoped>

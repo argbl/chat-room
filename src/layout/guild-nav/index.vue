@@ -8,7 +8,7 @@
         :name="guild.name"
         :type="guild.type"
         :path="guild.path"
-        :is-active="route.path === guild.path"
+        :is-active="route.name === guild.name"
         :active-bg-color="guild.activeColor"
         :default-bg-color="guild.defaultColor"
         :icon-default-color="guild.iconDefaultColor"
