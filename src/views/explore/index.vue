@@ -100,7 +100,7 @@
 </template>
 
 <script setup lang="ts">
-import { onUnmounted, Ref, ref, watchEffect } from 'vue'
+import { onBeforeUnmount, Ref, ref, watchEffect } from 'vue'
 import { list } from '@/api/room'
 import { useRoute } from 'vue-router'
 import { RoomModel } from '@/models/room'
@@ -109,16 +109,16 @@ import { useAppStore } from '@/store/app'
 const route = useRoute()
 const roomList: Ref<Array<RoomModel>> = ref([])
 const initRoomList = async () => {
-  const { data: result } = await list(Number(route.params.id))
+  const { data: result } = await list(Number(route.params.id) || 1)
   roomList.value = result.data
 }
 
 const stop = watchEffect(() => {
-  console.log('监听room.id')
+  console.log('监听room.id', Number(route.params.id))
   initRoomList()
 })
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
   stop()
 })
 

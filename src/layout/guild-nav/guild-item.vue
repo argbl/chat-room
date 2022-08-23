@@ -95,7 +95,10 @@ function handleEvent() {
   }
   if (props.path) {
     router.push({
-      path: props.path,
+      name: props.name,
+      params: {
+        id: 1,
+      },
     })
   }
 }
