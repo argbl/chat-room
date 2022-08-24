@@ -9,7 +9,7 @@ const routes = [
       {
         path: 'chat/:id',
         name: 'Chat',
-        component: () => import('../views/chat/index.vue'),
+        component: () => import('../views/chat-room/index.vue'),
       },
       {
         path: 'explore/:id?',
@@ -19,7 +19,7 @@ const routes = [
       {
         path: 'room/:id',
         name: 'Room',
-        component: () => import('../views/room/index.vue'),
+        component: () => import('../views/chat-room/index.vue'),
       },
     ],
   },

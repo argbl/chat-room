@@ -2,8 +2,7 @@ import { h } from 'vue'
 import { useRoute } from 'vue-router'
 import FriendsView from './friend/index.vue'
 import ExploreView from './explore/index.vue'
-import RoomView from './room/index.vue'
-import ChatView from './chat/index.vue'
+import ChatRoomView from './chat-room/index.vue'
 import InBox from '@/components/in-box/index.vue'
 export default {
   setup() {
@@ -14,11 +13,11 @@ export default {
             default: () => h(InBox),
           })
         : route.name === 'Chat'
-        ? h(ChatView, null, {
+        ? h(ChatRoomView, null, {
             default: () => h(InBox),
           })
         : route.name === 'Explore'
         ? h(ExploreView)
-        : h(RoomView)
+        : h(ChatRoomView)
   },
 }
