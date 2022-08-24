@@ -7,7 +7,7 @@ const props = defineProps({
   src: String,
   errSrc: {
     type: String,
-    default: 'src/assets/icons/logo.png',
+    default: 'http://localhost:3002/src/assets/icons/logo.png',
   },
 })
 

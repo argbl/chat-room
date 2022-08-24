@@ -2,7 +2,7 @@
   <div
     v-if="modelValue"
     class="fixed left-0 top-0 z-20 w-screen h-screen mask flex items-center justify-center"
-    @click.self="$emit('update:modelValue', false)"
+    @mousedown.self="$emit('update:modelValue', false)"
   >
     <div class="w-[500px] theme-second rounded">
       <div class="p-4 flex items-center justify-between">
@@ -55,10 +55,6 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 const handleConfirm = () => {
   props.onConfirm()
-  console.log(props.onConfirm)
-
-  console.log('执行')
-
   emit('update:modelValue', false)
 }
 const handleCancel = () => {

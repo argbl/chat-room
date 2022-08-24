@@ -41,8 +41,6 @@ const props = defineProps({
 const visible = ref(false)
 
 const handleVisible = () => {
-  console.log(visible.value)
-
   visible.value = !visible.value
 }
 

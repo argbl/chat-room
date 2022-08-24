@@ -53,6 +53,10 @@
         <div>请输入房间名称</div>
         <base-input v-model="roomProps.title"></base-input>
       </div>
+      <div class="my-2">
+        <div>向他人介绍房间</div>
+        <base-input v-model="roomProps.introduce" textarea></base-input>
+      </div>
     </div>
   </base-dialog>
 </template>
@@ -83,6 +87,7 @@ const roomProps = reactive({
   title: '',
   avatar: '',
   cover: '',
+  introduce: '',
 })
 
 const ROOM_UPLAD = {
