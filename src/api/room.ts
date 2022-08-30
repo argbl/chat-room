@@ -14,3 +14,7 @@ export async function list(id: number) {
 export async function info(id: number) {
   return await axios.get(`/room/info?id=${id}`)
 }
+
+export async function search(title: string) {
+  return await axios.get(`/room/search?title=${title}`)
+}
