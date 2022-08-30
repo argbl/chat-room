@@ -11,7 +11,7 @@
     >
       <li
         @click="handleOption(item)"
-        class="px-[10px] py-[10px]"
+        class="px-[10px] py-[10px] cursor-pointer select-opt"
         v-for="item in (list as Array<SelectProps>)"
         :key="item.id"
         :value="item.id"
@@ -23,6 +23,7 @@
 </template>
 
 <script setup lang="ts">
+import useTheme from '@/hooks/useTheme'
 import { ref, computed } from 'vue'
 interface SelectProps {
   id: number
@@ -57,6 +58,12 @@ const handleOption = (item: SelectProps) => {
   selectLabel.value = item.title
   visible.value = false
 }
+
+const { bgColorPrimary } = useTheme()
 </script>
 
-<style scoped></style>
+<style scoped>
+.select-opt:hover {
+  background-color: v-bind(bgColorPrimary);
+}
+</style>

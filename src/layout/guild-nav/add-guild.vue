@@ -100,8 +100,6 @@ const uploadCoverRef = ref<{ files: Array<File> } | null>(null)
 const upload = async (uploadType: number) => {
   let { data: result } = await avatar()
   if (result.code === 200) {
-    console.log(result)
-
     const form = new FormData()
     form.append('token', result.data)
     uploadType === ROOM_UPLAD.AVATAR
@@ -116,6 +114,12 @@ const upload = async (uploadType: number) => {
 }
 
 const confirm = async () => {
+  for (const key in roomProps) {
+    if (roomProps[key] === '' || roomProps[key] === null) {
+      Message.error('请填写完整信息')
+      return
+    }
+  }
   const { data: result } = await add(roomProps)
   if (result.code === 200) {
     Message.success(result.message)

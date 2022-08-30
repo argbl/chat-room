@@ -33,6 +33,11 @@ const routes = [
     name: 'Register',
     component: () => import('../views/login/index.vue'),
   },
+  {
+    path: '/redirect',
+    name: 'Redirect',
+    component: () => import('../views/redirect/index.vue'),
+  },
 ]
 
 const router = createRouter({
@@ -50,7 +55,10 @@ router.beforeEach(async (to, from) => {
     window.localStorage.getItem('RECORD_PINIA_USER')
   )
 
-  if (!isAuthenticated() && !['/login', '/register'].includes(to.path)) {
+  if (
+    !isAuthenticated() &&
+    !['/login', '/register', '/redirect'].includes(to.path)
+  ) {
     // 将用户重定向到登录页面
     return { name: 'Login' }
   }
