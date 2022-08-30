@@ -3,9 +3,12 @@
     <section class="h-12 border-b border-theme px-2 flex items-center">
       <div class="flex flex-1 justify-between">
         <div class="text-lg font-semibold tracking-wider">
-          @{{ routeName === 'Chat' ? user_chat.nickname : currentRoom.title }}
+          @{{ route.name === 'Chat' ? user_chat.nickname : currentRoom.title }}
         </div>
-        <slot></slot>
+        <div class="flex items-center space-x-4">
+          <slot name="join"></slot>
+          <slot name="inbox"></slot>
+        </div>
       </div>
     </section>
     <div style="height: calc(100vh - 49px)" class="mr-1">
@@ -15,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import useTheme from '@/hooks/useTheme'
 import { useAppStore } from '@/store/app'
 import { useChatStore } from '@/store/chat'
@@ -26,12 +28,8 @@ import Room from './room/index.vue'
 const route = useRoute()
 const { bgColorThird } = useTheme()
 const { user_chat } = storeToRefs(useChatStore())
-const { init } = useChatStore()
-init(Number(route.params.id))
+
 const { currentRoom } = storeToRefs(useAppStore())
-const routeName = computed(() => {
-  return route.name
-})
 </script>
 
 <style scoped lang="postcss">

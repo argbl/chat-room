@@ -9,7 +9,7 @@ export default {
     const route = useRoute()
     // 返回渲染函数
     return () =>
-      route.path === '/' || route.name === 'Chat'
+      route.name === 'Home' || route.name === 'Chat'
         ? h(HomeBar, null, {
             default: () => h(UserStatus),
           })

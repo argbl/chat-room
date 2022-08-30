@@ -113,7 +113,7 @@ import { list, search } from '@/api/room'
 import { useRoute } from 'vue-router'
 import { RoomModel } from '@/models/room'
 import { useAppStore } from '@/store/app'
-
+const room_title = ref('')
 const route = useRoute()
 const roomList: Ref<Array<RoomModel>> = ref([])
 const initRoomList = async () => {
@@ -122,6 +122,7 @@ const initRoomList = async () => {
 }
 watchEffect(() => {
   initRoomList()
+  room_title.value = ''
 })
 
 const appStore = useAppStore()
@@ -129,12 +130,12 @@ const saveBeforeJump = (room: RoomModel) => {
   appStore.currentRoom = room
 }
 
-const room_title = ref('')
-
 const handleSearch = async () => {
-  const { data: result } = await search(room_title.value)
+  const { data: result } = await search(
+    room_title.value,
+    Number(route.params.id)
+  )
   roomList.value = result.data
-  console.log(result)
 }
 </script>
 
