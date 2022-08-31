@@ -29,3 +29,7 @@ export async function join(room_id: number, status: number) {
     status,
   })
 }
+
+export async function number(id: number) {
+  return await axios.get(`/room/number?id=${id}`)
+}

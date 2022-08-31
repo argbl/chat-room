@@ -36,16 +36,18 @@
         <ul>
           <div class="h-[84px]"></div>
           <h2 class="pt-4 px-4 mb-2 font-semibold">用户列表</h2>
-          <div v-for="index in 25" :key="index" class="ml-2">
+          <div v-for="number in numberList" :key="number.id" class="ml-2">
             <div class="flex items-center rounded px-2 py-2 h-[42px]">
               <div class="mr-2">
-                <img
-                  class="rounded-full"
-                  src="https://cdn.discordapp.com/avatars/102991676301144064/a_b068de1d964f6c329d30449f33870353.webp?size=32"
+                <base-img
+                  class="rounded-full w-10 h-10"
+                  :src="number.join_user.avatar"
                 />
               </div>
               <div class="flex-1 flex flex-col">
-                <div class="text-yellow-500">可莉</div>
+                <div class="text-yellow-500">
+                  {{ number.join_user.nickname }}
+                </div>
                 <div class="text-xs text-second">正在炸鱼</div>
               </div>
             </div>
@@ -58,6 +60,7 @@
 </template>
 
 <script setup lang="ts">
+import { number } from '@/api/room'
 import { ThemeType } from '@/models/theme'
 import { useSettingStore } from '@/store/setting'
 import { storeToRefs } from 'pinia'
@@ -79,6 +82,19 @@ setTimeout(() => {
 })
 
 const { currentRoom } = storeToRefs(useAppStore())
+const useRoom = () => {
+  const numberList = ref([])
+  const getNumberList = async () => {
+    const { data: result } = await number(currentRoom.value.id!)
+    if (result.code === 200) {
+      numberList.value = result.data
+    }
+  }
+
+  return { numberList, getNumberList }
+}
+const { numberList, getNumberList } = useRoom()
+getNumberList()
 </script>
 
 <style lang="postcss" scoped>
