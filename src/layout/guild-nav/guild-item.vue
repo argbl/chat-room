@@ -94,11 +94,15 @@ function handleEvent() {
     }
   }
   if (props.path) {
+    const query =
+      props.name !== 'Home'
+        ? {
+            id: 1,
+          }
+        : null
     router.push({
       name: props.name,
-      params: {
-        id: 1,
-      },
+      ...query,
     })
   }
 }

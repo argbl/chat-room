@@ -41,11 +41,7 @@
         <section class="mb-8 min-w-[580px]">
           <h3 class="text-primary text-xl">特色社区</h3>
           <div class="grid grid-cols-5 gap-4 mt-4">
-            <div
-              v-for="room in roomList"
-              :key="room.id"
-              @click="saveBeforeJump(room)"
-            >
+            <div v-for="room in roomList" :key="room.id">
               <router-link :to="{ name: 'Room', params: { id: room.id } }">
                 <div
                   class="flex flex-col theme-second rounded-lg cursor-pointer"
@@ -112,7 +108,6 @@ import { Ref, ref, watchEffect } from 'vue'
 import { list, search } from '@/api/room'
 import { useRoute } from 'vue-router'
 import { RoomModel } from '@/models/room'
-import { useAppStore } from '@/store/app'
 const room_title = ref('')
 const route = useRoute()
 const roomList: Ref<Array<RoomModel>> = ref([])
@@ -124,11 +119,6 @@ watchEffect(() => {
   initRoomList()
   room_title.value = ''
 })
-
-const appStore = useAppStore()
-const saveBeforeJump = (room: RoomModel) => {
-  appStore.currentRoom = room
-}
 
 const handleSearch = async () => {
   const { data: result } = await search(

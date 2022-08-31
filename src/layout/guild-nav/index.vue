@@ -16,6 +16,17 @@
       >
         <path :fill="iconColor" :d="guild.d"></path>
       </guild-item>
+      <div
+        v-for="roomItem in roomList"
+        :key="roomItem.id"
+        class="cursor-pointer"
+        @click="jumpToRoom(roomItem.room.id)"
+      >
+        <img
+          class="w-12 h-12 rounded-full object-cover hover:rounded-2xl transition-all"
+          :src="roomItem.room.avatar"
+        />
+      </div>
     </ul>
   </nav>
   <AddGuild></AddGuild>
@@ -23,7 +34,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import GuildItem from './guild-item.vue'
 import GuildList from './index'
 import AddGuild from './add-guild.vue'
@@ -34,9 +45,23 @@ import { joins } from '@/api/room'
 const route = useRoute()
 const { user } = storeToRefs(useUserStore())
 
+const roomList = ref([])
 const getRooms = async () => {
   const { data: result } = await joins(user.value.id)
-  console.log(result)
+  if (result.code === 200) {
+    roomList.value = result.data
+  }
+}
+getRooms()
+
+const router = useRouter()
+const jumpToRoom = (room_id: number) => {
+  router.push({
+    name: 'Room',
+    params: {
+      id: room_id,
+    },
+  })
 }
 </script>
 

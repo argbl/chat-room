@@ -4,7 +4,7 @@
       class="ml-4 flex items-center rounded-md p-4"
       v-for="friend in computedFriendList"
       :key="friend.id"
-      @click="jumpChat(friend.uid!)"
+      @click="jumpToChat(friend.uid!)"
     >
       <base-img class="avatar w-8 h-8 mr-2" :src="friend.avatar" />
       <div class="flex-1 text-sm flex items-center font-semibold">
@@ -60,7 +60,7 @@ const handleFriend = async () => {
   }
 }
 const router = useRouter()
-const jumpChat = (uid: number) => {
+const jumpToChat = (uid: number) => {
   router.push({
     name: 'Chat',
     params: {

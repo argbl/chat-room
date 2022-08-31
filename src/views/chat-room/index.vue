@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import useTheme from '@/hooks/useTheme'
+import { watch } from 'vue'
 import { useAppStore } from '@/store/app'
 import { useChatStore } from '@/store/chat'
 import { useRoute } from 'vue-router'
@@ -29,7 +30,20 @@ const route = useRoute()
 const { bgColorThird } = useTheme()
 const { user_chat } = storeToRefs(useChatStore())
 
+const { roomInfo } = useAppStore()
 const { currentRoom } = storeToRefs(useAppStore())
+watch(
+  route,
+  async (newRoute) => {
+    if (newRoute.name === 'Room') {
+      await roomInfo(Number(newRoute.params.id))
+    }
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+)
 </script>
 
 <style scoped lang="postcss">

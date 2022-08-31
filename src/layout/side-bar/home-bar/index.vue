@@ -15,7 +15,10 @@
           <li
             class="mt-2 ml-2 max-w-[224px] p-[1px] rounded theme-third cursor-pointer"
           >
-            <div class="flex h-[42px] items-center px-2" @click="jumpFriend()">
+            <div
+              class="flex h-[42px] items-center px-2"
+              @click="jumpToFriend()"
+            >
               <div class="w-8 h-8 mr-3 flex justify-center items-center">
                 <img class="w-6 h-6" src="@icons/svg/group.svg" />
               </div>
@@ -27,7 +30,7 @@
               v-for="user in userList"
               :key="user.id"
               class="ml-2 cursor-pointer"
-              @click="jumpChat(user.id)"
+              @click="jumpToChat(user.id)"
             >
               <div class="flex items-center rounded px-2 py-2 h-[42px]">
                 <div class="mr-2">
@@ -81,14 +84,14 @@ import { useRouter } from 'vue-router'
 
 const { bgColorThird } = useTheme()
 const router = useRouter()
-const jumpFriend = () => {
+const jumpToFriend = () => {
   router.push({
     path: '/',
   })
 }
 const { userList } = storeToRefs(useChatStore())
 
-const jumpChat = (uid: number) => {
+const jumpToChat = (uid: number) => {
   router.push({
     name: 'Chat',
     params: {
