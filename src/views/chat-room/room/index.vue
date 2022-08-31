@@ -81,6 +81,7 @@ import { storeToRefs } from 'pinia'
 import { useRoomStore } from '@/store/room'
 const { bgColorThird } = useTheme()
 
+const inputValue = ref('')
 const route = useRoute()
 
 const { user: me } = storeToRefs(useUserStore())
@@ -91,24 +92,22 @@ const { history: letterHistory, letter } = useChatStore()
 const { roomHistorys } = storeToRefs(useRoomStore())
 const { history: roomHistory } = useRoomStore()
 
-const inputValue = ref('')
-
-const showTime = (index: number) => {
-  const last = chatHistorys.value[index - 1]
-  const cur = chatHistorys.value[index]
-  if (last) {
-    return new Date(cur.createtime!).getTime() -
-      new Date(last.createtime!).getTime() >
-      1000 * 60 * 5
-      ? true
-      : false
-  } else {
-    return true
+let historyFn: ((id: number) => any) | null = null
+watch(
+  route,
+  (newRoute) => {
+    if (newRoute.name === 'Chat') {
+      historyFn = letterHistory
+    } else {
+      historyFn = roomHistory
+    }
+    historyFn(Number(route.params.id))
+  },
+  {
+    immediate: true,
+    deep: true,
   }
-}
-
-letterHistory(Number(route.params.id))
-roomHistory(Number(route.params.id))
+)
 
 const socket = useSocket()
 const submit = async () => {
@@ -141,14 +140,24 @@ socket.on('chat', async (res: any) => {
 //监听群聊
 const room_prefix = 'room_'
 socket.on(room_prefix + route.params.id, async (res: any) => {
-  console.log(res)
-
-  // if (res) {
-  //   Message.text(`${res.nickname}:${res.content}`)
-  // }
+  await roomHistory(Number(route.params.id))
   page.value.num = 0
   scrollToBottom()
 })
+
+const showTime = (index: number) => {
+  const last = chatHistorys.value[index - 1]
+  const cur = chatHistorys.value[index]
+  if (last) {
+    return new Date(cur.createtime!).getTime() -
+      new Date(last.createtime!).getTime() >
+      1000 * 60 * 5
+      ? true
+      : false
+  } else {
+    return true
+  }
+}
 
 const loading = ref(false)
 
@@ -166,7 +175,7 @@ watch(
       loading.value = true
       lastScrollHeight.value = el.value?.scrollHeight || 0
       page.value.num++
-      await letterHistory(Number(route.params.id))
+      await historyFn(Number(route.params.id))
       loading.value = false
       await nextTick()
       el.value &&
