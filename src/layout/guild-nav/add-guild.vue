@@ -64,7 +64,6 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useAppStore } from '@/store/app'
 import BaseSelect from '@/components/base/base-select/index.vue'
 import BaseInput from '@/components/base/base-input/index.vue'
 import BaseImg from '@/components/base/base-img/index.vue'
@@ -72,9 +71,10 @@ import useChannel from '@/hooks/useChannel'
 import { avatar, uploadImage } from '@/api/common'
 import { add } from '@/api/room'
 import Message from '@/components/base/base-message'
+import { useSettingStore } from '@/store/setting'
 
 const { channelList, initChannel } = useChannel()
-const { addGuildVisible } = storeToRefs(useAppStore())
+const { addGuildVisible } = storeToRefs(useSettingStore())
 
 const init = async () => {
   await initChannel()

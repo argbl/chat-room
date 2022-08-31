@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import useTheme from '@/hooks/useTheme'
 import { watch } from 'vue'
-import { useAppStore } from '@/store/app'
+import { useRoomStore } from '@/store/room'
 import { useChatStore } from '@/store/chat'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
@@ -30,8 +30,8 @@ const route = useRoute()
 const { bgColorThird } = useTheme()
 const { user_chat } = storeToRefs(useChatStore())
 
-const { roomInfo } = useAppStore()
-const { currentRoom } = storeToRefs(useAppStore())
+const { roomInfo } = useRoomStore()
+const { currentRoom } = storeToRefs(useRoomStore())
 watch(
   route,
   async (newRoute) => {

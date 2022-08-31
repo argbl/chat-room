@@ -43,7 +43,8 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from '@/store/app'
+import { useRoomStore } from '@/store/room'
+import { useSettingStore } from '@/store/setting'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 const props = defineProps({
@@ -83,12 +84,12 @@ const props = defineProps({
 const isHover = ref(false)
 
 const clickButton = ref(false)
-const appStore = useAppStore()
+const settingStore = useSettingStore()
 const router = useRouter()
 function handleEvent() {
   if (props.type === 'system') {
     if (props.name === 'Add') {
-      appStore.addGuildVisible = !appStore.addGuildVisible
+      settingStore.addGuildVisible = !settingStore.addGuildVisible
     } else if (props.name === 'Download') {
       console.log('下载')
     }

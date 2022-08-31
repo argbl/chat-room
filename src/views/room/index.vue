@@ -17,14 +17,14 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { Ref, ref, watchEffect } from 'vue'
-import { useAppStore } from '../../store/app'
+import { useRoomStore } from '../../store/room'
 const chatMessage = ref('')
 const chatList = ref<string[]>([])
 function publishMessage() {
   chatList.value = [...chatList.value, chatMessage.value]
 }
 
-const { currentRoom } = storeToRefs(useAppStore())
+const { currentRoom } = storeToRefs(useRoomStore())
 </script>
 
 <style scoped></style>

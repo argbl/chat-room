@@ -66,7 +66,7 @@ import { useSettingStore } from '@/store/setting'
 import { storeToRefs } from 'pinia'
 import { ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
-import { useAppStore } from '../../../store/app'
+import { useRoomStore } from '../../../store/room'
 const userListRef = ref<HTMLElement | null>(null)
 const scrollTop = ref(0)
 const titleColor = ref('#ffffff')
@@ -82,7 +82,7 @@ setTimeout(() => {
   })
 })
 
-const { currentRoom } = storeToRefs(useAppStore())
+const { currentRoom } = storeToRefs(useRoomStore())
 const useRoom = () => {
   const memberList = ref([])
   const getMemberList = async (room_id: number) => {

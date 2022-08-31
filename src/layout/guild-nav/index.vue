@@ -19,7 +19,7 @@
       <div
         v-for="roomItem in roomList"
         :key="roomItem.id"
-        class="cursor-pointer"
+        class="cursor-pointer mb-2"
         @click="jumpToRoom(roomItem.room.id)"
       >
         <img

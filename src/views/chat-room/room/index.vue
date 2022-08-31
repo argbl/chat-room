@@ -7,14 +7,29 @@
     >
       <div v-loading:40="loading"></div>
       <div class="p-4">
-        <div v-for="(item, index) in chatHistory" :key="item.id">
+        <div
+          v-for="(item, index) in route.name === 'Chat'
+            ? chatHistorys
+            : roomHistorys"
+          :key="item.id"
+        >
           <div v-if="showTime(index)" class="flex justify-center text-sm">
             {{ useDateFormat(item.createtime, 'YYYY-MM-DD HH:mm') }}
           </div>
           <div class="relative min-h-[40px] px-12 mb-4">
-            <div v-if="item.user_send === me.id">
+            <div
+              v-if="
+                route.name === 'Chat'
+                  ? item.user_send === me.id
+                  : item.user.id === me.id
+              "
+            >
               <base-img
-                :src="item.chat_sender?.avatar"
+                :src="
+                  route.name === 'Chat'
+                    ? item.chat_sender?.avatar
+                    : item.user.avatar
+                "
                 class="w-10 h-10 avatar absolute right-0 top-0"
               />
 
@@ -22,10 +37,20 @@
             </div>
             <div v-else>
               <base-img
-                :src="item.chat_sender?.avatar"
+                :src="
+                  route.name === 'Chat'
+                    ? item.chat_sender?.avatar
+                    : item.user.avatar
+                "
                 class="w-10 h-10 avatar absolute left-0 top-0"
               />
-              <div class="font-semibold">{{ item.chat_sender?.nickname }}</div>
+              <div class="font-semibold">
+                {{
+                  route.name === 'Chat'
+                    ? item.chat_sender?.nickname
+                    : item.user.nickname
+                }}
+              </div>
               <div>{{ item.content }}</div>
             </div>
           </div>
@@ -53,19 +78,24 @@ import { useUserStore } from '@/store/user'
 import { useRoute } from 'vue-router'
 import Message from '@/components/base/base-message'
 import { storeToRefs } from 'pinia'
+import { useRoomStore } from '@/store/room'
 const { bgColorThird } = useTheme()
 
 const route = useRoute()
 
 const { user: me } = storeToRefs(useUserStore())
 
-const { user_chat, chatHistory, page } = storeToRefs(useChatStore())
-const { history, letter } = useChatStore()
+const { user_chat, chatHistorys, page } = storeToRefs(useChatStore())
+const { history: letterHistory, letter } = useChatStore()
+
+const { roomHistorys } = storeToRefs(useRoomStore())
+const { history: roomHistory } = useRoomStore()
+
 const inputValue = ref('')
 
 const showTime = (index: number) => {
-  const last = chatHistory.value[index - 1]
-  const cur = chatHistory.value[index]
+  const last = chatHistorys.value[index - 1]
+  const cur = chatHistorys.value[index]
   if (last) {
     return new Date(cur.createtime!).getTime() -
       new Date(last.createtime!).getTime() >
@@ -77,24 +107,46 @@ const showTime = (index: number) => {
   }
 }
 
-history(Number(route.params.id))
+letterHistory(Number(route.params.id))
+roomHistory(Number(route.params.id))
 
 const socket = useSocket()
 const submit = async () => {
-  socket.emit('send', {
-    id: user_chat.value.id,
-    message: inputValue.value,
-  })
-  await letter(user_chat.value)
+  if (route.name === 'Chat') {
+    socket.emit('send_letter', {
+      id: user_chat.value.id,
+      message: inputValue.value,
+    })
+    await letter(user_chat.value)
+  } else {
+    socket.emit('send_room', {
+      id: route.params.id,
+      message: inputValue.value,
+    })
+  }
+
   inputValue.value = ''
 }
 
+//监听私聊
 socket.on('chat', async (res: any) => {
   if (res) {
     Message.text(`${res.nickname}:${res.content}`)
   }
   page.value.num = 0
-  await history(Number(route.params.id))
+  await letterHistory(Number(route.params.id))
+  scrollToBottom()
+})
+
+//监听群聊
+const room_prefix = 'room_'
+socket.on(room_prefix + route.params.id, async (res: any) => {
+  console.log(res)
+
+  // if (res) {
+  //   Message.text(`${res.nickname}:${res.content}`)
+  // }
+  page.value.num = 0
   scrollToBottom()
 })
 
@@ -114,7 +166,7 @@ watch(
       loading.value = true
       lastScrollHeight.value = el.value?.scrollHeight || 0
       page.value.num++
-      await history(Number(route.params.id))
+      await letterHistory(Number(route.params.id))
       loading.value = false
       await nextTick()
       el.value &&

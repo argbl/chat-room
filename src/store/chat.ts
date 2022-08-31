@@ -10,7 +10,7 @@ export const useChatStore = defineStore('RECORD_PINIA_CHAT', {
   state: () => ({
     user_chat: {} as UserModel,
     userList: [] as Array<UserModel>,
-    chatHistory: [] as Array<ChatModel>,
+    chatHistorys: [] as Array<ChatModel>,
     page: {
       num: 0,
       size: 10,
@@ -32,9 +32,9 @@ export const useChatStore = defineStore('RECORD_PINIA_CHAT', {
       const { data: result } = await history(id, this.page.num, this.page.size)
       if (result.code === 200 && result.data.length) {
         if (this.page.num === 0) {
-          this.chatHistory = result.data.reverse()
+          this.chatHistorys = result.data.reverse()
         } else {
-          this.chatHistory = [...result.data.reverse(), ...this.chatHistory]
+          this.chatHistorys = [...result.data.reverse(), ...this.chatHistorys]
         }
       } else if (result.code === 200 && !result.data.length) {
         if (this.page.num === 0) {
