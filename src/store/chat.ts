@@ -9,6 +9,7 @@ import { history } from '@/api/chat'
 export const useChatStore = defineStore('RECORD_PINIA_CHAT', {
   state: () => ({
     user_chat: {} as UserModel,
+    userList: [] as Array<UserModel>,
     chatHistory: [] as Array<ChatModel>,
     page: {
       num: 0,
@@ -45,6 +46,14 @@ export const useChatStore = defineStore('RECORD_PINIA_CHAT', {
         Message.error(result.message)
       }
       return true
+    },
+
+    async letter(user: UserModel) {
+      const result = this.userList.filter((item) => {
+        return item.id !== user.id
+      })
+      result.push(user)
+      this.userList = result
     },
   },
   persist: true,

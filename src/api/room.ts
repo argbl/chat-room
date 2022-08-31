@@ -30,6 +30,12 @@ export async function join(room_id: number, status: number) {
   })
 }
 
-export async function number(id: number) {
-  return await axios.get(`/room/number?id=${id}`)
+export async function member(id: number) {
+  return await axios.get(`/room/member?id=${id}`)
+}
+
+export async function history(room_id: number, pageNum = 0, pageSize = 10) {
+  return await axios.get(
+    `/room/history?room_id=${room_id}&pageNum=${pageNum}&pageSize=${pageSize}`
+  )
 }

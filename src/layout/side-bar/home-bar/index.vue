@@ -22,27 +22,27 @@
               <div class="text-second">好友</div>
             </div>
           </li>
-          <h2
-            class="pt-[18px] pl-[18px] pr-2 pb-1 flex justify-between items-center"
-          >
-            <span class="text-seond text-xs">私信</span>
-            <svg
-              x="0"
-              y="0"
-              class="mr-2"
-              aria-hidden="false"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
+          <div v-if="userList.length > 0">
+            <div
+              v-for="user in userList"
+              :key="user.id"
+              class="ml-2 cursor-pointer"
+              @click="jumpChat(user.id)"
             >
-              <polygon
-                fill-rule="nonzero"
-                fill="#b9bbbe"
-                points="15 10 10 10 10 15 8 15 8 10 3 10 3 8 8 8 8 3 10 3 10 8 15 8"
-              ></polygon>
-            </svg>
-          </h2>
+              <div class="flex items-center rounded px-2 py-2 h-[42px]">
+                <div class="mr-2">
+                  <base-img class="rounded-full w-8 h-8" :src="user.avatar" />
+                </div>
+                <div class="flex-1 flex flex-col">
+                  <div class="text-yellow-500">
+                    {{ user.nickname }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <svg
+            v-else
             class="p-4 box-content"
             width="184"
             height="428"
@@ -75,6 +75,8 @@
 
 <script setup lang="ts">
 import useTheme from '@/hooks/useTheme'
+import { useChatStore } from '@/store/chat'
+import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 
 const { bgColorThird } = useTheme()
@@ -82,6 +84,16 @@ const router = useRouter()
 const jumpFriend = () => {
   router.push({
     path: '/',
+  })
+}
+const { userList } = storeToRefs(useChatStore())
+
+const jumpChat = (uid: number) => {
+  router.push({
+    name: 'Chat',
+    params: {
+      id: uid,
+    },
   })
 }
 </script>

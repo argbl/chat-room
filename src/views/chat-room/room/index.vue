@@ -60,7 +60,7 @@ const route = useRoute()
 const { user: me } = storeToRefs(useUserStore())
 
 const { user_chat, chatHistory, page } = storeToRefs(useChatStore())
-const { history } = useChatStore()
+const { history, letter } = useChatStore()
 const inputValue = ref('')
 
 const showTime = (index: number) => {
@@ -85,6 +85,7 @@ const submit = async () => {
     id: user_chat.value.id,
     message: inputValue.value,
   })
+  await letter(user_chat.value)
   inputValue.value = ''
 }
 
