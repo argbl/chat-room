@@ -39,3 +39,7 @@ export async function history(room_id: number, pageNum = 0, pageSize = 10) {
     `/room/history?room_id=${room_id}&pageNum=${pageNum}&pageSize=${pageSize}`
   )
 }
+
+export async function joins(user_id: number) {
+  return await axios.get(`/room/joins?user_id=${user_id}`)
+}

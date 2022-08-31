@@ -1,5 +1,5 @@
 interface UserModel {
-  id?: number
+  id: number
   nickname?: string
   banner_color?: string
   avatar?: string

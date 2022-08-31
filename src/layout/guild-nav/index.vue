@@ -27,8 +27,17 @@ import { useRoute } from 'vue-router'
 import GuildItem from './guild-item.vue'
 import GuildList from './index'
 import AddGuild from './add-guild.vue'
+import { useUserStore } from '@/store/user'
+import { storeToRefs } from 'pinia'
+import { joins } from '@/api/room'
 
 const route = useRoute()
+const { user } = storeToRefs(useUserStore())
+
+const getRooms = async () => {
+  const { data: result } = await joins(user.value.id)
+  console.log(result)
+}
 </script>
 
 <style lang="postcss" scoped>

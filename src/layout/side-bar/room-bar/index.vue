@@ -64,7 +64,8 @@ import { member } from '@/api/room'
 import { ThemeType } from '@/models/theme'
 import { useSettingStore } from '@/store/setting'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
+import { useRoute } from 'vue-router'
 import { useAppStore } from '../../../store/app'
 const userListRef = ref<HTMLElement | null>(null)
 const scrollTop = ref(0)
@@ -84,8 +85,8 @@ setTimeout(() => {
 const { currentRoom } = storeToRefs(useAppStore())
 const useRoom = () => {
   const memberList = ref([])
-  const getMemberList = async () => {
-    const { data: result } = await member(currentRoom.value.id!)
+  const getMemberList = async (room_id: number) => {
+    const { data: result } = await member(room_id)
     if (result.code === 200) {
       memberList.value = result.data
     }
@@ -94,7 +95,10 @@ const useRoom = () => {
   return { memberList, getMemberList }
 }
 const { memberList, getMemberList } = useRoom()
-getMemberList()
+const route = useRoute()
+watchEffect(() => {
+  getMemberList(Number(route.params.id))
+})
 </script>
 
 <style lang="postcss" scoped>
