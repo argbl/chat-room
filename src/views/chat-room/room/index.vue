@@ -98,10 +98,12 @@ watch(
   (newRoute) => {
     if (newRoute.name === 'Chat') {
       historyFn = letterHistory
-    } else {
+    } else if (newRoute.name === 'Room') {
       historyFn = roomHistory
     }
-    historyFn(Number(route.params.id))
+    if (newRoute.name === 'Chat' || newRoute.name === 'Room') {
+      historyFn && historyFn(Number(route.params.id))
+    }
   },
   {
     immediate: true,
@@ -140,6 +142,8 @@ socket.on('chat', async (res: any) => {
 //监听群聊
 const room_prefix = 'room_'
 socket.on(room_prefix + route.params.id, async (res: any) => {
+  console.log('监听到消息', res)
+
   await roomHistory(Number(route.params.id))
   page.value.num = 0
   scrollToBottom()
