@@ -47,8 +47,7 @@ const props = defineProps({
       }
     },
   }, // 消息配置项
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  remove: { type: Function, default: () => {} },
+  remove: { type: Function, default: () => null },
 })
 const visible = ref(false)
 const messageStyle = computed(() => {
