@@ -73,7 +73,7 @@
                     >
                       {{ room.introduce }}
                     </div>
-                    <div class="flex text-xs text-third">
+                    <!-- <div class="flex text-xs text-third">
                       <div class="mr-4 flex items-center">
                         <div
                           class="w-2 h-2 rounded-full bg-green-500 mr-1"
@@ -86,7 +86,7 @@
                         ></div>
                         <div>994,236 位成员</div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </router-link>

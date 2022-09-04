@@ -23,6 +23,10 @@ export const useUserStore = defineStore('RECORD_PINIA_USER', {
       }
     },
     async logout() {
+      window.localStorage.removeItem('RECORD_PINIA_CHAT')
+      window.localStorage.removeItem('RECORD_PINIA_MESSAGE')
+      window.localStorage.removeItem('RECORD_PINIA_SETTING')
+      window.localStorage.removeItem('RECORD_PINIA_FRIEND')
       window.localStorage.removeItem('RECORD_PINIA_USER')
       await logout()
     },

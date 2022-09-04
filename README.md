@@ -1,16 +1,47 @@
-# Vue 3 + TypeScript + Vite
+# 项目说明
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+项目前端采用vue3+typescript+pinia，
 
-## Recommended IDE Setup
+后端使用egg.js搭建。 
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+主要使用socket.io和egg-socket.io实现聊天的核心功能。 
 
-## Type Support For `.vue` Imports in TS
+页面设计上参考国外网站discord。
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+## 项目后端地址
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+[Martinell1/record: 左边那个项目的后端，采用egg.js实现 (github.com)](https://github.com/Martinell1/record)
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+# 项目预览
+
+## 登录页面
+
+![image-20220905015225469](http://qiniu.kaijinx.top/image-20220905015225469.png)
+
+## 项目首页
+
+![image-20220905015303305](http://qiniu.kaijinx.top/image-20220905015303305.png)
+
+## 频道探索页
+
+![image-20220905020142299](http://qiniu.kaijinx.top/image-20220905020142299.png)
+
+## 设置页面（可切换亮色主题）
+
+![image-20220905020321734](http://qiniu.kaijinx.top/image-20220905020321734.png)
+
+![image-20220905020334494](http://qiniu.kaijinx.top/image-20220905020334494.png)
+
+## 添加好友
+
+![image-20220905015855516](http://qiniu.kaijinx.top/image-20220905015855516.png)
+
+![image-20220905015922016](http://qiniu.kaijinx.top/image-20220905015922016.png)
+
+## 私聊
+
+![image-20220905015420665](http://qiniu.kaijinx.top/image-20220905015420665.png)
+
+## 群聊
+
+![image-20220905020022624](http://qiniu.kaijinx.top/image-20220905020022624.png)
